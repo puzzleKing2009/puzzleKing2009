@@ -1,6 +1,7 @@
 	var gameTimer;
 	var buildings;
 	var player;
+	var bingoTimer = 0;
 	var verNum = "v0.2";
 	
 	function playerInfo(money, updTime, gain){
@@ -12,6 +13,8 @@
 		var shipMlt;
 		var spdWorth;
 		var spdMWorth;
+		var bingoHolder = new Array();
+		this.bingoHolder = bingoHolder;
 		this.spdWorth = 0.13;
 		this.spdMWorth = 0.11;
 		this.shipMlt = 1.12;
@@ -52,7 +55,7 @@
 		load();
 	}
 	function resetPnB(){
-		player = new playerInfo(0, 1000, 1);
+		player = new playerInfo(0, 1500, 1);
 		clearInterval(gameTimer);
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 60000);
@@ -72,6 +75,8 @@
 			currBuilding.currGain += currBuilding.baseGain
 			if(currBuilding.name=="Spade")
 				buySpade(1);
+			if(currBuilding.name=="Bingo")
+				buyBingo(1);
 			player.gain += Number(currBuilding.baseGain);
 			if(currBuilding.name=="Spaceship")
 				currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
@@ -84,21 +89,27 @@
 			player.digMlt = Math.round((player.digMlt + player.spdMWorth)*100)/100;
 		}
 	}
+	function buyBingo(x){
+		for(var i=0; i<x; i++){
+			addBingoCard();
+		}
+	}
 	function pageRefresh(){
 		document.getElementById("myMoney").innerHTML = player.money;
 		document.getElementById("gainer").innerHTML = player.gain;
 		document.getElementById("digChance").innerHTML = player.digChnc;
 		document.getElementById("digMult").innerHTML = player.digMlt;
 		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain);
+		document.getElementById("bingoValue").innerHTML = Math.round(buildings[2].currGain * ((buildings[2].amount / 5) +1));
 		buildings.forEach(function(building, index){
 			index++;
 			document.getElementById("owned"+index).innerHTML = building.amount;
 			document.getElementById("cost"+index).innerHTML = building.cost;
 		//	document.getElementById("give"+index).innerHTML = building.baseGain;
 		//	document.getElementById("total"+index).innerHTML = building.currGain;
-		//	document.getElementById("give"+index+"Txt").innerHTML = building.baseGain;
-		//	document.getElementById("total"+index+"Txt").innerHTML = building.currGain;
-		//	document.getElementById("ratio"+index+"Txt").innerHTML = Math.round((building.baseGain / building.cost)*100)/100;
+			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain;
+			document.getElementById("total"+index+"Txt").innerHTML = building.currGain;
+			document.getElementById("ratio"+index+"Txt").innerHTML = Math.round((building.baseGain / building.cost)*100)/100;
 		});
 	}
 	function gameTick(){
@@ -113,14 +124,18 @@
 		
 		showBuilding();
 		dig();
-		playBingo();
+		bingoTimer++;
+		if(bingoTimer >= 60){
+			playBingo();
+			bingoTimer = 0;
+		}
 	}
 	function showBuilding(){
-		if(player.money > buildings[0].baseCost){
-	//		$('#infoBox').fadeIn("slow");
+		if(player.money > (buildings[0].baseCost*.8)){
+			$('#infoBox').fadeIn("slow");
 		}
 		buildings.forEach(function(building, index){
-			if(player.money > buildings[index].baseCost){
+			if(player.money > (buildings[index].baseCost*.8)){
 				$('#building'+index).fadeIn("slow");
 				$('#info'+index).fadeIn("slow");
 			}
@@ -135,10 +150,127 @@
 			var spadeBorder = document.getElementById("buy2");
 			spadeBorder.style.borderColor='FFD700';
 			spadeBorder.border="2";
-			window.setTimeout(function(){spadeBorder.style.borderColor='#000000'; spadeBorder.border="1";},200);
+			window.setTimeout(function(){spadeBorder.style.borderColor='#000000'; spadeBorder.border="1";},400);
 		}
 	}
 	function playBingo(){
+		var bingoNum = Math.floor(Math.random()*75+1);
+		player.bingoHolder.forEach(function(bingo){
+			bingo.playNum(bingoNum);
+			if(bingo.checkWin()){
+				var givePlayerMoney = Math.round(buildings[2].currGain * ((buildings[2].amount / 5) +1));
+				player.money += givePlayerMoney;
+				bingo.newCard();
+				var bingoBorder = document.getElementById("buy3");	
+				bingoBorder.style.borderColor='FFD700';
+				bingoBorder.border="2";
+				window.setTimeout(function(){bingoBorder.style.borderColor='#000000'; bingoBorder.border="1";},500);
+			}
+		});
+	}
+	function addBingoCard(){
+		player.bingoHolder.push(new bingoCard);
+	}
+	function bingoCard(){
+		var valueSlots = new Array(25);
+		var usedSlots = new Array(76);
+		this.usedSlots = usedSlots;
+		this.valueSlots = valueSlots;
+		this.playNum = playNum;
+		this.checkWin = checkWin;
+		this.newCard = newCard;
+		
+		for(var i=0;i<25;i++){
+			fillCard(i);	
+		}
+		
+		function newCard(){
+			valueSlots = new Array(25);
+			usedSlots = new Array(76);
+			for(var i=0;i<25;i++){
+				fillCard(i);	
+			}
+			this.usedSlots = usedSlots;
+			this.valueSlots = valueSlots;
+		}
+		function fillCard(i){
+			var number = ((i%5)*15) + (Math.floor(Math.random()*15)+1);
+			if(usedSlots[number]!=true){
+				valueSlots[i] = number;
+				usedSlots[number]= true;
+			}
+			else{
+				fillCard(i);
+			}
+		}
+		function playNum(x){
+			if(usedSlots[x]==true){
+				var index = valueSlots.indexOf(x);
+				valueSlots[index] = "x";
+				usedSlots[x] = false;
+			}
+		}
+		function checkWin(){
+			var win = false;
+			var chain = true;
+			if(valueSlots[0] == "x"){
+				for(var i=1; i<5; i++){
+					if(valueSlots[i]!="x")
+						chain = false;	
+				}
+				if(chain)
+					win=true;
+				chain = true;
+				for(var i=1; i<5; i++){
+					if(valueSlots[i*5]!="x")
+						chain = false;
+				}
+				if(chain)
+					win=true;
+				chain=true;
+				for(var i=1; i<5; i++){
+					if(valueSlots[i*5+i]!="x")
+						chain=false;
+				}
+			}
+			for(var j=1; j<5; j++){
+				if(valueSlots[j] == "x" && !win){
+					chain = true;
+					for(var i=1; i<5; i++){
+						if(valueSlots[(i*5)+j]!="x")
+							chain = false;
+					}
+					if(chain)
+						win=true;
+					
+					if(j==4){
+						chain=true;
+						for(var i=2; i<6; i++){
+							if(valueSlots[(i*5-i)]!="x")
+								chain=false;
+						}
+						if(chain)
+							win=true;
+					}	
+				}
+				
+			}
+			for(var j=0; j<4; j++){
+				if(valueSlots[(j*5)+5] == "x" && !win){
+					chain = true;
+					for(var i=1; i<5; i++){
+						if(valueSlots[((j*5)+5)+i] !="x")
+							chain = false;
+					}
+					if(chain)
+						win=true;
+				}
+			}
+			if(win){
+				return true;
+			}
+			return false;
+		}
 	}
 	function save(){
 		localStorage.setItem('playerMoney', player.money);
@@ -175,6 +307,8 @@
 				}
 				if(buildHold.name=="Spade")
 					buySpade(buildHold.amount);
+				if(buildHold.name=="Bingo")
+					buyBingo(buildHold.amount);
 				buildHold.cost = Math.round(buildHold.baseCost * Math.pow(buildHold.exp,buildHold.amount));
 				player.gain += buildHold.currGain;
 			});
