@@ -2,7 +2,7 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.2";
+	var verNum = "v0.25";
 	
 	function playerInfo(money, updTime, gain){
 		var money;
@@ -287,7 +287,7 @@
 		pageRefresh();
 	}
 	function load(){
-		if(localStorage.getItem('versionNum')){
+		if(localStorage.getItem('versionNum')!=verNum){
 			resetPnB();
 			if(localStorage.getItem('playerInfo'))
 				player.money = Number(localStorage.getItem('playerMoney'));
