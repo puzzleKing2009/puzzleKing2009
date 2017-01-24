@@ -287,7 +287,7 @@
 		pageRefresh();
 	}
 	function load(){
-		if(localStorage.getItem('versionNum')!=verNum){
+		if(localStorage.getItem('versionNum')==verNum){
 			resetPnB();
 			if(localStorage.getItem('playerInfo'))
 				player.money = Number(localStorage.getItem('playerMoney'));
