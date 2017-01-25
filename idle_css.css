@@ -4,7 +4,7 @@
 		display:block;
 		position:absolute;
 		left:35%;
-		width:100%;
+		width:130%;
 	}
 	td.value{
 		text-align:right;
@@ -37,10 +37,10 @@
 	.hiddenToggle{
 		border-bottom-style: solid;
 		border-bottom-color: black;
-		font-size:80%;
+		font-size:90%;
 		color:purple;
 	}
 	.digData{
 		position:absolute;
-		left:150;
+		left:190;
 	}

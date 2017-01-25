@@ -2,10 +2,14 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.25";
+	var verNum = "v0.3";
 	
-	function playerInfo(money, updTime, gain){
+	function playerInfo(){
 		var money;
+		var money_2;
+		var money_3;
+		var money_4;
+		var money_5;
 		var updTime;
 		var gain;
 		var digChnc;
@@ -14,15 +18,21 @@
 		var spdWorth;
 		var spdMWorth;
 		var bingoHolder = new Array();
+		var bingoWait;
+		this.bingoWait = 20;
 		this.bingoHolder = bingoHolder;
-		this.spdWorth = 0.13;
-		this.spdMWorth = 0.11;
-		this.shipMlt = 1.12;
-		this.digChnc = 0;
-		this.digMlt = 1.5;
-		this.money = money;
-		this.updTime = updTime;
-		this.gain = gain;
+		this.spdWorth = 0.18;
+		this.spdMWorth = 0.84;
+		this.shipMlt = 1.14;
+		this.digChnc = 2;
+		this.digMlt = 2.6;
+		this.money = 10;
+		this.money_2 = 0;
+		this.money_3 = 0;
+		this.money_4 = 0;
+		this.money_5 = 0;
+		this.updTime = 2000;
+		this.gain = 1;
 	}
 	
 	function building(name, cost, exp, gain){
@@ -55,12 +65,12 @@
 		load();
 	}
 	function resetPnB(){
-		player = new playerInfo(0, 1500, 1);
+		player = new playerInfo();
 		clearInterval(gameTimer);
 		gameTimer = setInterval(gameTick, player.updTime);
-		var autoSave = setInterval(save, 60000);
+		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.07, 1), new building("Spade", 200, 1.045, 3), new building("Bingo", 5000, 1.08, 3), new building("Spaceship", 6800, 1.19, 70), new building("Magic", 10000, 1.02, 50), new building("Ice Cubes", 999999, 1.1, 6), new building("Football", 12392232, 1.03, 7), new building("Garbage", 2232222832, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.07, 1), new building("Spade", 200, 1.045, 2), new building("Bingo", 5000, 1.066, 10), new building("Spaceship", 7200, 1.12, 70), new building("Magic", 10000, 1.02, 50), new building("Ice Cubes", 999999, 1.1, 6), new building("Football", 12392232, 1.03, 7), new building("Garbage", 2232222832, 1.05, 8)];
 	}
 	function buy(x){
 		var buyInQuest = document.getElementById("buy"+x);
@@ -95,12 +105,18 @@
 		}
 	}
 	function pageRefresh(){
+		showBuilding();
 		document.getElementById("myMoney").innerHTML = player.money;
+		document.getElementById("myMoney2").innerHTML = player.money_2;
+		document.getElementById("myMoney3").innerHTML = player.money_3;
+		document.getElementById("myMoney4").innerHTML = player.money_4;
+		document.getElementById("myMoney5").innerHTML = player.money_5;
 		document.getElementById("gainer").innerHTML = player.gain;
 		document.getElementById("digChance").innerHTML = player.digChnc;
 		document.getElementById("digMult").innerHTML = player.digMlt;
 		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain);
-		document.getElementById("bingoValue").innerHTML = Math.round(buildings[2].currGain * ((buildings[2].amount / 5) +1));
+		document.getElementById("bingoValue").innerHTML = calcBingoBucks();
+		document.getElementById("bingoWait").innerHTML = player.bingoWait;
 		buildings.forEach(function(building, index){
 			index++;
 			document.getElementById("owned"+index).innerHTML = building.amount;
@@ -109,33 +125,64 @@
 		//	document.getElementById("total"+index).innerHTML = building.currGain;
 			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain;
 			document.getElementById("total"+index+"Txt").innerHTML = building.currGain;
-			document.getElementById("ratio"+index+"Txt").innerHTML = Math.round((building.baseGain / building.cost)*100)/100;
+			document.getElementById("ratio"+index+"Txt").innerHTML = getWorthRatio(building, index);
 		});
 	}
+	function getWorthRatio(building, x){
+		var worthRatio = 0;
+		switch(x){
+			case 1: if(buildings[1].amount > 0)
+						worthRatio = Math.round((building.baseGain+(building.baseGain*(1+(player.digChnc/100)*(player.digMlt-1))))/building.cost*1000);
+					else{
+						worthRatio = Math.round((building.baseGain/building.cost)*1000);
+					}
+					break;
+			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*1000);break;
+			case 3: worthRatio = Math.round((building.baseGain+(calcBingoBucks()/(24*player.bingoWait)))/building.cost*1000); break;
+			case 4: worthRatio = Math.round((building.baseGain / building.cost)*1000); break;
+			case 5: worthRatio = Math.round((building.baseGain + (building.amount*10000*(Math.random()/10)))/1000); break;
+			case 6: break;
+			case 7: break;
+			case 8: break;
+		}
+		return worthRatio
+	}
 	function gameTick(){
-		if(Math.round((Math.random()*10000))==3621){
+		if(Math.round((Math.random()*100000))==36321){
 			buildings.forEach(function(building, index){
 				index++;
 				document.getElementById("buy"+index).src="buildx.png";
 		});
 		}
 		player.money = player.money+player.gain;
-		document.getElementById("myMoney").innerHTML = player.money;
 		
-		showBuilding();
-		dig();
-		bingoTimer++;
-		if(bingoTimer >= 60){
-			playBingo();
-			bingoTimer = 0;
+		if(buildings[1].amount >=1)
+			dig();
+		if(buildings[2].amount >=1){
+			bingoTimer++;
+			if(bingoTimer >= player.bingoWait){
+				playBingo();
+				bingoTimer = 0;
+			}
+		}
+		if(buildings[4].amount >=1)
+			doMagic();
+			
+		pageRefresh();
+	}
+	function doMagic(){
+		var coinChance = Math.random();
+		for(var i=0; i < buildings[4].amount; i++){
+			if(Math.random()*1000 <= coinChance*10)
+				player.money_2++;
 		}
 	}
 	function showBuilding(){
-		if(player.money > (buildings[0].baseCost*.8)){
+		if(player.money > (buildings[0].baseCost*.5)){
 			$('#infoBox').fadeIn("slow");
 		}
 		buildings.forEach(function(building, index){
-			if(player.money > (buildings[index].baseCost*.8)){
+			if(((player.money > (building.baseCost*.5)) || building.amount > 0)){
 				$('#building'+index).fadeIn("slow");
 				$('#info'+index).fadeIn("slow");
 			}
@@ -158,7 +205,7 @@
 		player.bingoHolder.forEach(function(bingo){
 			bingo.playNum(bingoNum);
 			if(bingo.checkWin()){
-				var givePlayerMoney = Math.round(buildings[2].currGain * ((buildings[2].amount / 5) +1));
+				var givePlayerMoney = calcBingoBucks();
 				player.money += givePlayerMoney;
 				bingo.newCard();
 				var bingoBorder = document.getElementById("buy3");	
@@ -167,6 +214,9 @@
 				window.setTimeout(function(){bingoBorder.style.borderColor='#000000'; bingoBorder.border="1";},500);
 			}
 		});
+	}
+	function calcBingoBucks(){
+		return Math.round(33*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.065) / 6) +3));
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);
@@ -179,9 +229,17 @@
 		this.playNum = playNum;
 		this.checkWin = checkWin;
 		this.newCard = newCard;
+		this.setCard = setCard;
 		
 		for(var i=0;i<25;i++){
 			fillCard(i);	
+		}
+		
+		function setCard(a1, a2){
+			valueSlots = a1;
+			usedSlots = a2;
+			this.valueSlots = valueSlots;
+			this.usedSlots = usedSlots;
 		}
 		
 		function newCard(){
@@ -273,7 +331,8 @@
 		}
 	}
 	function save(){
-		localStorage.setItem('playerMoney', player.money);
+		var playerJSON = JSON.stringify(player);
+		localStorage.setItem('player', playerJSON);
 		var buildJSON = JSON.stringify(buildings);
 		localStorage.setItem('buildings',buildJSON);
 		localStorage.setItem('versionNum',verNum);
@@ -289,29 +348,12 @@
 	function load(){
 		if(localStorage.getItem('versionNum')==verNum){
 			resetPnB();
-			if(localStorage.getItem('playerInfo'))
-				player.money = Number(localStorage.getItem('playerMoney'));
+			if(localStorage.getItem('player'))
+				var playerHolder = JSON.parse(localStorage.getItem('player'));
+			loadPlayer(playerHolder);
 			if(localStorage.getItem('buildings'))
 				var buildingHolder = JSON.parse(localStorage.getItem('buildings'));	
-			buildingHolder.forEach(function(buildingHold, index){
-			var buildHold = buildings[index];
-				buildHold.amount = buildingHold.amount;
-				if(buildHold.name == "Spaceship"){
-					for(var i=0; i< buildHold.amount; i++){
-						buildHold.currGain += buildHold.baseGain;
-						buildHold.baseGain = Math.round(buildHold.baseGain * player.shipMlt)
-						}
-				}
-				else{
-					buildHold.currGain = buildHold.baseGain * buildHold.amount;
-				}
-				if(buildHold.name=="Spade")
-					buySpade(buildHold.amount);
-				if(buildHold.name=="Bingo")
-					buyBingo(buildHold.amount);
-				buildHold.cost = Math.round(buildHold.baseCost * Math.pow(buildHold.exp,buildHold.amount));
-				player.gain += buildHold.currGain;
-			});
+			loadBuilding(buildingHolder);
 			document.getElementById("alert").innerHTML = "Game has been loaded";
 		}
 		else{
@@ -319,6 +361,25 @@
 		
 		saveLoadPopup();
 	}
+	function loadBuilding(build){
+		Object.keys(build).forEach(function(buildNodes){
+			buildings[buildNodes] = build[buildNodes];
+		});
+	}
+	function loadPlayer(p2){
+		Object.keys(p2).forEach(function(playerNodes){
+			player[playerNodes] = p2[playerNodes];
+		});
+		var bHolder = new Array();
+		var cHolder;
+		player.bingoHolder.forEach(function(bingo){
+			cHolder = new bingoCard();
+			cHolder.setCard(bingo.valueSlots, bingo.usedSlots);
+			bHolder.push(cHolder);
+		});
+		player.bingoHolder = bHolder;
+	}
+	
 	$('.toggle').click(function(){
 		$(this).toggleClass("grey");
 		var content = $(this).next();
