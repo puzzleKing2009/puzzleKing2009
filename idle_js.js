@@ -3,6 +3,16 @@
 	var player;
 	var bingoTimer = 0;
 	var verNum = "v0.3";
+	var buyAmount = 1;
+	
+	var gainer1 = 0;
+	var gainer2 = 0;
+	var gainer3 = 0;
+	var gainer4 = 0;
+	var gainer5 = 0;
+	var gainer6 = 0;
+	var gainer7 = 0;
+	var gainer8 = 0;
 	
 	function playerInfo(){
 		var money;
@@ -18,21 +28,26 @@
 		var spdWorth;
 		var spdMWorth;
 		var bingoHolder = new Array();
+		var iceHolder = new Array();
 		var bingoWait;
-		this.bingoWait = 20;
+		var meltTime;
+		
+		this.meltTime = 120;
+		this.iceHolder = iceHolder;
 		this.bingoHolder = bingoHolder;
+		this.bingoWait = 15;
 		this.spdWorth = 0.18;
 		this.spdMWorth = 0.84;
-		this.shipMlt = 1.14;
+		this.shipMlt = 1.092;
 		this.digChnc = 2;
 		this.digMlt = 2.6;
-		this.money = 10;
+		this.money = 109999999;
 		this.money_2 = 0;
 		this.money_3 = 0;
 		this.money_4 = 0;
 		this.money_5 = 0;
-		this.updTime = 2000;
-		this.gain = 1;
+		this.updTime = 20;
+		this.gain = 0;
 	}
 	
 	function building(name, cost, exp, gain){
@@ -70,7 +85,31 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.07, 1), new building("Spade", 200, 1.045, 2), new building("Bingo", 5000, 1.066, 10), new building("Spaceship", 7200, 1.12, 70), new building("Magic", 10000, 1.02, 50), new building("Ice Cubes", 999999, 1.1, 6), new building("Football", 12392232, 1.03, 7), new building("Garbage", 2232222832, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 3000, 1.06, 17), new building("Spaceship", 7000, 1.15, 60), new building("Magic", 40000, 1.033, 80), new building("Ice Cubes", 999999, 1.1, 6), new building("Football", 12392232, 1.03, 7), new building("Garbage", 2232222832, 1.05, 8)];
+	}
+	function cycleBuy(){
+		switch(buyAmount){
+			case 1: buyAmount = 2; document.getElementById("buyAmount").innerHTML = "10"; break;
+			case 2: buyAmount = 3; document.getElementById("buyAmount").innerHTML = "Max"; break;
+			case 3: buyAmount = 1; document.getElementById("buyAmount").innerHTML = "1"; break;
+		}
+	}
+	function pickBuy(x){
+		switch(buyAmount){
+			case 1: buy(x); break;
+			case 2: buyTen(x); break;
+			case 3: buyMax(x); break;
+		}
+	}
+	function buyTen(x){
+		for(var y = 0; y < 10; y++){
+			buy(x);
+		}
+	}
+	function buyMax(x){
+		while(player.money >= buildings[x-1].cost){
+			buy(x);
+		}
 	}
 	function buy(x){
 		var buyInQuest = document.getElementById("buy"+x);
@@ -87,9 +126,12 @@
 				buySpade(1);
 			if(currBuilding.name=="Bingo")
 				buyBingo(1);
+			if(currBuilding.name=="Ice Cubes")
+				buyIce(1);
 			player.gain += Number(currBuilding.baseGain);
-			if(currBuilding.name=="Spaceship")
+			if(currBuilding.name=="Spaceship"){
 				currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
+				}
 			pageRefresh();
 		}	
 	}
@@ -104,43 +146,65 @@
 			addBingoCard();
 		}
 	}
+	function buyIce(x){
+		for(var i=0; i<x; i++){
+		alert("pushed");
+			player.iceHolder.push(new iceCube());
+			alert(player.iceHolder[0]);
+		}
+	}
+	function iceCube(){
+		var duration = player.meltTime;
+		this.duration = duration;
+	}
 	function pageRefresh(){
 		showBuilding();
-		document.getElementById("myMoney").innerHTML = player.money;
-		document.getElementById("myMoney2").innerHTML = player.money_2;
-		document.getElementById("myMoney3").innerHTML = player.money_3;
-		document.getElementById("myMoney4").innerHTML = player.money_4;
-		document.getElementById("myMoney5").innerHTML = player.money_5;
-		document.getElementById("gainer").innerHTML = player.gain;
+		document.getElementById("myMoney").innerHTML = player.money.formatMoney();
+		document.getElementById("myMoney2").innerHTML = player.money_2.formatMoney();
+		document.getElementById("myMoney3").innerHTML = player.money_3.formatMoney();
+		document.getElementById("myMoney4").innerHTML = player.money_4.formatMoney();
+		document.getElementById("myMoney5").innerHTML = player.money_5.formatMoney();
+		document.getElementById("gainer").innerHTML = player.gain.formatMoney();
 		document.getElementById("digChance").innerHTML = player.digChnc;
 		document.getElementById("digMult").innerHTML = player.digMlt;
-		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain);
-		document.getElementById("bingoValue").innerHTML = calcBingoBucks();
+		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain).formatMoney();
+		document.getElementById("bingoValue").innerHTML = calcBingoBucks().formatMoney();
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
+		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
+		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
+		document.getElementById("gainer3").innerHTML = (gainer3/gainer8*100).formatMoney(2);
+		document.getElementById("gainer4").innerHTML = (gainer4/gainer8*100).formatMoney(2);
+		document.getElementById("gainer5").innerHTML = (gainer5/gainer8*100).formatMoney(2);
+		document.getElementById("gainer6").innerHTML = (gainer6/gainer8*100).formatMoney(2);
+		document.getElementById("gainer7").innerHTML = (gainer7/gainer8*100).formatMoney(2);
+		document.getElementById("gainer8").innerHTML = gainer8.formatMoney();
+		
 		buildings.forEach(function(building, index){
 			index++;
 			document.getElementById("owned"+index).innerHTML = building.amount;
-			document.getElementById("cost"+index).innerHTML = building.cost;
+			document.getElementById("cost"+index).innerHTML = building.cost.formatMoney();
 		//	document.getElementById("give"+index).innerHTML = building.baseGain;
 		//	document.getElementById("total"+index).innerHTML = building.currGain;
-			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain;
-			document.getElementById("total"+index+"Txt").innerHTML = building.currGain;
+			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain.formatMoney();
+			if(index==4)
+				document.getElementById("give"+index+"currTxt").innerHTML = Math.round(building.baseGain/player.shipMlt).formatMoney();
+			document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
 			document.getElementById("ratio"+index+"Txt").innerHTML = getWorthRatio(building, index);
 		});
 	}
 	function getWorthRatio(building, x){
 		var worthRatio = 0;
 		switch(x){
-			case 1: if(buildings[1].amount > 0)
+			case 1: if(buildings[1].amount > 0){
 						worthRatio = Math.round((building.baseGain+(building.baseGain*(1+(player.digChnc/100)*(player.digMlt-1))))/building.cost*1000);
-					else{
+					}else{
 						worthRatio = Math.round((building.baseGain/building.cost)*1000);
 					}
 					break;
 			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*1000);break;
-			case 3: worthRatio = Math.round((building.baseGain+(calcBingoBucks()/(24*player.bingoWait)))/building.cost*1000); break;
+			case 3: worthRatio = Math.round((building.baseGain+((calcBingoBucks()/(30*player.bingoWait))))/building.cost*1000); break;
 			case 4: worthRatio = Math.round((building.baseGain / building.cost)*1000); break;
-			case 5: worthRatio = Math.round((building.baseGain + (building.amount*10000*(Math.random()/10)))/1000); break;
+			case 5: worthRatio = Math.round((building.baseGain + (building.amount*1000*(Math.random()/10)))/1000); break;
 			case 6: break;
 			case 7: break;
 			case 8: break;
@@ -148,13 +212,20 @@
 		return worthRatio
 	}
 	function gameTick(){
+		resetBuildingIcon();
 		if(Math.round((Math.random()*100000))==36321){
 			buildings.forEach(function(building, index){
 				index++;
 				document.getElementById("buy"+index).src="buildx.png";
-		});
+			});
 		}
 		player.money = player.money+player.gain;
+		gainer8 += player.gain;
+		gainer1 += buildings[0].currGain;
+		gainer2 += buildings[1].currGain;
+		gainer3 += buildings[2].currGain;
+		gainer4 += buildings[3].currGain;
+		gainer5 += buildings[4].currGain;
 		
 		if(buildings[1].amount >=1)
 			dig();
@@ -167,9 +238,25 @@
 		}
 		if(buildings[4].amount >=1)
 			doMagic();
-			
+		if(buildings[5].amount >=1)
+			meltIce();
 		pageRefresh();
 	}
+	function meltIce(){
+		var cubes = player.iceHolder;
+		alert(cubes);
+		alert(cubes[0].duration);
+		var index = cubes.length-1;
+		while(index >= 0){
+			alert(cubes[index].duration);
+			cubes[index].duration--;
+			if(cubes[index].duration <= 0){
+				player.money_3++;
+				player.money += buildings[4].basegain * 10000;
+				cubes.splice(index,1);
+			}
+		}
+	}	
 	function doMagic(){
 		var coinChance = Math.random();
 		for(var i=0; i < buildings[4].amount; i++){
@@ -181,23 +268,32 @@
 		if(player.money > (buildings[0].baseCost*.5)){
 			$('#infoBox').fadeIn("slow");
 		}
-		buildings.forEach(function(building, index){
-			if(((player.money > (building.baseCost*.5)) || building.amount > 0)){
-				$('#building'+index).fadeIn("slow");
-				$('#info'+index).fadeIn("slow");
+		var showAll = false;
+		for(var x = buildings.length; x>0; x--){
+			if(((player.money > (buildings[x-1].baseCost*.5)) || buildings[x-1].amount > 0 || showAll)){
+				$('#building'+(x-1)).fadeIn("slow");
+				$('#info'+(x-1)).fadeIn("slow");
+				showAll = true;
 			}
+		}
+	}
+	function resetBuildingIcon(){
+		buildings.forEach(function(building, index){
+			index++;
+			document.getElementById("buy"+index).src="build"+index+".png";
+			document.getElementById("buy"+index).style.borderColor="#000000";
 		});
-		
 	}
 	function dig(){
 		if((Math.round(Math.random()*10000)/100) < player.digChnc){
 			var critValue = Math.round(buildings[0].currGain * player.digMlt);
 			player.money += critValue;
+			gainer6 += critValue;
+			gainer8 += critValue;
 			
 			var spadeBorder = document.getElementById("buy2");
 			spadeBorder.style.borderColor='FFD700';
-			spadeBorder.border="2";
-			window.setTimeout(function(){spadeBorder.style.borderColor='#000000'; spadeBorder.border="1";},400);
+			spadeBorder.src="build2.1.png";
 		}
 	}
 	function playBingo(){
@@ -207,16 +303,17 @@
 			if(bingo.checkWin()){
 				var givePlayerMoney = calcBingoBucks();
 				player.money += givePlayerMoney;
+				gainer7 += givePlayerMoney;
+				gainer8 += givePlayerMoney;
 				bingo.newCard();
 				var bingoBorder = document.getElementById("buy3");	
 				bingoBorder.style.borderColor='FFD700';
-				bingoBorder.border="2";
-				window.setTimeout(function(){bingoBorder.style.borderColor='#000000'; bingoBorder.border="1";},500);
+				bingoBorder.src="build3.1.png";
 			}
 		});
 	}
 	function calcBingoBucks(){
-		return Math.round(33*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.065) / 6) +3));
+		return Math.round(2*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.025) / 4) +2));
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);
@@ -362,13 +459,28 @@
 		saveLoadPopup();
 	}
 	function loadBuilding(build){
-		Object.keys(build).forEach(function(buildNodes){
-			buildings[buildNodes] = build[buildNodes];
+		build.forEach(function(building, index){
+			buildings[index].amount = building.amount;
+			if(buildings[index].name == "Spaceship"){
+				for(var x=1; x < buildings[index].amount; x++){
+					buildings[index].currGain += buildings[index].baseGain;
+					buildings[index].baseGain = Math.round(buildings[index].baseGain * player.shipMlt);
+				}
+			}
+			else{
+				buildings[index].currGain = buildings[index].baseGain * buildings[index].amount;
+			}
+			if(buildings[index].name == "Spade")
+				buySpade(buildings[index].amount);
+			buildings[index].cost = Math.round(buildings[index].baseCost * Math.pow(buildings[index].exp,buildings[index].amount));
+			
 		});
 	}
 	function loadPlayer(p2){
 		Object.keys(p2).forEach(function(playerNodes){
-			player[playerNodes] = p2[playerNodes];
+			if(playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5" || playerNodes == "gain"){
+				player[playerNodes] = p2[playerNodes];
+			}
 		});
 		var bHolder = new Array();
 		var cHolder;
@@ -390,6 +502,15 @@
 		location.reload();
 		
 	}
-	/* old code
-	<span class="give">Gives: $<span id="give3"></span></span><span class="giveTotal">Total: $<span id="total3"></span></span>
-	*/
+	
+	Number.prototype.formatMoney = function(c, d, t){
+		var n = this, 
+		c = isNaN(c = Math.abs(c)) ? 0 : c, 
+		d = d == undefined ? "." : d, 
+		t = t == undefined ? "," : t, 
+		s = n < 0 ? "-" : "", 
+		i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+		j = (j = i.length) > 3 ? j % 3 : 0;
+	   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
+	
