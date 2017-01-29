@@ -12,6 +12,7 @@
 			<tr style="background-color:#8664BA"><td class="shrink">§</td><td class="value" id="myMoney5">0</td></tr>
 		</table>
 		Current Gain: <span id="gainer"></span><br>
+		<!--
 		Gain from Shoes: <span id="gainer1"></span><br>
 		Gain from Spade: <span id="gainer2"></span><br>
 		Gain from Bingo: <span id="gainer3"></span><br>
@@ -20,22 +21,35 @@
 		Gain from Crit: <span id="gainer6"></span><br>
 		Gain from YAHTZEE: <span id="gainer7"></span><br>
 		Total Gain: <span id="gainer8"></span>
-		<button style="position:absolute;top:90%;left:85%" onClick="save()">Save</button>
-		<button style="position:absolute;top:90%;left:90%" onClick="load()">Load</button>
-		<button style="position:absolute;top:90%;left:95%" onClick="reset()">Reset</button>
-		<button style="position:absolute;top:0;left:60%" onClick="cycleBuy()">Buy <span id="buyAmount">1</span></button>
+		-->
+		<button style="position:absolute;top:90%;left:0%" onClick="save()">Save</button>
+		<button style="position:absolute;top:90%;left:3%" onClick="load()">Load</button>
+		<button style="position:absolute;top:90%;left:6%" onClick="reset()">Reset</button>
+		<button style="position:absolute;top:0;left:30%" onClick="cycleBuy()">Buy <span id="buyAmount">1</span></button>
 		<div style="position:absolute;top:97%;left:0%" id="alert"></div>
-		<div style="position:absolute;left:65%;top:0;width:290px" id="buyBox">
-			<div id="building0" style="display:none"><img class="buyable" src="build1.png" id="buy1" border="1" onclick="pickBuy(1)"><div class="building" style="position:absolute;left:26%;top:1"><span id="name1"></span><br>Currently owned: <span id="owned1"></span><br>Cost: $<span id="cost1"></span></div></div>
-			<div id="building1" style="display:none"><img class="buyable" src="build2.png" id="buy2" border="1" onclick="pickBuy(2)"><div class="building" style="position:absolute;left:26%;top:60"><span id="name2"></span><span class="digData">Dig Chance: <span id="digChance"></span></span><br>Currently owned: <span id="owned2"></span><span class="digData">Dig Multiplier: <span id="digMult"></span></span><br>Cost: $<span id="cost2"></span><span class="digData">Dig Value: <span id="digVal"></span></span></div></div>
-			<div id="building2" style="display:none"><img class="buyable" src="build3.png" id="buy3" border="1" onclick="pickBuy(3)"><div class="building" style="position:absolute;left:26%;top:117"><span id="name3"></span><span class="digData">Bingo Bucks: <span id="bingoValue"></span></span><br>Currently owned: <span id="owned3"></span><br>Cost: $<span id="cost3"></span></div></div>
-			<div id="building3" style="display:none"><img class="buyable" src="build4.png" id="buy4" border="1" onclick="pickBuy(4)"><div class="building" style="position:absolute;left:26%;top:174"><span id="name4"></span><br>Currently owned: <span id="owned4"></span><br>Cost: $<span id="cost4"></span></div></div>
-			<div id="building4" style="display:none"><img class="buyable" src="build5.png" id="buy5" border="1" onclick="pickBuy(5)"><div class="building" style="position:absolute;left:26%;top:233"><span id="name5"></span><br>Currently owned: <span id="owned5"></span><br>Cost: $<span id="cost5"></span></div></div>
-			<div id="building5" style="display:none"><img class="buyable" src="build6.png" id="buy6" border="1" onclick="pickBuy(6)"><div class="building" style="position:absolute;left:26%;top:290"><span id="name6"></span><br>Currently owned: <span id="owned6"></span><br>Cost: $<span id="cost6"></span></div></div>
-			<div id="building6" style="display:none"><img class="buyable" src="build7.png" id="buy7" border="1" onclick="pickBuy(7)"><div class="building" style="position:absolute;left:26%;top:348"><span id="name7"></span><br>Currently owned: <span id="owned7"></span><br>Cost: $<span id="cost7"></span></div></div>
-			<div id="building7" style="display:none"><img class="buyable" src="build8.png" id="buy8" border="1" onclick="pickBuy(8)"><div class="building" style="position:absolute;left:26%;top:405"><span id="name8"></span><br>Currently owned: <span id="owned8"></span><br>Cost: $<span id="cost8"></span></div></div>
+		<div style="position:absolute;left:35%;top:0;width:290px" id="buyBox">
+			<div id="building0" style="display:none"><img class="buyable" src="art/build1.png" id="buy1" border="1" onclick="pickBuy(1)"><div class="building" style="position:absolute;left:26%;top:1"><span id="name1"></span><br>Currently owned: <span id="owned1"></span><br>Cost: $<span id="cost1"></span></div></div>
+			<div id="building1" style="display:none"><img class="buyable" src="art/build2.png" id="buy2" border="1" onclick="pickBuy(2)"><div class="building" style="position:absolute;left:26%;top:60"><span id="name2"></span><span class="digData">Dig Chance: <span id="digChance"></span></span><br>Currently owned: <span id="owned2"></span><span class="digData">Dig Multiplier: <span id="digMult"></span></span><br>Cost: $<span id="cost2"></span><span class="digData">Dig Value: <span id="digVal"></span></span></div></div>
+			<div id="building2" style="display:none"><img class="buyable" src="art/build3.png" id="buy3" border="1" onclick="pickBuy(3)"><div class="building" style="position:absolute;left:26%;top:117"><span id="name3"></span><span class="digData">Bingo Bucks: <span id="bingoValue"></span></span><br>Currently owned: <span id="owned3"></span><br>Cost: $<span id="cost3"></span></div></div>
+			<div id="building3" style="display:none"><img class="buyable" src="art/build4.png" id="buy4" border="1" onclick="pickBuy(4)"><div class="building" style="position:absolute;left:26%;top:174"><span id="name4"></span><br>Currently owned: <span id="owned4"></span><br>Cost: $<span id="cost4"></span></div></div>
+			<div id="building4" style="display:none"><img class="buyable" src="art/build5.png" id="buy5" border="1" onclick="pickBuy(5)"><div class="building" style="position:absolute;left:26%;top:233"><span id="name5"></span><br>Currently owned: <span id="owned5"></span><br>Cost: $<span id="cost5"></span></div></div>
+			<div id="building5" style="display:none"><img class="buyable" src="art/build6.png" id="buy6" border="1" onclick="pickBuy(6)"><div class="building" style="position:absolute;left:26%;top:290"><span id="name6"></span><br>Currently owned: <span id="owned6"></span><br>Cost: $<span id="cost6"></span></div></div>
+			<div id="building6" style="display:none"><img class="buyable" src="art/build7.png" id="buy7" border="1" onclick="pickBuy(7)"><div class="building" style="position:absolute;left:26%;top:348"><span id="name7"></span><br>Currently owned: <span id="owned7"></span><br>Cost: $<span id="cost7"></span></div></div>
+			<div id="building7" style="display:none"><img class="buyable" src="art/build8.png" id="buy8" border="1" onclick="pickBuy(8)"><div class="building" style="position:absolute;left:26%;top:405"><span id="name8"></span><br>Currently owned: <span id="owned8"></span><br>Cost: $<span id="cost8"></span></div></div>
 		</div>
-		<div id="infoBox" style="position:absolute;left:65%;top:470;border:solid;width:450;height:150;overflow:auto;overflow-x:hidden;display:none;">	
+		
+		<div style="position:absolute;left:65%;top:0;width:290px" id="upgBox">
+			<div id="upgrade0" style="display:none"><img class="buyable" src="art/build1.png" id="upg1" border="1" onclick="buyUpg(1)"><div class="building" style="position:absolute;left:26%;top:1"><span id="upgName1"></span><br><br>Cost: $<span id="upgCost1"></span></div></div>
+			<div id="upgrade1" style="display:none"><img class="buyable" src="art/build2.png" id="upg2" border="1" onclick="buyUpg(2)"><div class="building" style="position:absolute;left:26%;top:60"><span id="upgName2"></span><br><br>Cost: $<span id="upgCost2"></span></div></div>
+			<div id="upgrade2" style="display:none"><img class="buyable" src="art/build3.png" id="upg3" border="1" onclick="buyUpg(3)"><div class="building" style="position:absolute;left:26%;top:117"><span id="upgName3"></span><br><br>Cost: $<span id="upgCost3"></span></div></div>
+			<div id="upgrade3" style="display:none"><img class="buyable" src="art/build4.png" id="upg4" border="1" onclick="buyUpg(4)"><div class="building" style="position:absolute;left:26%;top:174"><span id="upgName4"></span><br><br>Cost: $<span id="upgCost4"></span></div></div>
+			<div id="upgrade4" style="display:none"><img class="buyable" src="art/build5.png" id="upg5" border="1" onclick="buyUpg(5)"><div class="building" style="position:absolute;left:26%;top:233"><span id="upgName5"></span><br><br>Cost: $<span id="upgCost5"></span></div></div>
+			<div id="upgrade5" style="display:none"><img class="buyable" src="art/build6.png" id="upg6" border="1" onclick="buyUpg(6)"><div class="building" style="position:absolute;left:26%;top:290"><span id="upgName6"></span><br><br>Cost: $<span id="upgCost6"></span></div></div>
+			<div id="upgrade6" style="display:none"><img class="buyable" src="art/build7.png" id="upg7" border="1" onclick="buyUpg(7)"><div class="building" style="position:absolute;left:26%;top:348"><span id="upgName7"></span><br><br>Cost: $<span id="upgCost7"></span></div></div>
+			<div id="upgrade7" style="display:none"><img class="buyable" src="art/build8.png" id="upg8" border="1" onclick="buyUpg(8)"><div class="building" style="position:absolute;left:26%;top:405"><span id="upgName8"></span><br><br>Cost: $<span id="upgCost8"></span></div></div>
+		</div>
+		
+		<div id="infoBox" style="position:absolute;left:35%;top:490;border:solid;width:450;height:200;overflow:auto;overflow-x:hidden;display:none;">	
 			<div id="info0" style="display:none" class="toggle">Shoes</div>
 			<div class="hiddenToggle" id="content" style="display:none;">Your standard pair of shoes. Each pair lets you walk a mile in someone else's shoe! Each give $<span id="give1Txt"></span> a tick for a total of $<span id="total1Txt"></span> each tick. Buying one now has a worth of <span id="ratio1Txt"></span> </div>
 			<div id="info1" style="display:none" class="toggle">Spade</div>
@@ -59,6 +73,11 @@
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="idle_js.js"></script>
+	<script src="dig.js"></script>
+	<script src="bingo.js"></script>
+	<script src="ice.js"></script>
+	<script src="buyBuildings.js"></script>
+	<script src="buyUpgrades.js"></script>
 	
 	
 
