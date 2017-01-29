@@ -46,7 +46,7 @@
 		this.money_3 = 0;
 		this.money_4 = 0;
 		this.money_5 = 0;
-		this.updTime = 20;
+		this.updTime = 2000;
 		this.gain = 0;
 	}
 	
