@@ -85,7 +85,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 3000, 1.06, 17), new building("Spaceship", 7000, 1.15, 60), new building("Magic", 40000, 1.033, 80), new building("Ice Cubes", 999999, 1.75, 5), new building("Football", 50000000, 1.03, 7), new building("Garbage", 800000000, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2500, 1.06, 17), new building("Spaceship", 9000, 1.155, 80), new building("Magic", 40000, 1.033, 80), new building("Ice Cubes", 999999, 1.75, 5), new building("Football", 50000000, 1.03, 7), new building("Garbage", 800000000, 1.05, 8)];
 	}
 
 	function pageRefresh(){
@@ -117,8 +117,9 @@
 		//	document.getElementById("give"+index).innerHTML = building.baseGain;
 		//	document.getElementById("total"+index).innerHTML = building.currGain;
 			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain.formatMoney();
-			if(index==4)
+			if(index==4){
 				document.getElementById("give"+index+"currTxt").innerHTML = Math.round(building.baseGain/player.shipMlt).formatMoney();
+			}
 			if(index==6)
 				document.getElementById("melt"+index+"Txt").innerHTML = player.meltTime;
 			document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
@@ -232,7 +233,7 @@
 		build.forEach(function(building, index){
 			buildings[index].amount = building.amount;
 			if(buildings[index].name == "Spaceship"){
-				for(var x=1; x < buildings[index].amount; x++){
+				for(var x=0; x < buildings[index].amount; x++){
 					buildings[index].currGain += buildings[index].baseGain;
 					buildings[index].baseGain = Math.round(buildings[index].baseGain * player.shipMlt);
 				}
