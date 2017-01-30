@@ -3,8 +3,8 @@
 		border-width:thin;
 		display:block;
 		position:relative;
-		left:30%;
 		width:130%;
+		display: inline-block;
 	}
 	td.value{
 		text-align:right;
@@ -16,6 +16,8 @@
 	}
 	.buyable:hover{
 		cursor:hand;
+		display: inline-block;
+		heigth: 62px;
 	}
 	.give{
 		position:absolute;
