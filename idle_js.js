@@ -147,6 +147,7 @@
 	}
 	function gameTick(){
 		resetBuildingIcon();
+//		$('#building1Upgrade').css({"background-image": "url(art/build1.png)", "background-size":"contain"});
 		if(Math.round((Math.random()*100000))==36321){
 			buildings.forEach(function(building, index){
 				index++;

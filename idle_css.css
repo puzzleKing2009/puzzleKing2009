@@ -2,8 +2,8 @@
 		border-style:solid;
 		border-width:thin;
 		display:block;
-		position:absolute;
-		left:35%;
+		position:relative;
+		left:30%;
 		width:130%;
 	}
 	td.value{
@@ -43,4 +43,15 @@
 	.digData{
 		position:absolute;
 		left:190;
+	}
+	.upgrade{
+		position:absolute;
+		z-index: 1;
+		width:30%;
+		height:71%;
+		left: 60%;
+		top:0%;
+		border:solid;
+		background-color:#FFFFFF;
+		display:none;
 	}
