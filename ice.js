@@ -1,7 +1,7 @@
 	function meltIce(){
 		var cubes = player.iceHolder;
 		var index = cubes.length-1;
-		var currBuilding = buildings[5];
+		var currBuilding = buildings[6];
 		while(index >= 0){
 			cubes[index].duration--;
 			if(cubes[index].duration <= 0){
@@ -17,7 +17,7 @@
 		}
 	}	
 	function getMeltWorth(){
-		return (buildings[5].baseGain * 32000 * (Math.round(buildings[5].amount)) * (player.meltTime * .03));
+		return (buildings[6].baseGain * 32000 * (Math.round(buildings[6].amount)) * (player.meltTime * .03));
 	}
 	function buyIce(x){
 		for(var i=0; i<x; i++){
