@@ -85,7 +85,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2500, 1.06, 17), new building("Spaceship", 9000, 1.155, 80), new building("Magic", 40000, 1.033, 80), new building("Ice Cubes", 999999, 1.75, 5), new building("Football", 50000000, 1.03, 7), new building("Garbage", 800000000, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2500, 1.06, 17), new building("Spaceship", 9000, 1.155, 80), new building("Magic", 40000, 1.033, 80), new building("???", 999999, 1.75, 5), new building("Ice Cubes", 50000000, 1.75, 7), new building("Garbage", 800000000, 1.05, 8)];
 	}
 
 	function pageRefresh(){
@@ -120,7 +120,7 @@
 			if(index==4){
 				document.getElementById("give"+index+"currTxt").innerHTML = Math.round(building.baseGain/player.shipMlt).formatMoney();
 			}
-			if(index==6)
+			if(index==7)
 				document.getElementById("melt"+index+"Txt").innerHTML = player.meltTime;
 			document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
 			document.getElementById("ratio"+index+"Txt").innerHTML = getWorthRatio(building, index);
@@ -139,8 +139,8 @@
 			case 3: worthRatio = Math.round((building.baseGain+((calcBingoBucks()/(30*player.bingoWait))))/building.cost*1000); break;
 			case 4: worthRatio = Math.round((building.baseGain / building.cost)*1000); break;
 			case 5: worthRatio = Math.round((building.baseGain + (building.amount*1000*(Math.random()/10)))/1000); break;
-			case 6: worthRatio = Math.round((building.baseGain + (getMeltWorth()/player.meltTime)+50000)/building.cost*1000); break;
-			case 7: break;
+			case 6: break;
+			case 7: worthRatio = Math.round((building.baseGain + (getMeltWorth()/player.meltTime)+50000)/building.cost*1000); break;
 			case 8: break;
 		}
 		return worthRatio
@@ -173,7 +173,7 @@
 		}
 		if(buildings[4].amount >=1)
 			doMagic();
-		if(buildings[5].amount >=1)
+		if(buildings[6].amount >=1)
 			meltIce();
 		pageRefresh();
 	}
