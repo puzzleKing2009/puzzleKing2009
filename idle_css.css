@@ -1,9 +1,11 @@
 	.building {
 		border-style:solid;
 		border-width:thin;
-		position:relative;
 		width:130%;
 		display: inline-block;
+		position:absolute;
+		background-color:#FFFFFF;
+		height: 62px;
 	}
 	td.value{
 		text-align:right;
@@ -15,8 +17,11 @@
 	}
 	.buyable:hover{
 		cursor:hand;
+	}
+	.buyable{
 		display: inline-block;
-		heigth: 62px;
+		height: 62px;
+		margin-right: 1px;
 	}
 	.give{
 		position:absolute;
@@ -54,5 +59,54 @@
 		top:0%;
 		border:solid;
 		background-color:#FFFFFF;
+		background-image:url("art/build1BGUpg.png");
+		background-size:100%;
+		overflow:hidden;
 		display:none;
 	}
+	.upgradeBox{
+		width:64px;
+		height:66px;
+		position:absolute;
+		background-image:url("art/upgBox.png");
+		display:none;
+	}
+	.upgradeLineSlant1{
+		width:30px;
+		height:36px;
+		position:absolute;
+		background-image:url("art/upgBar1.png");
+		display:none;		
+	}
+	.upgradeLineSlant2{
+		width:30px;
+		height:36px;
+		position:absolute;
+		background-image:url("art/upgBar2.png");
+		display:none;	
+	}
+	.upgradeLineVert{
+		width:6px;
+		height:39px;
+		position:absolute;
+		background-image:url("art/upgBar3.png");
+		display:none;	
+	}
+	.upgradeLineHor{
+		width:40px;
+		height:6px;
+		position:absolute;
+		background-image:url("art/upgBar4.png");
+		display:none;	
+	}
+	.upgradeBuy:hover{
+		cursor:hand;
+	}
+	.upgAmt{
+		width:28px;
+		height:18px;
+		position:absolute;
+		background-color:#BBBBBB;
+		display:none;
+	}
+	

@@ -191,6 +191,11 @@
 			}
 		}
 	}
+	
+	function showUpgrade(){
+		$('#buildingUpgrades').toggle();
+	}
+	
 	function resetBuildingIcon(){
 		buildings.forEach(function(building, index){
 			index++;
