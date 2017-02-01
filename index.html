@@ -13,16 +13,19 @@
 			<tr style="background-color:#FFFFFF"><td>Current Gain: <span id="gainer"></span></td></tr>
 		</table>
 		
-		<!--
+		<div id="aaaa" style="display:none">
 		Gain from Shoes: <span id="gainer1"></span><br>
 		Gain from Spade: <span id="gainer2"></span><br>
 		Gain from Bingo: <span id="gainer3"></span><br>
 		Gain from Ship: <span id="gainer4"></span><br>
 		Gain from Magic: <span id="gainer5"></span><br>
+		Gain from Ice: <span id="gainer9"></span><br>
 		Gain from Crit: <span id="gainer6"></span><br>
 		Gain from YAHTZEE: <span id="gainer7"></span><br>
+		Gain from MELT: <span id="gainer10"> </span><br>
 		Total Gain: <span id="gainer8"></span>
-		-->
+		</div>
+		
 		<button style="position:absolute;top:90%;left:0%" onClick="save()">Save</button>
 		<button style="position:absolute;top:90%;left:3%" onClick="load()">Load</button>
 		<button style="position:absolute;top:90%;left:6%" onClick="reset()">Reset</button>
@@ -34,14 +37,70 @@
 		<div style="position:absolute;top:97%;left:0%" id="alert"></div>
 		
 		<div style="position:absolute;left:35%;top:0;width:280px;background-color:#FFFFFF" id="buyBox">
-			<div id="building0" style="display:none"><img class="buyable" src="art/build1.png" id="buy1" border="1" onclick="pickBuy(1)"><div class="building"><span id="name1"></span><br>Currently owned: <span id="owned1"></span><br>Cost: $<span id="cost1"></span></div></div>
-			<div id="building1" style="display:none"><img class="buyable" src="art/build2.png" id="buy2" border="1" onclick="pickBuy(2)"><div class="building"><span id="name2"></span><span class="digData">Dig Chance: <span id="digChance"></span></span><br>Currently owned: <span id="owned2"></span><span class="digData">Dig Multiplier: <span id="digMult"></span></span><br>Cost: $<span id="cost2"></span><span class="digData">Dig Value: <span id="digVal"></span></span></div></div>
-			<div id="building2" style="display:none"><img class="buyable" src="art/build3.png" id="buy3" border="1" onclick="pickBuy(3)"><div class="building"><span id="name3"></span><span class="digData">Bingo Bucks: <span id="bingoValue"></span></span><br>Currently owned: <span id="owned3"></span><br>Cost: $<span id="cost3"></span></div></div>
-			<div id="building3" style="display:none"><img class="buyable" src="art/build4.png" id="buy4" border="1" onclick="pickBuy(4)"><div class="building"><span id="name4"></span><br>Currently owned: <span id="owned4"></span><br>Cost: $<span id="cost4"></span></div></div>
-			<div id="building4" style="display:none"><img class="buyable" src="art/build5.png" id="buy5" border="1" onclick="pickBuy(5)"><div class="building"><span id="name5"></span><br>Currently owned: <span id="owned5"></span><br>Cost: $<span id="cost5"></span></div></div>
-			<div id="building5" style="display:none"><img class="buyable" src="art/build7.png" id="buy7" border="1" onclick="pickBuy(7)"><div class="building"><span id="name7"></span><br>Currently owned: <span id="owned7"></span><br>Cost: $<span id="cost7"></span></div></div>
-			<div id="building6" style="display:none"><img class="buyable" src="art/build6.png" id="buy6" border="1" onclick="pickBuy(6)"><div class="building"><span id="name6"></span><br>Currently owned: <span id="owned6"></span><br>Cost: $<span id="cost6"></span></div></div>
-			<div id="building7" style="display:none"><img class="buyable" src="art/build8.png" id="buy8" border="1" onclick="pickBuy(8)"><div class="building"><span id="name8"></span><br>Currently owned: <span id="owned8"></span><br>Cost: $<span id="cost8"></span></div></div>
+			<div id="building0" style="display:none">
+				<div class="buyable" style="background-image:url('art/build1.png');" id="buy1" border="1" onclick="pickBuy(1)">
+					<span class="tooltiptext">Your standard pair of shoes. Each pair lets you walk a mile in someone else's shoe! Each give $<span id="give1Txt"></span> a tick for a total of $<span id="total1Txt"></span> each tick. Buying one now has a worth of <span id="ratio1Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name1"></span><br>Currently owned: <span id="owned1"></span><br>Cost: $<span id="cost1"></span>
+				</div>
+			</div>
+			<div id="building1" style="display:none">
+				<div class="buyable" style="background-image:url('art/build2.png');" id="buy2" border="1" onclick="pickBuy(2)">
+					<span class="tooltiptext">A tool typically used for digging up money. Each Spade has a chance of letting you dig a mile to earn bonus Shoe production for a tick! Each dig has a reduced chance to dig agian! Each give $<span id="give2Txt"></span> a tick for a total of $<span id="total2Txt"></span> each tick. Buying one now has a worth of <span id="ratio2Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name2"></span><span class="digData">Dig Chance: <span id="digChance"></span></span><br>Currently owned: <span id="owned2"></span><span class="digData">Dig Multiplier: <span id="digMult"></span></span><br>Cost: $<span id="cost2"></span><span class="digData">Dig Value: <span id="digVal"></span></span>
+				</div>
+			</div>
+			<div id="building2" style="display:none">
+				<div class="buyable" style="background-image:url('art/build3.png');" id="buy3" border="1" onclick="pickBuy(3)">
+					<span class="tooltiptext">A card game for parties and old people homes. Every <span id="bingoWait"></span> ticks a BINGO ball will be called out. The more bingo cards you have the better the payout! Each give $<span id="give3Txt"></span> a tick for a total of $<span id="total3Txt"></span> each tick. Buying one now has a worth of <span id="ratio3Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name3"></span><span class="digData">Bingo Bucks: <span id="bingoValue"></span></span><br>Currently owned: <span id="owned3"></span><br>Cost: $<span id="cost3"></span>
+				</div>
+			</div>
+			<div id="building3" style="display:none">
+				<div class="buyable" style="background-image:url('art/build4.png');" id="buy4" border="1" onclick="pickBuy(4)">
+					<span class="tooltiptext">VROOOOOOOOM. Spaceships bring in a lot of money but are really expensive. Each spaceship you own makes the next one exponentially better. Your current Spaceship gives $<span id="give4currTxt"></span> a tick. Your next Spaceship gives $<span id="give4Txt"></span> a tick and you gain a total of $<span id="total4Txt"></span> each tick. Buying one now has a worth of <span id="ratio4Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name4"></span><br>Currently owned: <span id="owned4"></span><br>Cost: $<span id="cost4"></span>
+				</div>
+			</div>
+			<div id="building4" style="display:none">
+				<div class="buyable" style="background-image:url('art/build5.png');" id="buy5" border="1" onclick="pickBuy(5)">
+					<span class="tooltiptext">Magic magically gives you magic money with a magical chance of producing φ. Magic! Each magically give $<span id="give5Txt"></span> a tick for a magical total of $<span id="total5Txt"></span> each tick. Magically buying one now has a magical worth of <span id="ratio5Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name5"></span><br>Currently owned: <span id="owned5"></span><br>Cost: $<span id="cost5"></span>
+				</div>
+			</div>
+			<div id="building5" style="display:none">
+				<div class="buyable" style="background-image:url('art/build6.png');" id="buy6" border="1" onclick="pickBuy(6)">
+					<span class="tooltiptext">NYI. Each gives $<span id="give6Txt"></span> a tick for a total of $<span id="total6Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio6Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name6"></span><br>Currently owned: <span id="owned6"></span><br>Cost: $<span id="cost6"></span>
+				</div>
+			</div>
+			<div id="building6" style="display:none">
+				<div class="buyable" style="background-image:url('art/build7.png');" id="buy7" border="1" onclick="pickBuy(7)">
+					<span class="tooltiptext">Water frozen by magic and enchanted to give you money. Ice Cubes melt over <span id="melt7Txt"></span> ticks. When a cube melts it produces bonus money and a ☺. Each give $<span id="give7Txt"></span> a tick for a total of $<span id="total7Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio7Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name7"></span><br>Currently owned: <span id="owned7"></span><br>Cost: $<span id="cost7"></span>
+				</div>
+			</div>
+			<div id="building7" style="display:none">
+				<div class="buyable" style="background-image:url('art/build8.png');" id="buy8" border="1" onclick="pickBuy(8)">
+					<span class="tooltiptext">NYI. Each gives $<span id="give8Txt"></span> a tick for a total of $<span id="total8Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio8Txt"></span>
+					</span>
+				</div>
+				<div class="building"><span id="name8"></span><br>Currently owned: <span id="owned8"></span><br>Cost: $<span id="cost8"></span>
+				</div>
+			</div>
 		</div>
 <!--		
 		<div style="position:absolute;left:65%;top:0;width:290px" id="upgBox">
@@ -55,25 +114,7 @@
 			<div id="upgrade7" style="display:none"><img class="buyable" src="art/build8.png" id="upg8" border="1" onclick="buyUpg(8)"><div class="building" style="position:absolute;left:26%;top:405"><span id="upgName8"></span><br><br>Cost: $<span id="upgCost8"></span></div></div>
 		</div>
 		-->
-		<div id="infoBox" style="position:absolute;left:35%;top:490;border:solid;width:435;height:200;overflow:auto;overflow-x:hidden;display:none;background-color:#FFFFFF">	
-			<div id="info0" style="display:none" class="toggle">Shoes</div>
-			<div class="hiddenToggle" id="content" style="display:none;">Your standard pair of shoes. Each pair lets you walk a mile in someone else's shoe! Each give $<span id="give1Txt"></span> a tick for a total of $<span id="total1Txt"></span> each tick. Buying one now has a worth of <span id="ratio1Txt"></span> </div>
-			<div id="info1" style="display:none" class="toggle">Spade</div>
-			<div class="hiddenToggle" id="content" style="display:none;">A tool typically used for digging up money. Each Spade has a chance of letting you dig a mile to earn bonus Shoe production for a tick! Each give $<span id="give2Txt"></span> a tick for a total of $<span id="total2Txt"></span> each tick. Buying one now has a worth of <span id="ratio2Txt"></span></div>
-			<div id="info2" style="display:none" class="toggle">Bingo</div>
-			<div class="hiddenToggle" id="content" style="display:none;">A card game for parties and old people homes. Every <span id="bingoWait"></span> ticks a BINGO ball will be called out. The more bingo cards you have the better the payout! Each give $<span id="give3Txt"></span> a tick for a total of $<span id="total3Txt"></span> each tick. Buying one now has a worth of <span id="ratio3Txt"></span></div>
-			<div id="info3" style="display:none" class="toggle">Spaceship</div>
-			<div class="hiddenToggle" id="content" style="display:none;">VROOOOOOOOM. Spaceships bring in a lot of money but are really expensive. Each spaceship you own makes the next one exponentially better. Your current Spaceship gives $<span id="give4currTxt"></span> a tick. Your next Spaceship gives $<span id="give4Txt"></span> a tick and you have gain a total of $<span id="total4Txt"></span> each tick. Buying one now has a worth of <span id="ratio4Txt"></span></div>
-			<div id="info4" style="display:none" class="toggle">Magic</div>
-			<div class="hiddenToggle" id="content" style="display:none;">Magic magically gives you magic money with a magical chance of producing φ. Magic! Each magically give $<span id="give5Txt"></span> a tick for a magical total of $<span id="total5Txt"></span> each tick. Magically buying one now has a magical worth of <span id="ratio5Txt"></span></div>
-			<div id="info6" style="display:none" class="toggle">Ice Cubes</div>
-			<div class="hiddenToggle" id="content" style="display:none;">Water frozen by magic and enchanted to give you money. Ice Cubes melt over <span id="melt7Txt"></span> ticks. When a cube melts it produces bonus money and a ☺. Each give $<span id="give7Txt"></span> a tick for a total of $<span id="total7Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio7Txt"></span></div>
-			<div id="info5" style="display:none" class="toggle">Football</div>
-			<div class="hiddenToggle" id="content" style="display:none;">GO SPORT GO. Each gives $<span id="give6Txt"></span> a tick for a total of $<span id="total6Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio6Txt"></span></div>
-			<div id="info7" style="display:none" class="toggle">Garbage</div>
-			<div class="hiddenToggle" id="content" style="display:none;">The Dave Himself. Each gives $<span id="give8Txt"></span> a tick for a total of $<span id="total8Txt"></span> each tick. Buying one now has a Gain/Cost Ratio of <span id="ratio8Txt"></span></div>
-			
-		</div>
+
 		
 		<div id="buildingUpgrades" class="upgrade">
 			<div id="b1Upgrades">

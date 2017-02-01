@@ -2,8 +2,9 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.3";
+	var verNum = "v0.5";
 	var buyAmount = 1;
+	var worthMult = 1000;
 	
 	var gainer1 = 0;
 	var gainer2 = 0;
@@ -13,6 +14,8 @@
 	var gainer6 = 0;
 	var gainer7 = 0;
 	var gainer8 = 0;
+	var gainer9 = 0;
+	var gainer10 = 0;
 	
 	function playerInfo(){
 		var money;
@@ -35,12 +38,12 @@
 		this.meltTime = 900;
 		this.iceHolder = iceHolder;
 		this.bingoHolder = bingoHolder;
-		this.bingoWait = 15;
-		this.spdWorth = 0.18;
-		this.spdMWorth = 0.84;
-		this.shipMlt = 1.092;
-		this.digChnc = 2;
-		this.digMlt = 2.6;
+		this.bingoWait = 25;
+		this.spdWorth = 0.225;
+		this.spdMWorth = 0.63;
+		this.shipMlt = 1.06999;
+		this.digChnc = 2.11;
+		this.digMlt = 2.55;
 		this.money = 10;
 		this.money_2 = 0;
 		this.money_3 = 0;
@@ -85,7 +88,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2500, 1.06, 17), new building("Spaceship", 9000, 1.155, 80), new building("Magic", 40000, 1.033, 80), new building("???", 999999, 1.75, 5), new building("Ice Cubes", 50000000, 1.75, 7), new building("Garbage", 800000000, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2300, 1.11, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("NYI", 999999, 1.75, 5), new building("Ice Cubes", 50000000, 1.85, 300), new building("NYI", 800000000, 1.05, 8)];
 	}
 
 	function pageRefresh(){
@@ -101,14 +104,16 @@
 		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain).formatMoney();
 		document.getElementById("bingoValue").innerHTML = calcBingoBucks().formatMoney();
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
-	//	document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer3").innerHTML = (gainer3/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer4").innerHTML = (gainer4/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer5").innerHTML = (gainer5/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer6").innerHTML = (gainer6/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer7").innerHTML = (gainer7/gainer8*100).formatMoney(2);
-	//	document.getElementById("gainer8").innerHTML = gainer8.formatMoney();
+		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
+		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
+		document.getElementById("gainer3").innerHTML = (gainer3/gainer8*100).formatMoney(2);
+		document.getElementById("gainer4").innerHTML = (gainer4/gainer8*100).formatMoney(2);
+		document.getElementById("gainer5").innerHTML = (gainer5/gainer8*100).formatMoney(2);
+		document.getElementById("gainer6").innerHTML = (gainer6/gainer8*100).formatMoney(2);
+		document.getElementById("gainer7").innerHTML = (gainer7/gainer8*100).formatMoney(2);
+		document.getElementById("gainer9").innerHTML = (gainer9/gainer8*100).formatMoney(2);
+		document.getElementById("gainer10").innerHTML = (gainer10/gainer8*100).formatMoney(2);
+		document.getElementById("gainer8").innerHTML = gainer8.formatMoney();
 		
 		buildings.forEach(function(building, index){
 			index++;
@@ -130,17 +135,17 @@
 		var worthRatio = 0;
 		switch(x){
 			case 1: if(buildings[1].amount > 0){
-						worthRatio = Math.round((building.baseGain+(building.baseGain*(1+(player.digChnc/100)*(player.digMlt-1))))/building.cost*1000);
+						worthRatio = Math.round((building.baseGain+(building.baseGain*(1+(player.digChnc/100)*(player.digMlt-1))))/building.cost*worthMult*(1+player.digChnc/100));
 					}else{
-						worthRatio = Math.round((building.baseGain/building.cost)*1000);
+						worthRatio = Math.round((building.baseGain/building.cost)*worthMult);
 					}
 					break;
-			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*1000);break;
-			case 3: worthRatio = Math.round((building.baseGain+((calcBingoBucks()/(30*player.bingoWait))))/building.cost*1000); break;
-			case 4: worthRatio = Math.round((building.baseGain / building.cost)*1000); break;
-			case 5: worthRatio = Math.round((building.baseGain + (building.amount*1000*(Math.random()/10)))/1000); break;
+			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*worthMult*(1+player.digChnc/100));break;
+			case 3: worthRatio = Math.round(building.baseGain+(calcBingoBucks()/((1+(building.amount*2))*player.bingoWait))/building.cost*worthMult); break;
+			case 4: worthRatio = Math.round(((building.baseGain/player.shipMlt) / building.cost)*worthMult); break;
+			case 5: worthRatio = Math.round(((building.baseGain + (10000*(Math.random()/10)))/building.cost)*worthMult); break;
 			case 6: break;
-			case 7: worthRatio = Math.round((building.baseGain + (getMeltWorth()/player.meltTime)+50000)/building.cost*1000); break;
+			case 7: worthRatio = Math.round((((building.baseGain + getMeltWorth()+10000)/player.meltTime)/building.cost)*worthMult); break;
 			case 8: break;
 		}
 		return worthRatio
@@ -155,12 +160,19 @@
 			});
 		}
 		player.money = player.money+player.gain;
+		if(player.money >= 10000000 && worthMult < 5000)
+			worthMult = 5000;
+		if(player.money >= 50000000 && worthMult < 10000)
+			worthMult = 10000;
+		if(player.money >= 100000000 && worthMult < 100000)
+			worthMult = 80000;
 		gainer8 += player.gain;
 		gainer1 += buildings[0].currGain;
 		gainer2 += buildings[1].currGain;
 		gainer3 += buildings[2].currGain;
 		gainer4 += buildings[3].currGain;
 		gainer5 += buildings[4].currGain;
+		gainer9 += buildings[6].currGain;
 		
 		if(buildings[1].amount >=1)
 			dig();
@@ -179,14 +191,10 @@
 	}
 
 	function showBuilding(){
-		if(player.money > (buildings[0].baseCost*.5)){
-			$('#infoBox').fadeIn("slow");
-		}
 		var showAll = false;
 		for(var x = buildings.length; x>0; x--){
 			if(((player.money > (buildings[x-1].baseCost*.5)) || buildings[x-1].amount > 0 || showAll)){
 				$('#building'+(x-1)).fadeIn("slow");
-				$('#info'+(x-1)).fadeIn("slow");
 				showAll = true;
 			}
 		}
@@ -199,7 +207,7 @@
 	function resetBuildingIcon(){
 		buildings.forEach(function(building, index){
 			index++;
-			document.getElementById("buy"+index).src="art/build"+index+".png";
+			document.getElementById("buy"+index).style.backgroundImage="url('art/build"+index+".png')";
 			document.getElementById("buy"+index).style.borderColor="#000000";
 		});
 	}
@@ -210,6 +218,7 @@
 		var buildJSON = JSON.stringify(buildings);
 		localStorage.setItem('buildings',buildJSON);
 		localStorage.setItem('versionNum',verNum);
+		localStorage.setItem('worthMult', worthMult);
 		document.getElementById("alert").innerHTML = "Game has been saved";
 		saveLoadPopup();
 	}
@@ -228,6 +237,7 @@
 			if(localStorage.getItem('buildings'))
 				var buildingHolder = JSON.parse(localStorage.getItem('buildings'));	
 			loadBuilding(buildingHolder);
+			worthMult = localStorage.getItem('worthMult');
 			document.getElementById("alert").innerHTML = "Game has been loaded";
 		}
 		else{

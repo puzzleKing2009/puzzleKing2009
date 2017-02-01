@@ -5,7 +5,7 @@
 		display: inline-block;
 		position:absolute;
 		background-color:#FFFFFF;
-		height: 62px;
+		height: 60px;
 	}
 	td.value{
 		text-align:right;
@@ -18,10 +18,30 @@
 	.buyable:hover{
 		cursor:hand;
 	}
+	.buyable .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:300px;
+		background-color: black;
+		color: #fff;
+		text-align:center;
+		padding: 5px 0;
+		border-radius: 6px;
+		right:105%;
+	}
+	.buyable:hover .tooltiptext{
+		visibility: visible;
+	}
 	.buyable{
 		display: inline-block;
-		height: 62px;
+		height: 60px;
+		width: 73px;
+		border-style:solid;
+		border-width: 1px;
 		margin-right: 1px;
+		background-size:contain;
+		-webkit-user-select: none;
+		-moz-user-select: none;
 	}
 	.give{
 		position:absolute;
@@ -30,21 +50,6 @@
 	.giveTotal{
 		position:absolute;
 		left:180;
-	}
-	.toggle:hover{
-		cursor:hand;
-	}
-	.toggle{
-		font-size:120%;
-	}
-	.toggle.grey{
-		background-color:#DDDDDD;
-	}
-	.hiddenToggle{
-		border-bottom-style: solid;
-		border-bottom-color: black;
-		font-size:90%;
-		color:purple;
 	}
 	.digData{
 		position:absolute;

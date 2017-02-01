@@ -7,6 +7,8 @@
 			if(cubes[index].duration <= 0){
 				player.money_3++;
 				player.money += getMeltWorth();
+				gainer10 += getMeltWorth();
+				gainer8 += getMeltWorth();
 				cubes.splice(index,1);
 				currBuilding.amount --;
 				currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp, currBuilding.amount));
@@ -17,7 +19,7 @@
 		}
 	}	
 	function getMeltWorth(){
-		return (buildings[6].baseGain * 32000 * (Math.round(buildings[6].amount)) * (player.meltTime * .03));
+		return (buildings[6].baseGain * 8000 * (player.meltTime * .01));
 	}
 	function buyIce(x){
 		for(var i=0; i<x; i++){

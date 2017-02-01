@@ -15,12 +15,12 @@
 				bingo.newCard();
 				var bingoBorder = document.getElementById("buy3");	
 				bingoBorder.style.borderColor='FFD700';
-				bingoBorder.src="art/build3.1.png";
+				bingoBorder.style.backgroundImage="url('art/build3.1.png')";
 			}
 		});
 	}
 	function calcBingoBucks(){
-		return Math.round(2*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.025) / 4) +2));
+		return Math.round(5*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.125) / 3)+2));
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);
