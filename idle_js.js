@@ -101,7 +101,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 300), new building("Garbage", 800000000, 1.25, 1000)];
+		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 800000000, 1.25, 1000)];
 	}
 
 	function pageRefresh(){
