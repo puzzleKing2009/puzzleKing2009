@@ -19,11 +19,13 @@
 		}
 	}	
 	function getMeltWorth(){
-		return (buildings[6].baseGain * 8000 * (player.meltTime * .01));
+		return (buildings[6].baseGain *11200 * (player.meltTime * .01));
 	}
 	function buyIce(x){
 		for(var i=0; i<x; i++){
 			player.iceHolder.push(new iceCube());
+			iceBat(1);
+			player.totalIce++;
 		}
 	}
 	function iceCube(){

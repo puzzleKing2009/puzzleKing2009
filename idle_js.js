@@ -2,9 +2,10 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.5";
+	var verNum = "v0.1.5";
 	var buyAmount = 1;
 	var worthMult = 1000;
+	var warpMulti = 0;
 	
 	var gainer1 = 0;
 	var gainer2 = 0;
@@ -34,15 +35,23 @@
 		var iceHolder = new Array();
 		var bingoWait;
 		var meltTime;
+		var totalIce;
+		var batSplodeChnc;
+		var batWorth;
+		var batSplodeWorth;
+		var batFailChnc;
+		var iceSaveWorth;
 		
 		this.meltTime = 900;
+		this.totalIce = 0;
+		this.iceSaveWorth = 0.26;
 		this.iceHolder = iceHolder;
 		this.bingoHolder = bingoHolder;
 		this.bingoWait = 25;
-		this.spdWorth = 0.225;
-		this.spdMWorth = 0.63;
+		this.spdWorth = 0.15;
+		this.spdMWorth = 0.75;
 		this.shipMlt = 1.06999;
-		this.digChnc = 2.11;
+		this.digChnc = 3.11;
 		this.digMlt = 2.55;
 		this.money = 10;
 		this.money_2 = 0;
@@ -51,6 +60,10 @@
 		this.money_5 = 0;
 		this.updTime = 2000;
 		this.gain = 1;
+		this.batSplodeChnc = 50.00;
+		this.batWorth = 0.63;
+		this.batSplodeWorth = 0.25;
+		this.batFailChnc = 25;
 	}
 	
 	function building(name, cost, exp, gain){
@@ -88,7 +101,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.078, 1), new building("Spade", 200, 1.05, 2), new building("Bingo", 2300, 1.11, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("NYI", 999999, 1.75, 5), new building("Ice Cubes", 50000000, 1.85, 300), new building("NYI", 800000000, 1.05, 8)];
+		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 300), new building("Garbage", 800000000, 1.25, 1000)];
 	}
 
 	function pageRefresh(){
@@ -104,6 +117,7 @@
 		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain).formatMoney();
 		document.getElementById("bingoValue").innerHTML = calcBingoBucks().formatMoney();
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
+		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
 		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
 		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
 		document.getElementById("gainer3").innerHTML = (gainer3/gainer8*100).formatMoney(2);
@@ -141,12 +155,18 @@
 					}
 					break;
 			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*worthMult*(1+player.digChnc/100));break;
-			case 3: worthRatio = Math.round(building.baseGain+(calcBingoBucks()/((1+(building.amount*2))*player.bingoWait))/building.cost*worthMult); break;
+			case 3: worthRatio = Math.round((building.baseGain+(calcBingoBucks()/((1+(building.amount))*player.bingoWait)))/building.cost*worthMult); break;
 			case 4: worthRatio = Math.round(((building.baseGain/player.shipMlt) / building.cost)*worthMult); break;
 			case 5: worthRatio = Math.round(((building.baseGain + (10000*(Math.random()/10)))/building.cost)*worthMult); break;
-			case 6: break;
+			case 6: worthRatio = Math.round(((building.baseGain-(building.baseGain*((player.batSplodeChnc/100)*(1-player.batSplodeWorth))))*(1-(player.batSplodeChnc/100*player.batFailChnc/100)))/building.cost*worthMult);break;
 			case 7: worthRatio = Math.round((((building.baseGain + getMeltWorth()+10000)/player.meltTime)/building.cost)*worthMult); break;
-			case 8: break;
+			case 8: worthRatio = Math.round((building.baseGain / building.cost)*worthMult); 
+					if(warpMulti == 1){
+						worthRatio = Math.round(((building.baseGain+120000) / building.cost)*worthMult); 
+					}
+					if(warpMulti == 2){
+						worthRatio = Math.round((((building.baseGain+player.gain) * 1.7) / building.cost)*worthMult); 
+					}break;
 		}
 		return worthRatio
 	}
@@ -164,10 +184,12 @@
 			worthMult = 5000;
 		if(player.money >= 50000000 && worthMult < 10000)
 			worthMult = 10000;
-		if(player.money >= 100000000 && worthMult < 100000)
+		if(player.money >= 100000000 && worthMult < 80000)
 			worthMult = 80000;
+		if(player.money >= 1000000000 && worthMult < 500000)
+			worthMult = 10000000;
 		gainer8 += player.gain;
-		gainer1 += buildings[0].currGain;
+		gainer1 += buildings[5].currGain;
 		gainer2 += buildings[1].currGain;
 		gainer3 += buildings[2].currGain;
 		gainer4 += buildings[3].currGain;
@@ -185,9 +207,19 @@
 		}
 		if(buildings[4].amount >=1)
 			doMagic();
+		if(buildings[5].amount >=1)
+			batSplode();
 		if(buildings[6].amount >=1)
 			meltIce();
+		if(warpMulti == 1){
+			warpMoney();
+		}
+		
 		pageRefresh();
+	}
+	
+	function showAAAA(){
+		$('#aaaa').toggle()
 	}
 
 	function showBuilding(){
@@ -207,8 +239,10 @@
 	function resetBuildingIcon(){
 		buildings.forEach(function(building, index){
 			index++;
-			document.getElementById("buy"+index).style.backgroundImage="url('art/build"+index+".png')";
-			document.getElementById("buy"+index).style.borderColor="#000000";
+			if(index != 8){
+				document.getElementById("buy"+index).style.backgroundImage="url('art/build"+index+".png')";
+				document.getElementById("buy"+index).style.borderColor="#000000";
+			}
 		});
 	}
 
@@ -259,13 +293,19 @@
 			}
 			if(buildings[index].name == "Spade")
 				buySpade(buildings[index].amount);
+			if(buildings[index].name == "Gold Bat 9000"){
+				buyBat(buildings[index].amount);
+				iceBat(player.totalIce);
+			}
+			if(buildings[index].name == "Garbage" && buildings[index].amount > 0)
+				checkGarbage(buildings[index].amount);
 			buildings[index].cost = Math.round(buildings[index].baseCost * Math.pow(buildings[index].exp,buildings[index].amount));
 			
 		});
 	}
 	function loadPlayer(p2){
 		Object.keys(p2).forEach(function(playerNodes){
-			if(playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5" || playerNodes == "gain"){
+			if(playerNodes == "totalIce" || playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5" || playerNodes == "gain"){
 				player[playerNodes] = p2[playerNodes];
 			}
 		});

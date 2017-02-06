@@ -20,7 +20,7 @@
 		});
 	}
 	function calcBingoBucks(){
-		return Math.round(5*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.125) / 3)+2));
+		return Math.round(7*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.11) / 3)+2));
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);

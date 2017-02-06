@@ -6,10 +6,10 @@
 	}
 	function dig(){
 		var critAgain = true;
-		var counter = 1;
+		var counter = 0;
 		var counterPic = 1;
 		while(critAgain){
-			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(.28*counter))))){
+			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(.3*counter))))){
 				var critValue = Math.round(buildings[0].currGain * player.digMlt);
 				player.money += critValue;
 				gainer6 += critValue;

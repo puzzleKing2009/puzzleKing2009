@@ -43,6 +43,10 @@
 			if(currBuilding.name=="Spaceship"){
 				currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
 				}
+			if(currBuilding.name=="Gold Bat 9000")
+				buyBat(1);
+			if(currBuilding.name=="Garbage")
+				checkGarbage(currBuilding.amount);
 			pageRefresh();
 		}	
 	}

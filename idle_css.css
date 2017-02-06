@@ -7,6 +7,20 @@
 		background-color:#FFFFFF;
 		height: 60px;
 	}
+	.building .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:300px;
+		background-color: black;
+		color: #fff;
+		text-align:center;
+		border-radius: 6px;
+		left:105%;
+		top:0%;
+	}
+	.building:hover .tooltiptext{
+		visibility: visible;
+	}
 	td.value{
 		text-align:right;
 		width: 200px;
@@ -18,20 +32,7 @@
 	.buyable:hover{
 		cursor:hand;
 	}
-	.buyable .tooltiptext{
-		visibility:hidden;
-		position:absolute;
-		width:300px;
-		background-color: black;
-		color: #fff;
-		text-align:center;
-		padding: 5px 0;
-		border-radius: 6px;
-		right:105%;
-	}
-	.buyable:hover .tooltiptext{
-		visibility: visible;
-	}
+
 	.buyable{
 		display: inline-block;
 		height: 60px;
