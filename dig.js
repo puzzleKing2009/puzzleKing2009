@@ -1,19 +1,30 @@
 	function buySpade(x){
-		for(var i=0; i<x; i++){
-			player.digChnc = Math.round((player.digChnc + player.spdWorth)*100)/100;
-			player.digMlt = Math.round((player.digMlt + player.spdMWorth)*100)/100;
-		}
+			player.digChnc = Math.round((player.digChnc + (player.spdWorth*x))*100)/100;
+			player.digMlt = Math.round((player.digMlt + (player.spdMWorth*x))*100)/100;
 	}
 	function dig(){
 		var critAgain = true;
 		var counter = 0;
 		var counterPic = 1;
+		var totalCritValue = 0;
+		var multiDigTalent = false;
+		if(consecDigMult == 3)
+			multiDigTalent = true;
 		while(critAgain){
-			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(.3*counter))))){
-				var critValue = Math.round(buildings[0].currGain * player.digMlt);
-				player.money += critValue;
+			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(player.multCritReduc*counter))))){
+				var critValue = Math.round((buildings[0].currGain * player.digShoeWorth)* (player.digMlt * consecDigMult) * Math.pow(player.multCritValue,counter));
+				addMoney_1(critValue);
+				totalCritValue += critValue;
 				gainer6 += critValue;
 				gainer8 += critValue;
+				
+				if(allowShoeMulti){
+					if((Math.round(Math.random()*100)+1 <= 20)){
+						shoeMultiDur = 11;
+					}
+				}
+				if(counter > 4)
+					multiDigTalent = false;
 				
 				var spadeBorder = document.getElementById("buy2");
 				switch(counterPic){
@@ -33,4 +44,12 @@
 				critAgain = false;
 			}
 		}
+		if(counter > 4){
+			if(allowDigMulti){
+				consecDigMult = 3;
+			}
+		}
+		if(multiDigTalent)
+			consecDigMult = 1;
+		document.getElementById("digVal").innerHTML = totalCritValue.formatMoney();
 	}

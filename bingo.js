@@ -9,18 +9,28 @@
 			bingo.playNum(bingoNum);
 			if(bingo.checkWin()){
 				var givePlayerMoney = calcBingoBucks();
-				player.money += givePlayerMoney;
+				addMoney_1(givePlayerMoney);
 				gainer7 += givePlayerMoney;
 				gainer8 += givePlayerMoney;
+				if(Math.round(Math.random()*100)+1 <= player.extraBingo){
+					addMoney_1(givePlayerMoney);
+					gainer7 += givePlayerMoney;
+					gainer8 += givePlayerMoney;
+					bingoPicture = 2;
+				}
+				if(bingoChain)
+					bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
 				bingo.newCard();
 				var bingoBorder = document.getElementById("buy3");	
 				bingoBorder.style.borderColor='FFD700';
-				bingoBorder.style.backgroundImage="url('art/build3.1.png')";
+				bingoBorder.style.backgroundImage="url('art/build3."+bingoPicture+".png')";
 			}
 		});
+		document.getElementById("bingoChain").innerHTML = bingoChainValue;
 	}
 	function calcBingoBucks(){
-		return Math.round(7*buildings[2].currGain * ((Math.pow(buildings[2].amount, 1.11) / 3)+2));
+	
+		return Math.round((7*buildings[2].currGain * ((Math.pow(buildings[2].amount, player.bingoBuckScale) / 4.2)+2))*bingoChainValue);
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);
@@ -58,8 +68,14 @@
 		function fillCard(i){
 			var number = ((i%5)*15) + (Math.floor(Math.random()*15)+1);
 			if(usedSlots[number]!=true){
-				valueSlots[i] = number;
-				usedSlots[number]= true;
+				if(i==12 && bingoFree){
+					valueSlots[i] = "x";
+					usedSlots[number]= false;
+				}
+				else{
+					valueSlots[i] = number;
+					usedSlots[number]= true;
+				}
 			}
 			else{
 				fillCard(i);

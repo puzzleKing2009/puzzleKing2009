@@ -1,3 +1,5 @@
+var buildingFree = false;
+
 	function cycleBuy(){
 		switch(buyAmount){
 			case 1: buyAmount = 2; document.getElementById("buyAmount").innerHTML = "10"; break;
@@ -26,27 +28,72 @@
 		var buyInQuest = document.getElementById("buy"+x);
 		var currBuilding = buildings[x-1];
 		
-		if(currBuilding.cost <= player.money){
-			player.money = player.money - currBuilding.cost;
+		if(currBuilding.cost <= player.money || buildingFree){
+			if(!buildingFree){
+				player.money = player.money - currBuilding.cost;
+				moneySpentPerBuilding[x-1] += currBuilding.cost;
+			}
 			currBuilding.amount++;
 			currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp,currBuilding.amount));
 			buyInQuest.border="2";
 			window.setTimeout(function(){buyInQuest.border="1";},100);
 			currBuilding.currGain += currBuilding.baseGain
+			if(currBuilding.name=="Shoes" && bladedShoes){
+				if(currBuilding.amount%25 == 0)
+					player.digChnc += 1;
+			}
 			if(currBuilding.name=="Spade")
 				buySpade(1);
 			if(currBuilding.name=="Bingo")
 				buyBingo(1);
-			if(currBuilding.name=="Ice Cubes")
+			if(currBuilding.name=="Ice Cubes"){
 				buyIce(1);
+			}
 			player.gain += Number(currBuilding.baseGain);
 			if(currBuilding.name=="Spaceship"){
 				currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
-				}
-			if(currBuilding.name=="Gold Bat 9000")
-				buyBat(1);
+				rocketFuelLevel = 0;
+			}
+			if(currBuilding.name=="Gold Bat 9000"){
+				calcTrueSplode();
+			}	
 			if(currBuilding.name=="Garbage")
 				checkGarbage(currBuilding.amount);
+			if(weightOfMany && currBuilding.name!="Spade")
+				player.digMlt = Math.round((player.digMlt+0.1)*100)/100;
+			if(currBuilding.name=="Spaceship"){
+				if(sparePartsEnabled){
+					currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp,(currBuilding.amount-player.freeShips)));
+					if(currBuilding.amount % 10==0){
+						if(!buildingFree){
+							buildingFree = true;
+							player.freeShips += 1;
+							buy(4);
+							buildingFree = false;
+						}
+						else{
+							player.freeShips += 1;
+							buy(4);
+						}
+					}
+				}
+			}
 			pageRefresh();
 		}	
+	}
+	function loadBuilding(){
+		for(var x=0; x<8; x++){
+			var currBuilding = buildings[x];
+			currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp,currBuilding.amount));
+			if(x!=3){
+				player.gain += Number(currBuilding.baseGain * currBuilding.amount);
+				currBuilding.currGain += (currBuilding.baseGain * currBuilding.amount);
+			}
+			else{
+				player.gain += calcShipTotalValue(currBuilding.amount);
+			}
+		}
+		buySpade(buildings[1].amount);
+		checkGarbage(buildings[7].amount);
+		calcTrueSplode();
 	}

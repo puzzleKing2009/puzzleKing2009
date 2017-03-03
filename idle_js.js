@@ -2,11 +2,78 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.1.5";
+	var verNum = "v0.1.9";
 	var buyAmount = 1;
 	var worthMult = 1000;
 	var warpMulti = 0;
+	var totalTicks = 0;
+	var totalMoney = 10;
+	var moneySpentPerBuilding = [0,0,0,0,0,0,0,0];
+	var isRun = false;
+	var allowShoeMulti = false;
+	var shoeMultiDur = 0;
+	var divClone;
+	var smileCost = 10;
+	var smileCostBase = 10;
+	var upgCost = 100;
+	var upgBought = 0;
+	var consecDigMult = 1;
+	var allowDigMulti = false;
+	var bladedShoes = false;
+	var weightOfMany = false;
+	var bingoChain = false;
+	var bingoChainValue = 1;
+	var bingoFree = false;
+	var bingoPicture = 1;
+	var overdriveEnable = false;
+	var overdriveTimer = 0;
+	var overdriveDuration = 0;
+	var rocketFuelMax = .80;
+	var rocketFuelEnable = false;
+	var rocketFuelLevel = 0;
+	var sparePartsEnabled = false;
+	var moneyBucket = new Array(300);
+	moneyBucket.fill(0);
+	var moneyBucket2 = new Array(150);
+	moneyBucket2.fill(0);
+	var moneyPerSecondInterval;
+	var magicDuplicateEnable = false;
+	var magicTridentGivesGainEnable = false;
+	var magicAlterTimeEnable = false;
+	var magicIceGainTridentEnable = false;
+	var magicReduceIceTickEnable = false;
+	var alterTimeDuration = 0;
+	var alterTimeOn = false;
+	var tridentsPerTick = 0;
+	var batCounter = 0;
+	var batFailSafe = false;
+	var baterestEnable = false;
+	var baterestValue = 0;
+	var blastWaveEnable = false;
+	var coldBatEnable = false;
+	var coldBatDuration = 0;
+	var unstableIceEnable = false;
+	var totalIceReduc = 0;
+	var totalBatValue = 0;
+	var shoeMultiStepEnable = false;
+	var garbageAlwaysSpadeEnable = false;
+	var garbageThreeMultEnable = false;
+	var garbageFourMultEnable = false;
+	var garbageFiveMultEnable = false;
+	var garbageGlobalMult = 1;
+	var garbageGlobalMultBonus = 0;
+	var garbageSkipCounter = 0;
+	var garbageSkipEnable = false;
+	var garbageBigValEnable = false;
+	var totalUpgMax = 0;
+	var upgUnlocked = 0;
+	var manaDump = 0;
+	var mannaDump = 0;
+	var moanaDump = 0;
+	var manaMoneyMult = 1;
+	var manaMoney4Mult = 1;
 	
+	var oGainer = 0;
 	var gainer1 = 0;
 	var gainer2 = 0;
 	var gainer3 = 0;
@@ -17,6 +84,7 @@
 	var gainer8 = 0;
 	var gainer9 = 0;
 	var gainer10 = 0;
+	var gainergarb = 0;
 	
 	function playerInfo(){
 		var money;
@@ -41,18 +109,30 @@
 		var batSplodeWorth;
 		var batFailChnc;
 		var iceSaveWorth;
+		var runChnc;
+		var multCritValue;
+		var multCritReduc;
+		var digShoeWorth;
+		var ballsCalled;
+		var bingoBuckScale;
+		var extraBingo
+		var shipBaseGain;
 		
 		this.meltTime = 900;
 		this.totalIce = 0;
-		this.iceSaveWorth = 0.26;
+		this.meltWorth = 21000;
+		this.iceMeltMoney = 1;
+		this.iceSaveWorth = 0.131;
 		this.iceHolder = iceHolder;
 		this.bingoHolder = bingoHolder;
-		this.bingoWait = 25;
-		this.spdWorth = 0.15;
-		this.spdMWorth = 0.75;
-		this.shipMlt = 1.06999;
+		this.bingoWait = 20;
+		this.spdWorth = 0.17;
+		this.spdMWorth = 0.81;
+		this.shipMlt = 1.075;
+		this.shipBaseGain = 85;
+		this.overdriveWait = 50;
 		this.digChnc = 3.11;
-		this.digMlt = 2.55;
+		this.digMlt = 2.85;
 		this.money = 10;
 		this.money_2 = 0;
 		this.money_3 = 0;
@@ -60,10 +140,23 @@
 		this.money_5 = 0;
 		this.updTime = 2000;
 		this.gain = 1;
-		this.batSplodeChnc = 50.00;
-		this.batWorth = 0.63;
-		this.batSplodeWorth = 0.25;
+		this.baseBatSplodeChnc = 55.00;
+		this.batSplodeChnc = 55.00;
+		this.batWorth = 0.77;
+		this.batSplodeWorth = 0.2;
 		this.batFailChnc = 25;
+		this.runChnc = 0;
+		this.multCritValue = 1.0;
+		this.multCritReduc = 0.33;
+		this.digShoeWorth = 1;
+		this.ballsCalled = 1;
+		this.bingoBuckScale = 1.12;
+		this.extraBingo = 0;
+		this.freeShips = 0;
+		this.magicBonus = 1;
+		this.iceReform = 0;
+		this.spadeCurrChnc = 20;
+		this.timeWarpValue = .7;
 	}
 	
 	function building(name, cost, exp, gain){
@@ -85,15 +178,29 @@
 	
 	function pageInit(){
 		$('#alert').fadeOut(0)
-		
+		divClone = $('#wholeDocument').clone();
 		resetPnB();
-		buildings.forEach(function(building, index){
-			index++;
-			document.getElementById("name"+index).innerHTML = building.name;
-			document.getElementById("owned"+index).innerHTML = building.amount;
-			document.getElementById("cost"+index).innerHTML = building.cost;
-		});
+		clearInterval(moneyPerSecondInterval);
+		moneyPerSecondInterval = setInterval(calcPerSec, 1000);
+	//	money2PerSecondInterval = setInterval(calcPerSec2, 1000);
 		load();
+	}
+	function calcPerSec2(){
+		moneyBucket2.pop();
+		moneyBucket2.unshift(0);
+		var monPerMinute = moneyBucket2.reduce(sumBucket, 0);
+		monPerMinute = Math.round((monPerMinute/150)*100)/100;
+		document.getElementById("monPerSec2").innerHTML = monPerMinute.formatMoney();
+	}
+	function calcPerSec(){
+		moneyBucket.pop();
+		moneyBucket.unshift(0);
+		var monPerMinute = moneyBucket.reduce(sumBucket, 0);
+		monPerMinute = Math.round((monPerMinute/300)*100)/100;
+		document.getElementById("monPerSec").innerHTML = monPerMinute.formatMoney();
+	}
+	function sumBucket(a, b){
+		return a+b;
 	}
 	function resetPnB(){
 		player = new playerInfo();
@@ -101,7 +208,38 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 18), new building("Spaceship", 9000, 1.19, 85), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 800000000, 1.25, 1000)];
+		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 19), new building("Spaceship", 9000, 1.19, player.shipBaseGain), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 654321000, 1.15, 1000)];
+	}
+	function resetGlobals(){
+		 bingoTimer = 0;
+		 buyAmount = 1;
+		 worthMult = 1000;
+		 warpMulti = 0;
+		 totalTicks = 0;
+		 totalMoney = 10;
+		 moneySpentPerBuilding = [0,0,0,0,0,0,0,0];
+		 isRun = false;
+		 allowShoeMulti = false;
+		 shoeMultiDur = 0;
+		 upgCost = 100;
+		 smileCost = 10;
+		 consecDigMult = 1;
+		 allowDigMulti = false;
+		 bladedShoes = false;
+		 weightOfMany = false;
+		 bingoChain = false;
+		 bingoChainValue = 1;
+		 bingoFree = false;
+		 bingoPicture = 1;
+		 overdriveEnable = false;
+		 overdriveTimer = 0;
+		 overdriveDuration = 0;
+		 rocketFuelMax = .80;
+		 rocketFuelEnable = false;
+		 rocketFuelLevel = 0;
+		 sparePartsEnabled = false;
+		 moneyBucket = new Array(300);
+		 moneyBucket.fill(0);
 	}
 
 	function pageRefresh(){
@@ -112,12 +250,24 @@
 		document.getElementById("myMoney4").innerHTML = player.money_4.formatMoney();
 		document.getElementById("myMoney5").innerHTML = player.money_5.formatMoney();
 		document.getElementById("gainer").innerHTML = player.gain.formatMoney();
+		document.getElementById("runChance").innerHTML = player.runChnc;
+		document.getElementById("shoeMulti").innerHTML = shoeMultiDur;
 		document.getElementById("digChance").innerHTML = player.digChnc;
 		document.getElementById("digMult").innerHTML = player.digMlt;
-		document.getElementById("digVal").innerHTML = Math.round(player.digMlt*buildings[0].currGain).formatMoney();
 		document.getElementById("bingoValue").innerHTML = calcBingoBucks().formatMoney();
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
+		document.getElementById("bingoBallsCalled").innerHTML = player.ballsCalled;
+		document.getElementById("overdriveValue").innerHTML = (Math.round(getOverdriveValue()*10000)/100).formatMoney(2);
+		document.getElementById("tridentBaseGain").innerHTML = (Math.round(buildings[4].currGain*.77));
+		document.getElementById("conjureMoneyValue").innerHTML = (Math.round(buildings[4].currGain*.77));
+		document.getElementById("meltTridentGain").innerHTML = (Math.round(buildings[4].amount*.3));
 		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
+		document.getElementById("iceTTL").innerHTML = getMeltTime();
+		document.getElementById("iceMeltValue").innerHTML = getMeltWorth().formatMoney();
+		document.getElementById("melt7Value").innerHTML = player.iceMeltMoney.formatMoney();
+		document.getElementById("smileyCost").innerHTML = smileCost;
+		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();;
+		document.getElementById("oGainer").innerHTML = (oGainer/gainer8*100).formatMoney(2);
 		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
 		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
 		document.getElementById("gainer3").innerHTML = (gainer3/gainer8*100).formatMoney(2);
@@ -127,7 +277,18 @@
 		document.getElementById("gainer7").innerHTML = (gainer7/gainer8*100).formatMoney(2);
 		document.getElementById("gainer9").innerHTML = (gainer9/gainer8*100).formatMoney(2);
 		document.getElementById("gainer10").innerHTML = (gainer10/gainer8*100).formatMoney(2);
+		document.getElementById("gainerGarb").innerHTML = (gainergarb/gainer8*100).formatMoney(2);
 		document.getElementById("gainer8").innerHTML = gainer8.formatMoney();
+		document.getElementById("totalTickSpan").innerHTML = totalTicks.formatMoney();
+		document.getElementById("totalmoneySpan").innerHTML = totalMoney.formatMoney();
+		document.getElementById("spendOnShoe").innerHTML = moneySpentPerBuilding[0].formatMoney();
+		document.getElementById("spendOnSpade").innerHTML = moneySpentPerBuilding[1].formatMoney();
+		document.getElementById("spendOnBingo").innerHTML = moneySpentPerBuilding[2].formatMoney();
+		document.getElementById("spendOnShip").innerHTML = moneySpentPerBuilding[3].formatMoney();
+		document.getElementById("spendOnMagic").innerHTML = moneySpentPerBuilding[4].formatMoney();
+		document.getElementById("spendOnBat").innerHTML = moneySpentPerBuilding[5].formatMoney();
+		document.getElementById("spendOnCube").innerHTML = moneySpentPerBuilding[6].formatMoney();
+		document.getElementById("spendOnGarbage").innerHTML = moneySpentPerBuilding[7].formatMoney();
 		
 		buildings.forEach(function(building, index){
 			index++;
@@ -155,22 +316,31 @@
 					}
 					break;
 			case 2: worthRatio = Math.round((building.baseGain+(buildings[0].baseGain*(1+((player.spdWorth+player.digChnc)/100)*(player.spdMWorth+player.digMlt-1))))/building.cost*worthMult*(1+player.digChnc/100));break;
-			case 3: worthRatio = Math.round((building.baseGain+(calcBingoBucks()/((1+(building.amount))*player.bingoWait)))/building.cost*worthMult); break;
+			case 3: worthRatio = Math.round(((buildings[2].baseGain+(calcBingoBucks()/((player.extraBingo+1+(buildings[2].amount))*(player.bingoWait/(player.ballsCalled)))))*(1+(player.extraBingo/10)))/buildings[2].cost*worthMult); break;
 			case 4: worthRatio = Math.round(((building.baseGain/player.shipMlt) / building.cost)*worthMult); break;
 			case 5: worthRatio = Math.round(((building.baseGain + (10000*(Math.random()/10)))/building.cost)*worthMult); break;
 			case 6: worthRatio = Math.round(((building.baseGain-(building.baseGain*((player.batSplodeChnc/100)*(1-player.batSplodeWorth))))*(1-(player.batSplodeChnc/100*player.batFailChnc/100)))/building.cost*worthMult);break;
 			case 7: worthRatio = Math.round((((building.baseGain + getMeltWorth()+10000)/player.meltTime)/building.cost)*worthMult); break;
 			case 8: worthRatio = Math.round((building.baseGain / building.cost)*worthMult); 
-					if(warpMulti == 1){
+					if(warpMulti == 2){
 						worthRatio = Math.round(((building.baseGain+120000) / building.cost)*worthMult); 
 					}
-					if(warpMulti == 2){
+					if(warpMulti == 1){
 						worthRatio = Math.round((((building.baseGain+player.gain) * 1.7) / building.cost)*worthMult); 
 					}break;
 		}
 		return worthRatio
 	}
+	function addMoney_1(x){
+		player.money = Number(player.money + (x * garbageGlobalMult * manaMoneyMult));
+		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult));
+		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult));
+	}
+	function addMoney_4(x){
+		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult));
+	}
 	function gameTick(){
+		totalTicks++;
 		resetBuildingIcon();
 //		$('#building1Upgrade').css({"background-image": "url(art/build1.png)", "background-size":"contain"});
 		if(Math.round((Math.random()*100000))==36321){
@@ -179,7 +349,7 @@
 				document.getElementById("buy"+index).src="buildx.png";
 			});
 		}
-		player.money = player.money+player.gain;
+		addMoney_1(player.gain);
 		if(player.money >= 10000000 && worthMult < 5000)
 			worthMult = 5000;
 		if(player.money >= 50000000 && worthMult < 10000)
@@ -187,34 +357,72 @@
 		if(player.money >= 100000000 && worthMult < 80000)
 			worthMult = 80000;
 		if(player.money >= 1000000000 && worthMult < 500000)
+			worthMult = 500000;
+		if(player.money >= 100000000000 && worthMult < 6000000)
+			worthMult = 6000000;
+		if(player.money >= 10000000000000 && worthMult < 10000000)
 			worthMult = 10000000;
+		
 		gainer8 += player.gain;
+		oGainer += buildings[0].currGain;
 		gainer1 += buildings[5].currGain;
 		gainer2 += buildings[1].currGain;
 		gainer3 += buildings[2].currGain;
 		gainer4 += buildings[3].currGain;
 		gainer5 += buildings[4].currGain;
 		gainer9 += buildings[6].currGain;
+		gainergarb += buildings[7].currGain;
 		
 		if(buildings[1].amount >=1)
 			dig();
 		if(buildings[2].amount >=1){
 			bingoTimer++;
 			if(bingoTimer >= player.bingoWait){
-				playBingo();
+				for(var k=0;k<player.ballsCalled;k++){
+					playBingo();
+				}
 				bingoTimer = 0;
+				bingoChainValue = 1;
+				bingoPicture = 1;
+			}
+			else{
+				document.getElementById("bingoChain").innerHTML = bingoChainValue;
 			}
 		}
-		if(buildings[4].amount >=1)
+		if(buildings[4].amount >=1){
+			tridentsPerTick = 0;
 			doMagic();
+		}
 		if(buildings[5].amount >=1)
 			batSplode();
 		if(buildings[6].amount >=1)
 			meltIce();
-		if(warpMulti == 1){
-			warpMoney();
+		if(buildings[7].amount >=1){
+			doGarbage();
 		}
-		
+		if(buildings[3].amount >=1)
+			runShip();
+		if(shoeMultiStepEnable)
+			shoeMultiStep();
+		if(!isRun)
+			shoeRun();
+		if(shoeMultiDur == 1)
+			shoeMultiDur -= 1;
+		if(shoeMultiDur > 1){
+			shoeMultiRun();
+			shoeMultiDur -= 1;
+		}
+		for(var jjk=0; jjk<totalUpgMax;jjk++){
+			if((Math.round(Math.random()*10000)/100) <=10){
+				addMoney_4(1);
+			}
+		}
+		if(player.money_3 >= 3){
+			$('#upgBox:Hidden').toggle();
+		}
+		if(player.money_4 >= 10000){
+			$('#manaArea:Hidden').toggle();
+		}
 		pageRefresh();
 	}
 	
@@ -225,15 +433,19 @@
 	function showBuilding(){
 		var showAll = false;
 		for(var x = buildings.length; x>0; x--){
-			if(((player.money > (buildings[x-1].baseCost*.5)) || buildings[x-1].amount > 0 || showAll)){
-				$('#building'+(x-1)).fadeIn("slow");
-				showAll = true;
+			if(x < 6){
+				if(((player.money > (buildings[x-1].baseCost*.5)) || buildings[x-1].amount > 0 || showAll)){
+					$('#building'+(x-1)).fadeIn("slow");
+					showAll = true;
+				}
+			}
+			else{
+				if(((player.money > (buildings[x-1].baseCost*.3)) || buildings[x-1].amount > 0 || showAll)){
+					$('#building'+(x-1)).fadeIn("slow");
+					showAll = true;
+				}
 			}
 		}
-	}
-	
-	function showUpgrade(){
-		$('#buildingUpgrades').toggle();
 	}
 	
 	function resetBuildingIcon(){
@@ -249,10 +461,49 @@
 	function save(){
 		var playerJSON = JSON.stringify(player);
 		localStorage.setItem('player', playerJSON);
+		buildings[3].amount -= player.freeShips;
 		var buildJSON = JSON.stringify(buildings);
 		localStorage.setItem('buildings',buildJSON);
+		buildings[3].amount += player.freeShips;
+		var upg1JSON = JSON.stringify(upg1Manage);
+		localStorage.setItem('upg1', upg1JSON);
+		var upg2JSON = JSON.stringify(upg2Manage);
+		localStorage.setItem('upg2', upg2JSON);
+		var upg3JSON = JSON.stringify(upg3Manage);
+		localStorage.setItem('upg3', upg3JSON);
+		var upg4JSON = JSON.stringify(upg4Manage);
+		localStorage.setItem('upg4', upg4JSON);
+		var upg5JSON = JSON.stringify(upg5Manage);
+		localStorage.setItem('upg5', upg5JSON);
+		var upg6JSON = JSON.stringify(upg6Manage);
+		localStorage.setItem('upg6', upg6JSON);
+		var upg7JSON = JSON.stringify(upg7Manage);
+		localStorage.setItem('upg7', upg7JSON);
+		var upg8JSON = JSON.stringify(upg8Manage);
+		localStorage.setItem('upg8', upg8JSON);
+		
+		localStorage.setItem('upgProgress',canBuyUpgrade);
+		localStorage.setItem('upgSeen1', shownUpg1Before);
+		localStorage.setItem('upgSeen2', shownUpg2Before);
+		localStorage.setItem('upgSeen3', shownUpg3Before);
+		localStorage.setItem('upgSeen4', shownUpg4Before);
+		localStorage.setItem('upgSeen5', shownUpg5Before);
+		localStorage.setItem('upgSeen6', shownUpg6Before);
+		localStorage.setItem('upgSeen7', shownUpg7Before);
+		localStorage.setItem('upgSeen8', shownUpg8Before);
+		
+		localStorage.setItem('manaDump', manaDump);
+		localStorage.setItem('mannaDump', mannaDump);
+		localStorage.setItem('moanaDump', moanaDump);
+
+		
 		localStorage.setItem('versionNum',verNum);
 		localStorage.setItem('worthMult', worthMult);
+		localStorage.setItem('totalTick', totalTicks);
+		localStorage.setItem('totalMon', totalMoney);
+		var moneyPerBuild = JSON.stringify(moneySpentPerBuilding);
+		localStorage.setItem('monPerBuild',moneyPerBuild);
+
 		document.getElementById("alert").innerHTML = "Game has been saved";
 		saveLoadPopup();
 	}
@@ -265,47 +516,99 @@
 	function load(){
 		if(localStorage.getItem('versionNum')==verNum){
 			resetPnB();
-			if(localStorage.getItem('player'))
+			resetGlobals();
+			shownUpg1Before = (localStorage.getItem('upgSeen1') == 'true');
+			shownUpg2Before = (localStorage.getItem('upgSeen2') == 'true');
+			shownUpg3Before = (localStorage.getItem('upgSeen3') == 'true');
+			shownUpg4Before = (localStorage.getItem('upgSeen4') == 'true');
+			shownUpg5Before = (localStorage.getItem('upgSeen5') == 'true');
+			shownUpg6Before = (localStorage.getItem('upgSeen6') == 'true');
+			shownUpg7Before = (localStorage.getItem('upgSeen7') == 'true');
+			shownUpg8Before = (localStorage.getItem('upgSeen8') == 'true');
+			if(localStorage.getItem('player')){
 				var playerHolder = JSON.parse(localStorage.getItem('player'));
-			loadPlayer(playerHolder);
-			if(localStorage.getItem('buildings'))
+				loadPlayer(playerHolder);
+			}
+			if(localStorage.getItem('buildings')){
 				var buildingHolder = JSON.parse(localStorage.getItem('buildings'));	
-			loadBuilding(buildingHolder);
+				loadBuildings(buildingHolder);
+			}
+			if(localStorage.getItem('upg1')){
+				var upg1Mang = JSON.parse(localStorage.getItem('upg1'));
+				loadUpg1(upg1Mang);
+			}
+			if(localStorage.getItem('upg2')){
+				var upg2Mang = JSON.parse(localStorage.getItem('upg2'));
+				loadUpg2(upg2Mang);
+			}
+			if(localStorage.getItem('upg3')){
+				var upg3Mang = JSON.parse(localStorage.getItem('upg3'));
+				loadUpg3(upg3Mang);
+			}
+			if(localStorage.getItem('upg4')){
+				var upg4Mang = JSON.parse(localStorage.getItem('upg4'));
+				loadUpg4(upg4Mang);
+			}
+			if(localStorage.getItem('upg5')){
+				var upg5Mang = JSON.parse(localStorage.getItem('upg5'));
+				loadUpg5(upg5Mang);
+			}
+			if(localStorage.getItem('upg6')){
+				var upg6Mang = JSON.parse(localStorage.getItem('upg6'));
+				loadUpg6(upg6Mang);
+			}
+			if(localStorage.getItem('upg7')){
+				var upg7Mang = JSON.parse(localStorage.getItem('upg7'));
+				loadUpg7(upg7Mang);
+			}
+			if(localStorage.getItem('upg8')){
+				var upg8Mang = JSON.parse(localStorage.getItem('upg8'));
+				loadUpg8(upg8Mang);
+			}
+			
+			if(localStorage.getItem('manaDump')){
+				calcManaPercent(Number(localStorage.getItem('manaDump')));
+			}
+			if(localStorage.getItem('mannaDump')){
+				calcMannaPercent(Number(localStorage.getItem('mannaDump')));
+			}
+			if(localStorage.getItem('moanaDump')){
+				calcMoanaPercent(Number(localStorage.getItem('moanaDump')));
+			}
+			
 			worthMult = localStorage.getItem('worthMult');
+			totalTicks = Number(localStorage.getItem('totalTick'));
+			totalMoney = Number(localStorage.getItem('totalMon'));
+			moneySpentPerBuilding = JSON.parse(localStorage.getItem('monPerBuild'));
+			
+			canBuyUpgrade = (localStorage.getItem('upgProgress') == 'true');
+			if(canBuyUpgrade){
+				player.money_3 += smileCost;
+				canBuyUpgrade = false;
+				handleUpgBuy();
+			}
+			
 			document.getElementById("alert").innerHTML = "Game has been loaded";
 		}
 		else{
 		}
-		
+		buildings.forEach(function(building, index){
+			index++;
+			document.getElementById("name"+index).innerHTML = building.name;
+			document.getElementById("owned"+index).innerHTML = building.amount;
+			document.getElementById("cost"+index).innerHTML = building.cost;
+		});
 		saveLoadPopup();
 	}
-	function loadBuilding(build){
+	function loadBuildings(build){
 		build.forEach(function(building, index){
 			buildings[index].amount = building.amount;
-			if(buildings[index].name == "Spaceship"){
-				for(var x=0; x < buildings[index].amount; x++){
-					buildings[index].currGain += buildings[index].baseGain;
-					buildings[index].baseGain = Math.round(buildings[index].baseGain * player.shipMlt);
-				}
-			}
-			else{
-				buildings[index].currGain = buildings[index].baseGain * buildings[index].amount;
-			}
-			if(buildings[index].name == "Spade")
-				buySpade(buildings[index].amount);
-			if(buildings[index].name == "Gold Bat 9000"){
-				buyBat(buildings[index].amount);
-				iceBat(player.totalIce);
-			}
-			if(buildings[index].name == "Garbage" && buildings[index].amount > 0)
-				checkGarbage(buildings[index].amount);
-			buildings[index].cost = Math.round(buildings[index].baseCost * Math.pow(buildings[index].exp,buildings[index].amount));
-			
 		});
+		loadBuilding();
 	}
 	function loadPlayer(p2){
 		Object.keys(p2).forEach(function(playerNodes){
-			if(playerNodes == "totalIce" || playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5" || playerNodes == "gain"){
+			if(playerNodes == "totalIce" || playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5"){
 				player[playerNodes] = p2[playerNodes];
 			}
 		});
