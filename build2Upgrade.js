@@ -362,7 +362,7 @@ $('#b2upg1').toggleClass("upgradeBuy");
 	}
 	function showColorUpg2(x){
 		x += 1;
-		$('#b2upg'+x).css("background-image", "url(art/b2/upg"+x+".png)");
+		$('#b2upg'+x).css("background-image", "url(art/B2/upg"+x+".png)");
 	}
 	function loadUpg2(upg2List){
 

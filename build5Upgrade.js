@@ -262,7 +262,7 @@ $('#b5upg9').toggleClass("upgradeBuy");
 	}
 	function showColorUpg5(x){
 		x += 1;
-		$('#b5upg'+x).css("background-image", "url(art/b5/upg"+x+".png)");
+		$('#b5upg'+x).css("background-image", "url(art/B5/upg"+x+".png)");
 	}
 	function loadUpg5(upg5List){
 
