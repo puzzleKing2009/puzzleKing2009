@@ -217,8 +217,8 @@ $('#b7upg1').toggleClass("upgradeBuy");
 		switch(x){
 			case 0: upIceBase(); break;
 			case 1: reduceIceTickIce(); break;
-			case 2: player.meltWorth += 2000; break;
-			case 3: player.iceReform = 50; break;
+			case 2: player.meltWorth += 1000; break;
+			case 3: player.iceReform = 25; break;
 			case 4: player.iceReform = 100; break;
 			case 5: reduceTimeTickIce(); break;
 			case 6: reduceIceTickIce(); break;
@@ -230,7 +230,7 @@ $('#b7upg1').toggleClass("upgradeBuy");
 		checkMaxUpgrade(7);
 	}
 	function upIceBase(){
-		buildings[6].baseGain += 63;
+		buildings[6].baseGain += 42;
 		player.gain -= Number(buildings[6].currGain);
 		buildings[6].currGain = 0;
 		buildings[6].currGain = buildings[6].baseGain * buildings[6].amount; 

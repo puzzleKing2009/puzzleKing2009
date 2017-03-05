@@ -59,7 +59,7 @@
 		return 0;
 	}
 	function getMeltWorth(){
-		return (Math.round(buildings[6].baseGain * player.meltWorth * (player.meltTime * .01)));
+		return (Math.round(buildings[6].baseGain * 0.9 * player.meltWorth * (player.meltTime * .01)));
 	}
 	function buyIce(x){
 		for(var i=0; i<x; i++){
