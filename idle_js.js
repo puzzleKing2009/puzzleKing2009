@@ -420,7 +420,7 @@
 		if(player.money_3 >= 3){
 			$('#upgBox:Hidden').toggle();
 		}
-		if(player.money_4 >= 10000){
+		if(player.money_4 >= 1000000){
 			$('#manaArea:Hidden').toggle();
 		}
 		pageRefresh();
