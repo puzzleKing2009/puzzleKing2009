@@ -237,9 +237,9 @@ $('#b7upg1').toggleClass("upgradeBuy");
 		player.gain += Number(buildings[6].currGain);
 	}
 	function reduceIceTickIce(){
-		player.meltTime -= 20;
+		player.meltTime -= 10;
 		if(!upg7Free)
-			reduceAllIceTime(20);
+			reduceAllIceTime(10);
 	}
 	function reduceTimeTickIce(){
 		player.updTime = player.updTime - 50;
