@@ -209,7 +209,7 @@ $('#b5upg9').toggleClass("upgradeBuy");
 		switch(x){
 			case 0: reduceMagicBaseCost(); break;
 			case 1: upMagicBase(); break;
-			case 2: player.magicBonus += 0.1; break;
+			case 2: player.magicBonus += 0.15; break;
 			case 3: magicDuplicateEnable = true; break;
 			case 4: magicTridentGivesGainEnable = true; $('#magicConjureMoney').toggle(); break;
 			case 5: reduceTimeTickMagic(); break;
