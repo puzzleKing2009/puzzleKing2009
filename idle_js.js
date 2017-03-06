@@ -512,6 +512,8 @@
 		localStorage.setItem('worthMult', worthMult);
 		localStorage.setItem('totalTick', totalTicks);
 		localStorage.setItem('totalMon', totalMoney);
+		localStorage.setItem('rocketFuel', rocketFuelLevel);
+		
 		var moneyPerBuild = JSON.stringify(moneySpentPerBuilding);
 		localStorage.setItem('monPerBuild',moneyPerBuild);
 
@@ -586,11 +588,24 @@
 				calcMoanaPercent(Number(localStorage.getItem('moanaDump')));
 			}
 			
-			worthMult = localStorage.getItem('worthMult');
-			totalTicks = Number(localStorage.getItem('totalTick'));
-			totalMoney = Number(localStorage.getItem('totalMon'));
-			moneySpentPerBuilding = JSON.parse(localStorage.getItem('monPerBuild'));
-			verNum = localStorage.getItem('versionNum');
+			if(localStorage.getItem('worthMult')){
+				worthMult = localStorage.getItem('worthMult');
+			}
+			if(localStorage.getItem('totalTick')){
+				totalTicks = Number(localStorage.getItem('totalTick'));
+			}
+			if(localStorage.getItem('totalMon')){
+				totalMoney = Number(localStorage.getItem('totalMon'));
+			}
+			if(localStorage.getItem('monPerBuild')){
+				moneySpentPerBuilding = JSON.parse(localStorage.getItem('monPerBuild'));
+			}
+			if(localStorage.getItem('versionNum')){
+				verNum = localStorage.getItem('versionNum');
+			}
+			if(localStorage.getItem('rocketFuel')){
+				rocketFuelLevel = localStorage.getItem('rocketFuel');
+			}
 			
 			canBuyUpgrade = (localStorage.getItem('upgProgress') == 'true');
 			if(canBuyUpgrade){
