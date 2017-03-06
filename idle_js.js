@@ -182,15 +182,26 @@
 		resetPnB();
 		clearInterval(moneyPerSecondInterval);
 		moneyPerSecondInterval = setInterval(calcPerSec, 1000);
-	//	money2PerSecondInterval = setInterval(calcPerSec2, 1000);
+		money2PerSecondInterval = setInterval(calcPerSec2, 600000);
 		load();
 	}
 	function calcPerSec2(){
-		moneyBucket2.pop();
-		moneyBucket2.unshift(0);
-		var monPerMinute = moneyBucket2.reduce(sumBucket, 0);
-		monPerMinute = Math.round((monPerMinute/150)*100)/100;
-		document.getElementById("monPerSec2").innerHTML = monPerMinute.formatMoney();
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				var tempVerNum = xhr.responseText;
+				tempVerNum = tempVerNum.trim();
+				if(tempVerNum != verNum){
+					setTimeout(function(){
+						verNum = tempVerNum;
+						save();
+						location.reload();
+					},30000);
+				}
+			}
+		};
+		xhr.open("GET", "https://sneekxy.github.io/verNum.txt?id="+Math.random()+"", true);
+		xhr.send();
 	}
 	function calcPerSec(){
 		moneyBucket.pop();
@@ -514,7 +525,6 @@
 		pageRefresh();
 	}
 	function load(){
-		if(localStorage.getItem('versionNum')==verNum){
 			resetPnB();
 			resetGlobals();
 			shownUpg1Before = (localStorage.getItem('upgSeen1') == 'true');
@@ -580,6 +590,7 @@
 			totalTicks = Number(localStorage.getItem('totalTick'));
 			totalMoney = Number(localStorage.getItem('totalMon'));
 			moneySpentPerBuilding = JSON.parse(localStorage.getItem('monPerBuild'));
+			verNum = localStorage.getItem('versionNum');
 			
 			canBuyUpgrade = (localStorage.getItem('upgProgress') == 'true');
 			if(canBuyUpgrade){
@@ -589,9 +600,8 @@
 			}
 			
 			document.getElementById("alert").innerHTML = "Game has been loaded";
-		}
-		else{
-		}
+			
+			
 		buildings.forEach(function(building, index){
 			index++;
 			document.getElementById("name"+index).innerHTML = building.name;
