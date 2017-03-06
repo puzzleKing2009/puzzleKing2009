@@ -42,7 +42,7 @@ var canBuyUpgrade = false;
 				
 			}
 		}
-		smileCost = Math.round(smileCostBase * (Math.pow(2.2 , enabledUpgrades.reduce(sumBucket,0))) + 1000*enabledUpgrades.reduce(sumBucket,0));
+		smileCost = Math.round(smileCostBase * (Math.pow(2.4 , enabledUpgrades.reduce(sumBucket,0))) + 1000*enabledUpgrades.reduce(sumBucket,0));
 	}
 	
 	function doBuyUpg(x){
