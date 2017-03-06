@@ -44,10 +44,10 @@ var canBuyUpgrade = false;
 		}
 		var totalUpgs = enabledUpgrades.reduce(sumBucket,0);
 		if(totalUpgs < 4){
-			smileCost = Math.round(smileCostBase * (Math.pow(2.2 , totalUpgs)) + (1000*(Math.pow(totalUpgs,2.2)/10));
+			smileCost = Math.round(smileCostBase * (Math.pow(2.2 , totalUpgs)) + (1000*(Math.pow(totalUpgs,2.2)/10)));
 		}
 		else{
-			smileCost = Math.round(smileCostBase * (Math.pow(2.2 , (totalUpgs+1))) + (1000*(Math.pow((totalUpgs+1),2.2)/10));
+			smileCost = Math.round(smileCostBase * (Math.pow(2.2 , (totalUpgs+1))) + (1000*(Math.pow((totalUpgs+1),2.2)/10)));
 		}
 	}
 	
