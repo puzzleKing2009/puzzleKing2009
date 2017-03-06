@@ -195,7 +195,7 @@
 					setTimeout(function(){
 						verNum = tempVerNum;
 						save();
-						location.reload();
+						location.reload(true);
 					},120000);
 				}
 			}
