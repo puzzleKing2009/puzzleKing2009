@@ -638,9 +638,10 @@
 		$(content).toggle();
 	});
 	function reset(){
-		localStorage.removeItem('versionNum');
-		location.reload();
-		
+		if(confirm("This will reset your entire game. Are you sure you want to do this?")){
+			localStorage.clear();
+			location.reload();
+		}	
 	}
 	
 	Number.prototype.formatMoney = function(c, d, t){
