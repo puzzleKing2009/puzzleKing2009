@@ -604,7 +604,7 @@
 				verNum = localStorage.getItem('versionNum');
 			}
 			if(localStorage.getItem('rocketFuel')){
-				rocketFuelLevel = localStorage.getItem('rocketFuel');
+				rocketFuelLevel = Number(localStorage.getItem('rocketFuel'));
 			}
 			
 			canBuyUpgrade = (localStorage.getItem('upgProgress') == 'true');
