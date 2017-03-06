@@ -17,6 +17,8 @@
 					gainer7 += givePlayerMoney;
 					gainer8 += givePlayerMoney;
 					bingoPicture = 2;
+					if(bingoChain)
+						bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
 				}
 				if(bingoChain)
 					bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
