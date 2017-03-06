@@ -218,7 +218,7 @@ $('#b7upg1').toggleClass("upgradeBuy");
 			case 0: upIceBase(); break;
 			case 1: reduceIceTickIce(); break;
 			case 2: player.meltWorth += 1000; break;
-			case 3: player.iceReform = 25; break;
+			case 3: player.iceReform = 50; break;
 			case 4: player.iceReform = 100; break;
 			case 5: reduceTimeTickIce(); break;
 			case 6: reduceIceTickIce(); break;
