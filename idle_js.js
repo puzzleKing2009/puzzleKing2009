@@ -196,7 +196,7 @@
 						verNum = tempVerNum;
 						save();
 						location.reload();
-					},30000);
+					},120000);
 				}
 			}
 		};
