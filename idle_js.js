@@ -154,7 +154,7 @@
 		this.extraBingo = 0;
 		this.freeShips = 0;
 		this.magicBonus = 1;
-		this.iceReform = 0;
+		this.iceReform = 10;
 		this.spadeCurrChnc = 20;
 		this.timeWarpValue = .7;
 	}
