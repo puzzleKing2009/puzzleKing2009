@@ -428,7 +428,7 @@
 				addMoney_4(1);
 			}
 		}
-		if(player.money_3 >= 3){
+		if(player.money_3 >= 3 || enabledUpgrades.reduce(sumBucket,0) > 0){
 			$('#upgBox:Hidden').toggle();
 		}
 		if(player.money_4 >= 1000000){
