@@ -275,6 +275,7 @@
 		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
 		document.getElementById("iceTTL").innerHTML = getMeltTime();
 		document.getElementById("iceMeltValue").innerHTML = getMeltWorth().formatMoney();
+		document.getElementById("garbageSpadeGiveBonus").innerHTML = Math.round(buildings[7].amount/10).formatMoney();
 		document.getElementById("melt7Value").innerHTML = player.iceMeltMoney.formatMoney();
 		document.getElementById("smileyCost").innerHTML = smileCost;
 		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();;

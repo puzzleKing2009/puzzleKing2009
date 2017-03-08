@@ -95,6 +95,9 @@
 	}
 	function warpMoney(){
 		if((Math.round(Math.random()*10000)/100) <= player.spadeCurrChnc){
-			addMoney_4(1);
+			var giveSpades = 1;
+			if(garbageAlwaysSpadeEnable)
+					giveSpades = 1+Math.round(buildings[7].amount/10);
+			addMoney_4(giveSpades);
 		}
 	}
