@@ -41,7 +41,7 @@
 					magicIceMelted();
 				}
 				if(coldBatEnable){
-					coldBatDuration = 4;
+					coldBatDuration = 5;
 				}
 				if(Math.random()*100 <= player.iceReform){
 					buildingFree = true;
