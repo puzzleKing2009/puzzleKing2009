@@ -244,7 +244,7 @@ $('#b3upg8').toggleClass("upgradeBuy");
 	}	
 	function reduceIceTickBingo(){
 		fireBingo = true;
-		player.fireBingoChnc += 7;
+		player.fireBingoChnc += 10;
 	}
 		
 	function showGrey3Upg(x){
