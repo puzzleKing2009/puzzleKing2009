@@ -274,7 +274,7 @@
 		document.getElementById("conjureMoneyValue").innerHTML = (Math.round(buildings[4].currGain*.77));
 		document.getElementById("meltTridentGain").innerHTML = (Math.round(buildings[4].amount*.3));
 		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
-		document.getElementById("baterestValue").innerHTML = Math.round((buildings[5].amount/500 + .1) * 100)/100;
+		document.getElementById("baterestValue2").innerHTML = (Math.round((buildings[5].amount/500 + .1) * 100)/100);
 		document.getElementById("iceTTL").innerHTML = getMeltTime();
 		document.getElementById("iceMeltValue").innerHTML = getMeltWorth().formatMoney();
 		document.getElementById("garbageSpadeGiveBonus").innerHTML = Math.round(buildings[7].amount/10).formatMoney();
