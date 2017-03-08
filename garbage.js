@@ -39,7 +39,7 @@
 			warpMoney();
 		}
 		if(garbageSkipEnable){
-			if(garbageSkipCounter >= 5){
+			if(garbageSkipCounter >= 3){
 				garbageSkipCounter = -1;
 				gameTick();
 				
