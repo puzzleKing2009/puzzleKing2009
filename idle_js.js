@@ -73,6 +73,9 @@
 	var moanaDump = 0;
 	var manaMoneyMult = 1;
 	var manaMoney4Mult = 1;
+	var fireBingo = false;
+	var fireSpade = false;
+	
 	
 	var oGainer = 0;
 	var gainer1 = 0;
@@ -158,6 +161,7 @@
 		this.iceReform = 10;
 		this.spadeCurrChnc = 20;
 		this.timeWarpValue = .7;
+		this.fireBingoChnc = 0;
 	}
 	
 	function building(name, cost, exp, gain){

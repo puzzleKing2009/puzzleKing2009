@@ -243,9 +243,7 @@ $('#b3upg8').toggleClass("upgradeBuy");
 		checkGarbage(buildings[7].amount);
 	}	
 	function reduceIceTickBingo(){
-		player.meltTime -= 10;
-		if(!upg3Free)
-			reduceAllIceTime(10);
+		player.fireBingoChnc += 5;
 	}
 		
 	function showGrey3Upg(x){

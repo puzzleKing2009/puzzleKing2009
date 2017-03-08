@@ -20,6 +20,11 @@
 					if(bingoChain)
 						bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
 				}
+				if(fireBingo){
+					if(Math.random()*100 <= player.fireBingoChnc){
+						reduceAllIceTime(1);
+					}
+				}
 				if(bingoChain)
 					bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
 				bingo.newCard();

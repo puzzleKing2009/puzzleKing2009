@@ -327,9 +327,7 @@ $('#b2upg1').toggleClass("upgradeBuy");
 			buildings[1].cost = Math.round(buildings[1].baseCost * Math.pow(buildings[1].exp,buildings[1].amount));
 	}
 	function reduceIceTickSpade(){
-		player.meltTime -= 30;
-		if(!upg2Free)
-			reduceAllIceTime(30);
+		fireSpade = true;
 	}
 	function enableBladedShoes(){
 		player.digChnc += Math.floor(buildings[0].amount / 25);

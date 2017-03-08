@@ -12,6 +12,11 @@
 			multiDigTalent = true;
 		while(critAgain){
 			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(player.multCritReduc*counter))))){
+				if(fireSpade){
+					if(Math.random()*100 <= 5){
+						reduceAllIceTime(1);
+					}
+				}
 				var critValue = Math.round((buildings[0].currGain * player.digShoeWorth)* (player.digMlt * consecDigMult) * Math.pow(player.multCritValue,counter));
 				addMoney_1(critValue);
 				totalCritValue += critValue;
