@@ -19,9 +19,9 @@
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/77777777)))*10000)/100;
 		$('#mana1Percent').text(fillPercent);
 		manaFill1(fillPercent);
-		var moneyMult =  Math.round((.00000199*Math.pow(fillPercent,4)+.01)*10000)/100;
+		var moneyMult =  Math.round((.0199*Math.pow(fillPercent,2)+.01)*10000)/100;
 		$('#mana1Worth').text(moneyMult.formatMoney());
-		manaMoneyMult = Math.round((1+(.00000199*Math.pow(fillPercent,4)+.01))*100)/100;
+		manaMoneyMult = Math.round((1+(.0199*Math.pow(fillPercent,2)+.01))*100)/100;
 	}
 	function calcMannaPercent(x){
 		mannaDump += x;
