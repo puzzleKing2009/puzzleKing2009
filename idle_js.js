@@ -67,6 +67,7 @@
 	var garbageBigValEnable = false;
 	var totalUpgMax = 0;
 	var upgUnlocked = 0;
+	var shownMana = false;
 	var manaDump = 0;
 	var mannaDump = 0;
 	var moanaDump = 0;
@@ -432,7 +433,7 @@
 		if(player.money_3 >= 3 || enabledUpgrades.reduce(sumBucket,0) > 0){
 			$('#upgBox:Hidden').toggle();
 		}
-		if(player.money_4 >= 1000000){
+		if(player.money_4 >= 1000000 || shownMana){
 			$('#manaArea:Hidden').toggle();
 		}
 		pageRefresh();
@@ -514,6 +515,7 @@
 		localStorage.setItem('totalTick', totalTicks);
 		localStorage.setItem('totalMon', totalMoney);
 		localStorage.setItem('rocketFuel', rocketFuelLevel);
+		localStorage.setItem('manaShown', shownMana);
 		
 		var moneyPerBuild = JSON.stringify(moneySpentPerBuilding);
 		localStorage.setItem('monPerBuild',moneyPerBuild);
@@ -538,6 +540,7 @@
 			shownUpg6Before = (localStorage.getItem('upgSeen6') == 'true');
 			shownUpg7Before = (localStorage.getItem('upgSeen7') == 'true');
 			shownUpg8Before = (localStorage.getItem('upgSeen8') == 'true');
+			shownMana = (localStorage.getItem('manaShown') == 'true');
 			if(localStorage.getItem('player')){
 				var playerHolder = JSON.parse(localStorage.getItem('player'));
 				loadPlayer(playerHolder);
