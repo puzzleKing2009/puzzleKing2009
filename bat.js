@@ -52,7 +52,7 @@
 					addMoney_1((buildings[5].currGain * baterestValue));
 					gainer1 += (buildings[5].currGain * baterestValue);
 					gainer8 += (buildings[5].currGain * baterestValue);
-					baterestValue = Math.round((baterestValue + .07)*100)/100;
+					baterestValue = Math.round((baterestValue + (buildings[5].amount/500 + .1))*100)/100;
 				}
 			}
 		}
@@ -61,7 +61,7 @@
 				addMoney_1((buildings[5].currGain * baterestValue));
 				gainer1 += (buildings[5].currGain * baterestValue);
 				gainer8 += (buildings[5].currGain * baterestValue);
-				baterestValue = Math.round((baterestValue + .07)*100)/100;
+				baterestValue =  Math.round((baterestValue + (buildings[5].amount/500 + .1))*100)/100;
 			}
 		}
 		$('#coldBatDuration').text(coldBatDuration);
