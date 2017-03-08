@@ -17,6 +17,11 @@
 					gainer7 += givePlayerMoney;
 					gainer8 += givePlayerMoney;
 					bingoPicture = 2;
+					if(fireBingo){
+						if(Math.random()*100 <= player.fireBingoChnc){
+							reduceAllIceTime(1);
+						}
+					}	
 					if(bingoChain)
 						bingoChainValue = Math.round((bingoChainValue + 0.05)*100)/100;
 				}
