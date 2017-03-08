@@ -37,6 +37,9 @@
 		
 		if(overdriveDuration > 1){
 			var overdriveMoney = Math.round(buildings[3].currGain * getOverdriveValue());
+			if(Math.random()*100 <= player.fireShipChnc){
+				reduceAllIceTime(1);
+			}
 			addMoney_1(overdriveMoney);
 			gainer4 += overdriveMoney;
 			gainer8 += overdriveMoney;
@@ -51,6 +54,6 @@
 		$('#liftoffDuration').text(overdriveDuration);
 	}
 	function getOverdriveValue(){
-		var odValue = 1-Math.pow(Math.E, ((buildings[3].amount*-1)/100));
+		var odValue = 1-Math.pow(Math.E, ((buildings[3].amount*-1)/90));
 		return odValue;
 	}

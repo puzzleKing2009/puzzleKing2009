@@ -134,7 +134,7 @@
 		this.spdMWorth = 0.81;
 		this.shipMlt = 1.075;
 		this.shipBaseGain = 85;
-		this.overdriveWait = 50;
+		this.overdriveWait = 40;
 		this.digChnc = 3.11;
 		this.digMlt = 2.85;
 		this.money = 10;
@@ -162,6 +162,7 @@
 		this.spadeCurrChnc = 20;
 		this.timeWarpValue = .7;
 		this.fireBingoChnc = 0;
+		this.fireShipChnc = 0;
 	}
 	
 	function building(name, cost, exp, gain){

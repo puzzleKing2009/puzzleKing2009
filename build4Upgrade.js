@@ -221,7 +221,7 @@ $('#b4upg1').toggleClass("upgradeBuy");
 			case 2: reduceTimeTickShip(); break;
 			case 3: increaseShipBase(); break;
 			case 4: overdriveEnable = true; $('#shipLiftoffCounter').toggle(); $('#shipLiftoffDuration').toggle(); break;
-			case 5: player.overdriveWait -= 10; break;
+			case 5: player.fireShipChnc += 25; break;
 			case 6: reduceShipScalingCost(); break;
 			case 7: enableSpareParts(); break;
 			case 8: reduceShipCost(); break;
@@ -237,9 +237,9 @@ $('#b4upg1').toggleClass("upgradeBuy");
 		player.gain += calcShipTotalValue(buildings[3].amount);
 	}
 	function reduceIceTickShip(){
-		player.meltTime -= 20;
+		player.meltTime -= 15;
 		if(!upg4Free)
-			reduceAllIceTime(20);
+			reduceAllIceTime(15);
 	}
 	function reduceTimeTickShip(){
 		player.updTime = player.updTime - 100;
