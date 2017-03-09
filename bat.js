@@ -32,7 +32,7 @@
 					reduceAllIceTime(1);
 				}
 				if(baterestEnable){
-					baterestValue = Math.round((baterestValue * .2)*100)/100;
+					baterestValue = Math.round((baterestValue * .3)*100)/100;
 				}
 				var splodeValue = Math.round(buildings[5].currGain * (1-player.batSplodeWorth));
 				if(zeroGain){
