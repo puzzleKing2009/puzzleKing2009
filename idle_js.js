@@ -2,7 +2,7 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.1.9";
+	var verNum = "v0.1.8953";
 	var buyAmount = 1;
 	var worthMult = 1000;
 	var warpMulti = 0;
