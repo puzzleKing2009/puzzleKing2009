@@ -3,7 +3,12 @@
 		buildings[3].baseGain = player.shipBaseGain;
 		for(var i=0; i<x; i++){
 			buildings[3].currGain += buildings[3].baseGain;
-			buildings[3].baseGain = Math.round(buildings[3].baseGain * player.shipMlt);
+			if(i >= 120){
+				buildings[3].baseGain = Math.round(buildings[3].baseGain * (player.shipMlt * .96));
+			}
+			else{
+				buildings[3].baseGain = Math.round(buildings[3].baseGain * player.shipMlt);
+			}
 		}
 		return buildings[3].currGain;
 	}

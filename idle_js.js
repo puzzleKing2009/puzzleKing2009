@@ -75,6 +75,8 @@
 	var manaMoney4Mult = 1;
 	var fireBingo = false;
 	var fireSpade = false;
+	var avatarUpgPurchase = true;
+	var shipReductApply = false;
 	
 	
 	var oGainer = 0;
@@ -142,6 +144,7 @@
 		this.money_3 = 0;
 		this.money_4 = 0;
 		this.money_5 = 0;
+		this.money_6 = 0;
 		this.updTime = 2000;
 		this.gain = 1;
 		this.baseBatSplodeChnc = 55.00;
@@ -308,6 +311,7 @@
 		document.getElementById("spendOnBat").innerHTML = moneySpentPerBuilding[5].formatMoney();
 		document.getElementById("spendOnCube").innerHTML = moneySpentPerBuilding[6].formatMoney();
 		document.getElementById("spendOnGarbage").innerHTML = moneySpentPerBuilding[7].formatMoney();
+		$('#sacReward').text(calcConvertMonies().formatMoney());
 		
 		buildings.forEach(function(building, index){
 			index++;
@@ -355,9 +359,22 @@
 		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult));
 		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult));
 	}
+	function addMoney_2(x){
+		player.money_2 = Number(player.money_2 + x);
+	}
+	function addMoney_3(x){
+		player.money_3 = Number(player.money_3 + x);
+	}
 	function addMoney_4(x){
 		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult));
 	}
+	function addMoney_5(x){
+		player.money_5 = Number(player.money_5 + x);
+	}
+	function addMoney_6(x){
+		player.money_6 = Number(player.money_6 + x);
+	}
+	
 	function gameTick(){
 		totalTicks++;
 		resetBuildingIcon();
@@ -440,6 +457,7 @@
 			$('#upgBox:Hidden').toggle();
 		}
 		if(player.money_4 >= 1000000 || shownMana){
+			shownMana = true;
 			$('#manaArea:Hidden').toggle();
 		}
 		pageRefresh();
@@ -643,7 +661,7 @@
 	}
 	function loadPlayer(p2){
 		Object.keys(p2).forEach(function(playerNodes){
-			if(playerNodes == "totalIce" || playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5"){
+			if(playerNodes == "totalIce" || playerNodes == "iceHolder" || playerNodes == "bingoHolder" || playerNodes == "money" || playerNodes == "money_2" || playerNodes == "money_3" || playerNodes == "money_4" || playerNodes == "money_5" || playerNodes == "money_6"){
 				player[playerNodes] = p2[playerNodes];
 			}
 		});

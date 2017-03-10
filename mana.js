@@ -19,26 +19,30 @@
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/77777777)))*10000)/100;
 		$('#mana1Percent').text(fillPercent);
 		manaFill1(fillPercent);
-		var moneyMult =  Math.round((.0199*Math.pow(fillPercent,2)+.01)*10000)/100;
+		var moneyMult =  Math.round((.03*Math.pow(fillPercent,2)+.01)*10000)/100;
 		$('#mana1Worth').text(moneyMult.formatMoney());
-		manaMoneyMult = Math.round((1+(.0199*Math.pow(fillPercent,2)+.01))*100)/100;
+		manaMoneyMult = Math.round((1+(.03*Math.pow(fillPercent,2)+.01))*100)/100;
 	}
 	function calcMannaPercent(x){
 		mannaDump += x;
 		$('#mana2Dump').text(mannaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/40000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/30000000)))*10000)/100;
 		$('#mana2Percent').text(fillPercent);
 		manaFill2(fillPercent);
-		var moneyMult =  Math.round((.0069*Math.pow(fillPercent,2)+.01)*10000)/100;
+		var moneyMult =  Math.round((.69*fillPercent+.01)*10000)/100;
 		$('#mana2Worth').text(moneyMult.formatMoney());
-		manaMoney4Mult = Math.round((1+(.0069*Math.pow(fillPercent,2)+.01))*100)/100;
+		manaMoney4Mult = Math.round((1+(.69*fillPercent+.01))*100)/100;
 	}
 	function calcMoanaPercent(x){
 		moanaDump += x;
 		$('#mana3Dump').text(moanaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/1000000000000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/4000000000000000)))*10000)/100;
 		$('#mana3Percent').text(fillPercent);
 		manaFill3(fillPercent);
+		if(fillPercent == 100){
+			avatarUpgPurchase = false;
+			$('#summonButton:hidden').toggle();
+		}
 	}
 	function manaDumpFunc(x){
 		if(x==1){

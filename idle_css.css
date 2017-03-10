@@ -1,7 +1,7 @@
 	.building {
 		border-style:solid;
 		border-width:thin;
-		width:130%;
+		width:400px;
 		display: inline-block;
 		position:absolute;
 		background-color:#FFFFFF;
@@ -96,11 +96,11 @@
 	}
 	.digData{
 		position:absolute;
-		left:190;
+		left:220;
 	}
 	.shoeData{
 		position:absolute;
-		left:190;
+		left:220;
 		display:none;
 	}
 	.upgrade{
@@ -298,10 +298,115 @@
 		font-family: "Courier New", Courier, monospace;
 		font-size: 12px;
 		border-radius: 6px;
-		top:0%;
-		right:105%;
+		top:100%;
+		right:1%;
 		z-index: 1;
 	}
 	.manaDumpButton1:hover .tooltiptext, .manaDumpButton2:hover .tooltiptext, .manaDumpButton3:hover .tooltiptext{
 		visibility: visible;
+	}
+	.summonBtn{
+		position:absolute; 
+		background-image:url('art/sumBtn.png');
+		left:78%; 
+		top:80%; 
+		width:260px; 
+		height:70px;
+		display:none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+	.summonBtn .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:260px;
+		background-color: #495558;
+		color: #fff;
+		text-align:center;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 12px;
+		border-radius: 6px;
+		top:100%;
+		z-index: 1;
+	}
+	.summonBtn:hover .tooltiptext{
+		visibility: visible;
+	}
+	.sacBtn{
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+	.sacBtn .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:280px;
+		background-color: #495558;
+		color: #fff;
+		text-align:center;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 12px;
+		border-radius: 6px;
+		top:100%;
+		right:0%;
+		z-index: 1;
+	}
+	.sacBtn:hover .tooltiptext, .avaUpg:hover .tooltiptext{
+		visibility: visible;
+	}
+	.avaUpg{
+		position:absolute;
+		top:16px;
+		left:139px;
+		width:220px;
+		height:35px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+	.avaUpg .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:280px;
+		background-color: #495558;
+		color: #fff;
+		text-align:center;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 12px;
+		border-radius: 6px;
+		bottom:105%;
+		right:0%;
+		z-index: 1;
+	}
+	.avaUpgPrice{
+		position:absolute;
+		top:57px;
+		left:145px;
+		width:210px;
+		height:23px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+	.avaUpgSlot{
+		position:absolute;
+		top:25px;
+		left:25px;
+		width:50px;
+		height:50px;
+		color:green;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+	.avatar{
+		position:absolute;
+		left:17%;
+		top:100px;
+		width:400px;
+		height:400px;
+	}
+	.avatarUpgrade{
+		position:absolute;
+		top:80%;
+		left:100px;
+		width:400px;
+		height:100px;
+		background-image: url("art/avatarUpgrade.png");
 	}

@@ -51,7 +51,12 @@ var buildingFree = false;
 			}
 			player.gain += Number(currBuilding.baseGain);
 			if(currBuilding.name=="Spaceship"){
-				currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
+				if(currBuilding.amount >= 120){
+					currBuilding.baseGain = Math.round(currBuilding.baseGain * (player.shipMlt * .96));
+				}
+				else{
+					currBuilding.baseGain = Math.round(currBuilding.baseGain * player.shipMlt);
+				}
 				rocketFuelLevel = 0;
 			}
 			if(currBuilding.name=="Gold Bat 9000"){

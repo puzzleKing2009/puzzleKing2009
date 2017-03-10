@@ -1,3 +1,4 @@
+	var davidisdumb = 0;
 	function buySpade(x){
 			player.digChnc = Math.round((player.digChnc + (player.spdWorth*x))*100)/100;
 			player.digMlt = Math.round((player.digMlt + (player.spdMWorth*x))*100)/100;
@@ -14,6 +15,7 @@
 			if((Math.round(Math.random()*10000)/100) <= Math.round((player.digChnc / (1+(player.multCritReduc*counter))))){
 				if(fireSpade){
 					if(Math.random()*100 <= 5){
+						davidisdumb += 1;
 						reduceAllIceTime(1);
 					}
 				}

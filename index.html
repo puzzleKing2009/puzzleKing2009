@@ -4,7 +4,7 @@
 	<meta http-equiv='cache-control' content='no-cache'>
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
-	<link rel="shortcut icon" href="mikeicon.ico?" type="image/x-icon">
+	<link rel="shortcut icon" href="Famiorb.ico?" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="idle_css.css">
 	</HEAD>
 	<BODY onload="pageInit()">
@@ -16,6 +16,7 @@
 			<tr style="background-color:#EAE127"><td class="shrink">☺</td><td class="value" id="myMoney3">0</td></tr>
 			<tr style="background-color:#1BDFED"><td class="shrink">♠</td><td class="value" id="myMoney4">0</td></tr>
 			<tr style="background-color:#8664BA"><td class="shrink">§</td><td class="value" id="myMoney5">0</td></tr>
+			<tr style="background-color:#1BC91A"><td class="shrink">‡̶̟͎̎̎</td><td class="value" id="myMoney6">0</td></tr>
 		</table>
 		<div>
 			Average $ per second: <span id="monPerSec"></span><br>
@@ -118,7 +119,7 @@
 				<div class="buyable" style="background-image:url('art/build8.png');" id="buy8" border="1" onclick="pickBuy(8)">
 				</div>
 				<div id="bgBuilding8" class="building"><span id="name8"></span><br>Currently owned: <span id="owned8"></span><br>Cost: $<span id="cost8"></span>
-					<span class="tooltiptext">Stinky smelly garbage. Different amounts of garbage produce different effects. When at an odd number of garbage they have a chance to give ♠. When at an even number, tick rate is greatly increased. Each gives $<span id="give8Txt"></span> a tick for a total of $<span id="total8Txt"></span> each tick. Buying one now has a worth of <span id="ratio8Txt"></span>
+					<span class="tooltiptext">Stinky smelly garbage. Different amounts of garbage produce different effects. When at an odd number of garbage they have a chance to give ♠. When at an even number, Time Warp is active and tick rate is greatly increased. Each gives $<span id="give8Txt"></span> a tick for a total of $<span id="total8Txt"></span> each tick. Buying one now has a worth of <span id="ratio8Txt"></span>
 					</span>
 				</div>
 			</div>
@@ -236,7 +237,7 @@
 					</span>
 				</div>
 				<div id="b1upg5" class="upgradeBox" style="left:280px; top:230px" onClick="buy1Upgrade(4)">
-					<span class="tooltipLeft"><span class="upgTitle">Multistep</span></br>Increases Shoe Gain by 100% per Shoe owned. This increase does not count twoards dig bonuses
+					<span class="tooltipLeft"><span class="upgTitle">Multistep</span></br>Increases Shoe Gain by 100% per Shoe owned. This increase does not count towards dig bonuses
 					</span>
 				</div>
 				<div id="b1upg6" class="upgradeBox" style="left:370px; top:270px" onClick="buy1Upgrade(5)">
@@ -756,7 +757,7 @@
 					</span>
 				</div>
 				<div id="b8upg9" class="upgradeBox" style="left:400px; top:400px" onClick="buy8Upgrade(8)">
-					<span class="tooltipLeft"><span class="upgTitle">Liquid Trash</span></br>The tick speed bonus from an even number of Garbage is increased by 10%
+					<span class="tooltipLeft"><span class="upgTitle">Liquid Trash</span></br>The tick speed bonus from Time Warp is increased by 10%
 					</span>
 				</div>
 				<div id="b8upg10" class="upgradeBox" style="left:400px; top:270px" onClick="buy8Upgrade(9)">
@@ -799,6 +800,33 @@
 			
 			
 		</div>
+		
+		<div id="avatarUpgrades" class="upgrade" style="background-size: 45px 45px; background-image:url('art/sacBG.png')">
+		<div style="background-image:url('art/close.png'); cursor:hand; width:45px;height:45px;position:absolute;left:92%;" onclick="summonAvatar()"></div>
+		<div class="sacBtn" style="background-image:url('art/sacrifice.png'); cursor:hand; left:275; width:45px; height:45px; position:absolute;" onclick="convertMonies()">
+			<div class="tooltiptext">
+				Convert all of your $, φ, ☺, and ♠ into §. Sacrificing now will give <span id="sacReward"></span>§
+			</div>
+		</div>
+		<div id="avatarPlace" class="avatar">
+		</div>
+		<div id="avatarUpgradeSpot" class="avatarUpgrade">
+			<div id="avaUpgID" style="display:none"></div>
+			<div id="avaUpgSlot" style="cursor:hand;" class="avaUpgSlot" onclick="buyAvaUpgrade()"></div>
+			<div id="avaUpgDesc" class="avaUpg">
+				<div id="avaUpgTT" class="tooltiptext">
+				</div>
+			</div>
+			<div class="avaUpgPrice">§<span id="avaUpgPrice"></span></div>
+		</div>
+		</div>
+		
+		<div class="summonBtn" id="summonButton" style="cursor:hand;" onclick="summonAvatar()">
+			<div class="tooltiptext">
+				Consume all of your Moana to summon a random Avatar
+			</div>
+		</div>
+		
 	</div>
 	</BODY>
 	
@@ -825,6 +853,7 @@
 	<script src="build7Upgrade.js"></script>
 	<script src="build8Upgrade.js"></script>
 	<script src="mana.js"></script>
+	<script src="avatar.js"></script>
 	
 	
 	
