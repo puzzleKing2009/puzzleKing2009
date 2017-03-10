@@ -372,6 +372,8 @@ $('#b2upg1').toggleClass("upgradeBuy");
 			upg2List[i] -= 1;
 			if(upg2List[i] > 0){
 				shownUpg2Before = true;
+				if(upg2Manage[i] == 0)
+					upg2Manage[i] = 1;
 				for(var j=0; j<upg2List[i]; j++){
 					buy2Upgrade(i);
 				}
