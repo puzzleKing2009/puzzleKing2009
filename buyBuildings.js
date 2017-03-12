@@ -64,7 +64,7 @@ var buildingFree = false;
 			}	
 			if(currBuilding.name=="Garbage")
 				checkGarbage(currBuilding.amount);
-			if(weightOfMany && currBuilding.name!="Spade")
+			if(weightOfMany && currBuilding.name!="Spade" && !buildingFree)
 				player.digMlt = Math.round((player.digMlt+0.1)*100)/100;
 			if(currBuilding.name=="Spaceship"){
 				if(sparePartsEnabled){
