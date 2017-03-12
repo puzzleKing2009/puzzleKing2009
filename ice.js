@@ -54,6 +54,8 @@
 	}	
 	function getMeltTime(){
 		if(player.iceHolder[0] != null){
+			if(player.iceHolder[0].duration <= 0)
+				player.iceHolder[0].duration = 0;
 			return player.iceHolder[0].duration;
 		}
 		return 0;
