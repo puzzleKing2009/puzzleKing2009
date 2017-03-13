@@ -16,7 +16,7 @@
 	function calcManaPercent(x){
 		manaDump += x;
 		$('#mana1Dump').text(manaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/123456789)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/234567899)))*10000)/100;
 		$('#mana1Percent').text(fillPercent);
 		manaFill1(fillPercent);
 		var moneyMult =  Math.round((.0000015*Math.pow(fillPercent,4)+.01)*10000)/100;
@@ -36,7 +36,7 @@
 	function calcMoanaPercent(x){
 		moanaDump += x;
 		$('#mana3Dump').text(moanaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/10000000000000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/100000000000000000)))*10000)/100;
 		$('#mana3Percent').text(fillPercent);
 		manaFill3(fillPercent);
 		if(fillPercent == 100){
