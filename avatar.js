@@ -243,7 +243,7 @@
 		player.money = player.money_2 = player.money_3 = player.money_4 = 0;
 	}
 	function calcConvertMonies(){
-		return Math.round(((player.money * .0000000000000001) + (player.money_2 * .00000001) + (player.money_3 * .00001) + (player.money_4 * .00000001)));
+		return Math.round(((player.money * .0000000000000001) + (player.money_2 * .000000001) + (player.money_3 * .00001) + (player.money_4 * .00000001)));
 	}
 	function buyAvaUpgrade(){
 		var avaUpg = Number($('#avaUpgID').text());
