@@ -16,7 +16,7 @@
 	function calcManaPercent(x){
 		manaDump += x;
 		$('#mana1Dump').text(manaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/87654321)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/98765432)))*10000)/100;
 		$('#mana1Percent').text(fillPercent);
 		manaFill1(fillPercent);
 		var moneyMult =  Math.round((.0000015*Math.pow(fillPercent,4)+.01)*10000)/100;
@@ -26,7 +26,7 @@
 	function calcMannaPercent(x){
 		mannaDump += x;
 		$('#mana2Dump').text(mannaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/30000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/50000000)))*10000)/100;
 		$('#mana2Percent').text(fillPercent);
 		manaFill2(fillPercent);
 		var moneyMult =  Math.round((.64*fillPercent+.01)*10000)/100;
