@@ -456,7 +456,7 @@
 		if(player.money_3 >= 3 || enabledUpgrades.reduce(sumBucket,0) > 0){
 			$('#upgBox:Hidden').toggle();
 		}
-		if(player.money_4 >= 1500000 || shownMana){
+		if(player.money_4 >= 2000000 || shownMana){
 			shownMana = true;
 			$('#manaArea:Hidden').toggle();
 		}
