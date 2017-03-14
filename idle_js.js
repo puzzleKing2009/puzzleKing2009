@@ -474,7 +474,7 @@
 		if(shoeMultiStepEnable)
 			shoeMultiStep();
 		if(!isRun)
-		//	shoeRun();
+			shoeRun();
 		if(shoeMultiDur == 1)
 			shoeMultiDur -= 1;
 		if(shoeMultiDur > 1){
