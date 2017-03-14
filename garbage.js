@@ -34,6 +34,7 @@
 			garbageWarp(isWarp);
 		}
 	}
+	var daveHolder = 0;
 	function doGarbage(){
 		if(warpMulti==1 || garbageAlwaysSpadeEnable){
 			warpMoney();
@@ -41,7 +42,8 @@
 		if(garbageSkipEnable){
 			if(garbageSkipCounter >= 3){
 				garbageSkipCounter = -1;
-				gameTick();
+				daveHolder += 1;
+				doGameTick();
 				
 			}
 			garbageSkipCounter += 1;

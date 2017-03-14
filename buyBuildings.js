@@ -87,7 +87,7 @@ var buildingFree = false;
 		}	
 	}
 	function loadBuilding(){
-		for(var x=0; x<8; x++){
+		for(var x=0; x<11; x++){
 			var currBuilding = buildings[x];
 			currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp,currBuilding.amount));
 			if(x!=3){

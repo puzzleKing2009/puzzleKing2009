@@ -22,13 +22,13 @@
 	function gainTrident(){
 		tridentsPerTick += 1;
 		if(magicDuplicateEnable){
-			if(Math.random()*100 <= 25)
+			if(Math.random()*100 <= doubleMagicChnc)
 				gainTrident();
 		}
 		if(magicTridentGivesGainEnable){
-			addMoney_1(Math.round((buildings[4].currGain*.77)));
-			gainer5+= Math.round((buildings[4].currGain*.77));
-			gainer8+= Math.round((buildings[4].currGain*.77));
+			addMoney_1(Math.round((buildings[4].currGain* hiddenValueVal)));
+			gainer5+= Math.round((buildings[4].currGain* hiddenValueVal));
+			gainer8+= Math.round((buildings[4].currGain* hiddenValueVal));
 		}
 		if(magicAlterTimeEnable){
 			if(tridentsPerTick >= 10 && !alterTimeOn){

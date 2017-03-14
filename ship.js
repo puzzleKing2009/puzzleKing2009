@@ -36,7 +36,7 @@
 		shipBorder.style.backgroundImage="url('art/build4.png')";
 		
 		if(overdriveTimer >= player.overdriveWait){
-			overdriveDuration = 11;
+			overdriveDuration = overdriveDurationVal;
 			overdriveTimer = 0;
 		}
 		

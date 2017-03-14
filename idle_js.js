@@ -77,7 +77,17 @@
 	var fireSpade = false;
 	var avatarUpgPurchase = true;
 	var shipReductApply = false;
-	
+	var avaMon1Mult = 1;
+	var avaMon2Mult = 1;
+	var avaMon3Mult = 1;
+	var avaMon4Mult = 1;
+	var avaMon5Mult = 1;
+	var tripleTickEnable = false;
+	var multiStepVal = 1;
+	var overdriveDurationVal = 11;
+	var doubleMagicChnc = 25;
+	var hiddenValueVal = .77;
+	var dateTicksToDo = Date.now();
 	
 	var oGainer = 0;
 	var gainer1 = 0;
@@ -228,7 +238,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 19), new building("Spaceship", 9000, 1.19, player.shipBaseGain), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 654321000, 1.15, 1000)];
+		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 19), new building("Spaceship", 9000, 1.19, player.shipBaseGain), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 654321000, 1.15, 1000), new building("hold1", 1, 1.1, 1), new building("hold2", 2,2.2,2), new building("hold3",3,3.3,3)];
 	}
 	function resetGlobals(){
 		 bingoTimer = 0;
@@ -278,8 +288,8 @@
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
 		document.getElementById("bingoBallsCalled").innerHTML = player.ballsCalled;
 		document.getElementById("overdriveValue").innerHTML = (Math.round(getOverdriveValue()*10000)/100).formatMoney(2);
-		document.getElementById("tridentBaseGain").innerHTML = (Math.round(buildings[4].currGain*.77));
-		document.getElementById("conjureMoneyValue").innerHTML = (Math.round(buildings[4].currGain*.77));
+		document.getElementById("tridentBaseGain").innerHTML = (Math.round(buildings[4].currGain* hiddenValueVal));
+		document.getElementById("conjureMoneyValue").innerHTML = (Math.round(buildings[4].currGain* hiddenValueVal));
 		document.getElementById("meltTridentGain").innerHTML = (Math.round(buildings[4].amount*.3));
 		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
 		document.getElementById("baterestValue2").innerHTML = (Math.round((buildings[5].amount/500 + .1) * 100)/100);
@@ -351,31 +361,54 @@
 					if(warpMulti == 1){
 						worthRatio = Math.round((((building.baseGain+player.gain) * 1.7) / building.cost)*worthMult); 
 					}break;
+			case 9: break;
+			case 10: break;
+			case 11: break;
 		}
 		return worthRatio
 	}
 	function addMoney_1(x){
-		player.money = Number(player.money + (x * garbageGlobalMult * manaMoneyMult));
-		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult));
-		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult));
+		player.money = Number(player.money + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
+		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
+		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
 	}
 	function addMoney_2(x){
-		player.money_2 = Number(player.money_2 + x);
+		player.money_2 = Number(player.money_2 + (x * avaMon2Mult));
 	}
 	function addMoney_3(x){
-		player.money_3 = Number(player.money_3 + x);
+		player.money_3 = Number(player.money_3 + (x * avaMon3Mult));
 	}
 	function addMoney_4(x){
-		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult));
+		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult * avaMon4Mult));
 	}
 	function addMoney_5(x){
-		player.money_5 = Number(player.money_5 + x);
+		player.money_5 = Number(player.money_5 + (x * avaMon5Mult));
 	}
 	function addMoney_6(x){
 		player.money_6 = Number(player.money_6 + x);
 	}
-	
 	function gameTick(){
+		var warpDValue = 1;
+		if(warpMulti == 2){
+			warpDValue = player.timeWarpValue;
+		}
+		var TicksToDo = Math.floor((Date.now() - dateTicksToDo)/(player.updTime * warpDValue));
+		if(TicksToDo < 1)
+			TicksToDo = 1;
+			
+		for(var ww=0; ww<TicksToDo; ww++){
+			if(tripleTickEnable){
+				for(var ff=0; ff<4; ff++){
+					doGameTick();
+				}
+			}
+			else{
+					doGameTick();
+			}
+		}
+		dateTicksToDo = Date.now();
+	}
+	function doGameTick(){
 		totalTicks++;
 		resetBuildingIcon();
 //		$('#building1Upgrade').css({"background-image": "url(art/build1.png)", "background-size":"contain"});
@@ -441,7 +474,7 @@
 		if(shoeMultiStepEnable)
 			shoeMultiStep();
 		if(!isRun)
-			shoeRun();
+		//	shoeRun();
 		if(shoeMultiDur == 1)
 			shoeMultiDur -= 1;
 		if(shoeMultiDur > 1){
@@ -469,7 +502,7 @@
 
 	function showBuilding(){
 		var showAll = false;
-		for(var x = buildings.length; x>0; x--){
+		for(var x = 8; x>0; x--){
 			if(x < 6){
 				if(((player.money > (buildings[x-1].baseCost*.5)) || buildings[x-1].amount > 0 || showAll)){
 					$('#building'+(x-1)).fadeIn("slow");

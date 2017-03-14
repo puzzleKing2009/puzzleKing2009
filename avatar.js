@@ -123,7 +123,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/7.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Running Growth").append(cache); 
-					$('#avaUpgTT').text("The value of Shoes Multistep is tripled. Run chance is increased to 30"); 
+					$('#avaUpgTT').text("The value of Shoes Multistep is increased by 1,000%. Run chance is increased to 30"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 2:$('#avaUpgID').text("8"); 
@@ -194,21 +194,21 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/15.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Wealth").append(cache); 
-					$('#avaUpgTT').text("Increases all $ gain by 500%"); 
+					$('#avaUpgTT').text("Increases time between ticks by 2 second. Normal ticks are replaced by quad Ticks"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 1:$('#avaUpgID').text("16"); 
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/16.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Posidens Trident").append(cache); 
-					$('#avaUpgTT').text("Increases all trident gain by 200%"); 
+					$('#avaUpgTT').text("Increases all $ gain by 400%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 2:$('#avaUpgID').text("17"); 
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/17.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Smile.jpg").append(cache); 
-					$('#avaUpgTT').text("Increases all smile gain by 200%"); 
+					$('#avaUpgTT').text("Increases all φ gain by 250%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 3:
@@ -216,7 +216,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/18.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Dig").append(cache); 
-					$('#avaUpgTT').text("Increases all Spade gain by 200%"); 
+					$('#avaUpgTT').text("Increases all ☺ gain by 400%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 4:
@@ -224,14 +224,14 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/19.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Welthy Nazi").append(cache); 
-					$('#avaUpgTT').text("Increases all SS gain by 400%"); 
+					$('#avaUpgTT').text("Increases all ♠ gain by 150%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 5:$('#avaUpgID').text("20"); 
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/20.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Wealthy Time").append(cache); 
-					$('#avaUpgTT').text("Increases time between ticks by 2 second. Every tick is now 4 ticks"); 
+					$('#avaUpgTT').text("Increases all § gain by 100%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 				}
@@ -248,26 +248,26 @@
 	function buyAvaUpgrade(){
 		var avaUpg = Number($('#avaUpgID').text());
 		switch(avaUpg){
-			case 1: avaMatAmt[0] = 1; break;
-			case 2: avaMatAmt[1] = 1;break;
-			case 3: avaMatAmt[2] = 1;break;
+			case 1: avaMatAmt[0] = 1; $('#building8').fadeIn(); break;
+			case 2: avaMatAmt[1] = 1; $('#building9').fadeIn(); break;
+			case 3: avaMatAmt[2] = 1; $('#building10').fadeIn(); break;
 			case 4: avaMatAmt[3] = 1;break;
 			case 5: avaMatAmt[4] = 1;break;
 			case 6: avaMatAmt[5] = 1;break;
-			case 7: avaGroAmt[0] = 1;break;
-			case 8: avaGroAmt[1] = 1;break;
-			case 9: avaGroAmt[2] = 1;break;
-			case 10: avaGroAmt[3] = 1;break;
-			case 11: avaGroAmt[4] = 1;break;
+			case 7: avaGroAmt[0] = 1; multiStepVal = 10; player.runChnc = 30; break;
+			case 8: avaGroAmt[1] = 1; player.digChnc += 10; player.multCritValue = (player.multCritValue * 2); break;
+			case 9: avaGroAmt[2] = 1; player.ballsCalled = 5; player.bingoWait = 2; break;
+			case 10: avaGroAmt[3] = 1; overdriveDurationVal = 21; rocketFuelMax = .01; break;
+			case 11: avaGroAmt[4] = 1; doubleMagicChnc = 50; hiddenValueVal *= 2; break;
 			case 12: avaGroAmt[5] = 1;break;
 			case 13: avaGroAmt[6] = 1;break;
 			case 14: avaGroAmt[7] = 1;break;
-			case 15: avaWelAmt[0] = 1;break;
-			case 16: avaWelAmt[1] = 1;break;
-			case 17: avaWelAmt[2] = 1;break;
-			case 18: avaWelAmt[3] = 1;break;
-			case 19: avaWelAmt[4] = 1;break;
-			case 20: avaWelAmt[5] = 1;break;
+			case 15: avaWelAmt[0] = 1; tripleTickEnable = true; player.updTime += 2000; checkGarbage(buildings[7].amount); break;
+			case 16: avaWelAmt[1] = 1; avaMon1Mult = 5; break;
+			case 17: avaWelAmt[2] = 1; avaMon2Mult = 3.5; break;
+			case 18: avaWelAmt[3] = 1; avaMon3Mult = 5; break;
+			case 19: avaWelAmt[4] = 1; avaMon4Mult = 2.5; break;
+			case 20: avaWelAmt[5] = 1; avaMon5Mult = 2; break;
 		}
 		finishAvaUpg();
 	}
