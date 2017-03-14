@@ -392,7 +392,7 @@
 		if(warpMulti == 2){
 			warpDValue = player.timeWarpValue;
 		}
-		var TicksToDo = Math.floor((Date.now() - dateTicksToDo)/(player.updTime * warpDValue));
+		var TicksToDo = Math.round((Date.now() - dateTicksToDo)/(player.updTime * warpDValue));
 		if(TicksToDo < 1)
 			TicksToDo = 1;
 			
