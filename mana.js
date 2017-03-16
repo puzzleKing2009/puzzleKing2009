@@ -29,9 +29,9 @@
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/50000000)))*10000)/100;
 		$('#mana2Percent').text(fillPercent);
 		manaFill2(fillPercent);
-		var moneyMult =  Math.round((.64*fillPercent+.01)*10000)/100;
+		var moneyMult =  Math.round((.44*fillPercent+.01)*10000)/100;
 		$('#mana2Worth').text(moneyMult.formatMoney());
-		manaMoney4Mult = Math.round((1+(.64*fillPercent+.01))*100)/100;
+		manaMoney4Mult = Math.round((1+(.44*fillPercent+.01))*100)/100;
 	}
 	function calcMoanaPercent(x){
 		moanaDump += x;
