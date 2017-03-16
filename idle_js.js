@@ -393,6 +393,8 @@
 			warpDValue = player.timeWarpValue;
 		}
 		var TicksToDo = Math.round((Date.now() - dateTicksToDo)/(player.updTime * warpDValue));
+		if(TicksToDo >= 150)
+			TicksToDo = 150;
 		if(TicksToDo < 1)
 			TicksToDo = 1;
 			
