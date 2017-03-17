@@ -32,6 +32,8 @@
 					reduceAllIceTime(1);
 				}
 				if(baterestEnable){
+					if(baterestValue >= david_stupid_max_bat)
+						david_stupid_max_bat = baterestValue;
 					baterestValue = Math.round((baterestValue * baterestLoss)*100)/100;
 				}
 				var splodeValue = Math.round(buildings[5].currGain * (1-player.batSplodeWorth));
