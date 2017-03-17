@@ -318,7 +318,14 @@
 
 	function pageRefresh(){
 		showBuilding();
-		document.getElementById("myMoney").innerHTML = player.money.formatMoney();
+		var pBigMoney = player.money;
+			if(pBigMoney.toString().length > 20){
+				pBigMoney = pBigMoney.formatMoney(1);
+			}
+			else{
+				pBigMoney = pBigMoney.formatMoney();
+			}
+		document.getElementById("myMoney").innerHTML = pBigMoney;
 		document.getElementById("myMoney2").innerHTML = player.money_2.formatMoney();
 		document.getElementById("myMoney3").innerHTML = player.money_3.formatMoney();
 		document.getElementById("myMoney4").innerHTML = player.money_4.formatMoney();
