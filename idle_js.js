@@ -2,7 +2,7 @@
 	var buildings;
 	var player;
 	var bingoTimer = 0;
-	var verNum = "v0.1.898";
+	var verNum = "v0.1.8994";
 	var buyAmount = 1;
 	var worthMult = 1000;
 	var warpMulti = 0;
@@ -99,7 +99,6 @@
 	var showSummonBTN = false;
 	var selectedAvatarSave = -1;
 	var selectedUpgradeSave = -1;
-	var david_stupid_max_bat = 0;
 	
 	var oGainer = 0;
 	var gainer1 = 0;
@@ -248,7 +247,7 @@
 		moneyBucket.unshift(0);
 		var monPerMinute = moneyBucket.reduce(sumBucket, 0);
 		monPerMinute = Math.round((monPerMinute/300)*100)/100;
-		document.getElementById("monPerSec").innerHTML = monPerMinute.formatMoney();
+		document.getElementById("monPerSec").innerHTML = shortenLargeNumber(monPerMinute);
 	}
 	/*
 	function cps2(){
@@ -318,31 +317,24 @@
 
 	function pageRefresh(){
 		showBuilding();
-		var pBigMoney = player.money;
-			if(pBigMoney.toString().length >= 20){
-				pBigMoney = pBigMoney.formatMoney(1);
-			}
-			else{
-				pBigMoney = pBigMoney.formatMoney();
-			}
-		document.getElementById("myMoney").innerHTML = pBigMoney;
-		document.getElementById("myMoney2").innerHTML = player.money_2.formatMoney();
-		document.getElementById("myMoney3").innerHTML = player.money_3.formatMoney();
-		document.getElementById("myMoney4").innerHTML = player.money_4.formatMoney();
-		document.getElementById("myMoney5").innerHTML = player.money_5.formatMoney();
-		document.getElementById("myMoney6").innerHTML = player.money_6.formatMoney();
-		document.getElementById("gainer").innerHTML = player.gain.formatMoney();
+		document.getElementById("myMoney").innerHTML = shortenLargeNumber(player.money);
+		document.getElementById("myMoney2").innerHTML = shortenLargeNumber(player.money_2);
+		document.getElementById("myMoney3").innerHTML = shortenLargeNumber(player.money_3);
+		document.getElementById("myMoney4").innerHTML = shortenLargeNumber(player.money_4);
+		document.getElementById("myMoney5").innerHTML = shortenLargeNumber(player.money_5);
+		document.getElementById("myMoney6").innerHTML = shortenLargeNumber(player.money_6);
+		document.getElementById("gainer").innerHTML = shortenLargeNumber(player.gain);
 		document.getElementById("runChance").innerHTML = player.runChnc;
 		document.getElementById("shoeMulti").innerHTML = shoeMultiDur;
 		document.getElementById("digChance").innerHTML = player.digChnc;
 		document.getElementById("digMult").innerHTML = player.digMlt;
-		document.getElementById("bingoValue").innerHTML = calcBingoBucks().formatMoney();
+		document.getElementById("bingoValue").innerHTML = shortenLargeNumber(calcBingoBucks());
 		document.getElementById("bingoWait").innerHTML = player.bingoWait;
 		document.getElementById("bingoBallsCalled").innerHTML = player.ballsCalled;
 		document.getElementById("overdriveValue").innerHTML = (Math.round(getOverdriveValue()*10000)/100).formatMoney(2);
 		document.getElementById("tridentBaseGain").innerHTML = (Math.round(buildings[4].currGain* hiddenValueVal));
 		document.getElementById("conjureMoneyValue").innerHTML = (Math.round(buildings[4].currGain* hiddenValueVal));
-		document.getElementById("meltTridentGain").innerHTML = (Math.round(buildings[4].amount*.3));
+		document.getElementById("meltTridentGain").innerHTML = (Math.round(buildings[4].amount*.3)).formatMoney();
 		document.getElementById("batChance").innerHTML = player.batSplodeChnc;
 		document.getElementById("baterestValue2").innerHTML = (Math.round((buildings[5].amount/500 + .1) * 100)/100);
 		document.getElementById("iceTTL").innerHTML = getMeltTime();
@@ -350,7 +342,7 @@
 		document.getElementById("garbageSpadeGiveBonus").innerHTML = Math.round(buildings[7].amount/10).formatMoney();
 		document.getElementById("melt7Value").innerHTML = player.iceMeltMoney.formatMoney();
 		document.getElementById("smileyCost").innerHTML = smileCost;
-		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();;
+		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();
 		document.getElementById("oGainer").innerHTML = (oGainer/gainer8*100).formatMoney(2);
 		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
 		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
@@ -378,24 +370,24 @@
 		buildings.forEach(function(building, index){
 			index++;
 			document.getElementById("owned"+index).innerHTML = building.amount;
-			document.getElementById("cost"+index).innerHTML = building.cost.formatMoney();
+			document.getElementById("cost"+index).innerHTML = shortenLargeNumber(building.cost);
 		//	document.getElementById("give"+index).innerHTML = building.baseGain;
 		//	document.getElementById("total"+index).innerHTML = building.currGain;
-			document.getElementById("give"+index+"Txt").innerHTML = building.baseGain.formatMoney();
+			document.getElementById("give"+index+"Txt").innerHTML = shortenLargeNumber(building.baseGain);
 			if(index==4){
-				document.getElementById("give"+index+"currTxt").innerHTML = Math.round(building.baseGain/player.shipMlt).formatMoney();
+				document.getElementById("give"+index+"currTxt").innerHTML = shortenLargeNumber(Math.round(building.baseGain/player.shipMlt));
 			}
 			if(index==7)
 				document.getElementById("melt"+index+"Txt").innerHTML = player.meltTime;
-			document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
+				document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
 			if(index==11){
 				if(player.rpcTradeActive){
-					document.getElementById("give"+index+"Txt").innerHTML = getRPCValTrade().formatMoney();
-					document.getElementById("total"+index+"Txt").innerHTML = (getRPCValTrade() * buildings[10].amount).formatMoney();
+					document.getElementById("give"+index+"Txt").innerHTML = shortenLargeNumber(getRPCValTrade());
+					document.getElementById("total"+index+"Txt").innerHTML = shortenLargeNumber((getRPCValTrade() * buildings[10].amount));
 				}
 				else{
-					document.getElementById("give"+index+"Txt").innerHTML = getRPCVal().formatMoney();
-					document.getElementById("total"+index+"Txt").innerHTML = (getRPCVal() * buildings[10].amount).formatMoney();
+					document.getElementById("give"+index+"Txt").innerHTML = shortenLargeNumber(getRPCVal());
+					document.getElementById("total"+index+"Txt").innerHTML = shortenLargeNumber((getRPCVal() * buildings[10].amount));
 				}
 			}
 			document.getElementById("ratio"+index+"Txt").innerHTML = getWorthRatio(building, index);
@@ -825,6 +817,19 @@
 		}	
 	}
 	
+
+
+function shortenLargeNumber(number){
+var SI_PREFIXES = ["Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion"];
+    var tier = Math.log10(number) / 3 | 0;
+    if(tier < 4) return Math.round(number).formatMoney();
+    var prefix = SI_PREFIXES[tier-4];
+    var scale = Math.pow(10, tier * 3);
+    var scaled = number / scale;
+	return scaled.toFixed(2) + " "+prefix;
+}
+	
+
 	Number.prototype.formatMoney = function(c, d, t){
 		var n = this, 
 		c = isNaN(c = Math.abs(c)) ? 0 : c, 
