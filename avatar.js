@@ -22,37 +22,40 @@
 	}
 	function pickAvatar(){
 		if(totalAvaUpg() == 0){
+			$('#avatarPlace').css("background-image", "url(art/avaGro.png)");
 			pickAvaUpg(2, -1);
 		}
-		if(avaMatComplete && avaGroComplete && avaWelComplete){
-			
-		}
 		else{
-			switch(Math.floor(Math.random()*3)+1){
-				case 1: if(avaMatComplete){
-							pickAvatar()
-						}
-						else{
-							$('#avatarPlace').css("background-image", "url(art/avaMat.png)");
-							pickAvaUpg(1, -1);
-						}
-				break;
-				case 2:	if(avaGroComplete){
-							pickAvatar()
-						}
-						else{
-							$('#avatarPlace').css("background-image", "url(art/avaGro.png)");
-							pickAvaUpg(2, -1);
-						}
-				break;
-				case 3: if(avaWelComplete){
-							pickAvatar()
-						}
-						else{
-							$('#avatarPlace').css("background-image", "url(art/avaWel.png)");
-							pickAvaUpg(3, -1);
-						}
-				break;
+			if(avaMatComplete && avaGroComplete && avaWelComplete){
+
+			}
+			else{
+				switch(Math.floor(Math.random()*3)+1){
+					case 1: if(avaMatComplete){
+								pickAvatar()
+							}
+							else{
+								$('#avatarPlace').css("background-image", "url(art/avaMat.png)");
+								pickAvaUpg(1, -1);
+							}
+					break;
+					case 2:	if(avaGroComplete){
+								pickAvatar()
+							}
+							else{
+								$('#avatarPlace').css("background-image", "url(art/avaGro.png)");
+								pickAvaUpg(2, -1);
+							}
+					break;
+					case 3: if(avaWelComplete){
+								pickAvatar()
+							}
+							else{
+								$('#avatarPlace').css("background-image", "url(art/avaWel.png)");
+								pickAvaUpg(3, -1);
+							}
+					break;
+				}
 			}
 		}
 	}
