@@ -319,7 +319,7 @@
 	function pageRefresh(){
 		showBuilding();
 		var pBigMoney = player.money;
-			if(pBigMoney.toString().length > 20){
+			if(pBigMoney.toString().length >= 20){
 				pBigMoney = pBigMoney.formatMoney(1);
 			}
 			else{
