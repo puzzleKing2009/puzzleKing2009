@@ -19,7 +19,7 @@
 		if(player.rpcTradeActive){
 			tradeTimer -= 1;
 			var ss = moneySpentPerBuilding[selectedToTrade];
-			var bonusMon = ss * .000000000001;
+			var bonusMon = ss * .000000000000002;
 			fdsafdsafdsa = bonusMon
 			addMoney_1(bonusMon);
 			if(tradeTimer <= 0){
@@ -36,13 +36,13 @@
 	}
 	function getRPCVal(){
 		var arHolder = moneySpentPerBuilding.slice(0,10);
-		var totalMoney = Number(Math.round(arHolder.reduce(sumBucket, 0) * .00000000000001));
+		var totalMoney = Number(Math.round(arHolder.reduce(sumBucket, 0) * .0000000000000003));
 		return totalMoney;
 	}
 	function getRPCValTrade(){
 		var arHolder = moneySpentPerBuilding.slice(0,10);
-		var totalMoney = Number(Math.round(arHolder.reduce(sumBucket, 0) * .00000000000001));
+		var totalMoney = Number(Math.round(arHolder.reduce(sumBucket, 0) * .0000000000000003));
 		var ss = moneySpentPerBuilding[selectedToTrade];
-		var bonusMon = ss * .000000000001;
+		var bonusMon = ss * .000000000000002;
 		return totalMoney+bonusMon;
 	}
