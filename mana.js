@@ -26,12 +26,12 @@
 	function calcMannaPercent(x){
 		mannaDump += x;
 		$('#mana2Dump').text(mannaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/50000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/45000000)))*10000)/100;
 		$('#mana2Percent').text(fillPercent);
 		manaFill2(fillPercent);
-		var moneyMult =  Math.round((.64*fillPercent+.01)*10000)/100;
+		var moneyMult =  Math.round((.55*fillPercent+.01)*10000)/100;
 		$('#mana2Worth').text(moneyMult.formatMoney());
-		manaMoney4Mult = Math.round((1+(.64*fillPercent+.01))*100)/100;
+		manaMoney4Mult = Math.round((1+(.55*fillPercent+.01))*100)/100;
 	}
 	function calcMoanaPercent(x){
 		moanaDump += x;
