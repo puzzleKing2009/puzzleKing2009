@@ -99,6 +99,7 @@
 	var showSummonBTN = false;
 	var selectedAvatarSave = -1;
 	var selectedUpgradeSave = -1;
+	var david_stupid_max_bat = 0;
 	
 	var oGainer = 0;
 	var gainer1 = 0;
