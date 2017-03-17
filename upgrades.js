@@ -1,7 +1,7 @@
 var enabledUpgrades = [0,0,0,0,0,0,0,0];
 var canBuyUpgrade = false;
 	function handleUpgBuy(){
-		if(player.money_3 >= smileCost && !canBuyUpgrade && enabledUpgrades.reduce(sumBucket,0)!=8){
+		if(player.money_3 >= smileCost && !canBuyUpgrade && enabledUpgrades.reduce(sumBucket,0) != 8){
 			player.money_3 -= smileCost;
 			canBuyUpgrade = true;
 			$(".upgHolderD").addClass("upgHolderC");

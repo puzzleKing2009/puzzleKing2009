@@ -16,11 +16,13 @@
 			<tr style="background-color:#EAE127"><td class="shrink">☺</td><td class="value" id="myMoney3">0</td></tr>
 			<tr style="background-color:#1BDFED"><td class="shrink">♠</td><td class="value" id="myMoney4">0</td></tr>
 			<tr style="background-color:#8664BA"><td class="shrink">§</td><td class="value" id="myMoney5">0</td></tr>
-			<tr style="background-color:#1BC91A"><td class="shrink">‡̶̟͎̎̎</td><td class="value" id="myMoney6">0</td></tr>
+			<tr style="background-color:#1BC91A"><td class="shrink">∞</td><td class="value" id="myMoney6">0</td></tr>
 		</table>
 		<div>
 			Average $ per second: <span id="monPerSec"></span><br>
-			<span style="display:none">Average φ per second: <span id="monPerSec2"></span><br></span>
+		<!--	Average φ per second: <span id="mps2"></span><br>
+			Average smile per second: <span id="mps3"></span><br>
+			Average spade per second: <span id="mps4"></span><br> -->
 			Current Gain: <span id="gainer"></span><br>
 		</div>
 		
@@ -126,24 +128,24 @@
 			<div id="building8" style="display:none">
 				<div class="buyable" style="background-image:url('art/build9.png');" id="buy9" border="1" onclick="pickBuy(9)">
 				</div>
-				<div id="bgBuilding9" class="building"><span id="name9"></span><br>Currently owned: <span id="owned9"></span><br>Cost: $<span id="cost9"></span>
-					<span class="tooltiptext">Stinky smelly garbage. Different amounts of garbage produce different effects. When at an odd number of garbage they have a chance to give ♠. When at an even number, Time Warp is active and tick rate is greatly increased. Each gives $<span id="give9Txt"></span> a tick for a total of $<span id="total9Txt"></span> each tick. Buying one now has a worth of <span id="ratio9Txt"></span>
+				<div id="bgBuilding9" class="building"><span id="name9"></span><span class="shoeData" id="pieRanVal">Bonus Gain: <span id="pieRanGive"></span>%</span><br>Currently owned: <span id="owned9"></span><br>Cost: $<span id="cost9"></span>
+					<span class="tooltiptext">The once forgotten Pi(e). The sweet aroma fills you with money and reminds you of a better place. The smell has a 5% chance to condense into a physical form granting you ∞. Each gives $<span id="give9Txt"></span> a tick for a total of $<span id="total9Txt"></span> each tick. Buying one now has a worth of <span id="ratio9Txt"></span>
 					</span>
 				</div>
 			</div>
 			<div id="building9" style="display:none">
 				<div class="buyable" style="background-image:url('art/build10.png');" id="buy10" border="1" onclick="pickBuy(10)">
 				</div>
-				<div id="bgBuilding10" class="building"><span id="name10"></span><br>Currently owned: <span id="owned10"></span><br>Cost: $<span id="cost10"></span>
-					<span class="tooltiptext">Stinky smelly garbage. Different amounts of garbage produce different effects. When at an odd number of garbage they have a chance to give ♠. When at an even number, Time Warp is active and tick rate is greatly increased. Each gives $<span id="give10Txt"></span> a tick for a total of $<span id="total10Txt"></span> each tick. Buying one now has a worth of <span id="ratio10Txt"></span>
+				<div id="bgBuilding10" class="building"><span id="name10"></span><span class="digData" id="sleepRemaining">Ticks left to sleep: <span id="sleepDuration"></span></span><br>Currently owned: <span id="owned10"></span><span class="digData" id="sleepingAwake">Awake: <span id="sleepingAwakeDuration"></span></span><br>Cost: $<span id="cost10"></span>
+					<span class="tooltiptext">A peacefully sleeping Giant. It is said that this giant only awakens once every 50 ticks. If you listen closely you can hear faint whispers echoing "wake me up (CAN'T WAKE UP)". When awake giants can produce ∞. Each gives $<span id="give10Txt"></span> a tick when awake for a total of $<span id="total10Txt"></span> each tick when awake. Buying one now has a worth of <span id="ratio10Txt"></span>
 					</span>
 				</div>
 			</div>
 			<div id="building10" style="display:none">
 				<div class="buyable" style="background-image:url('art/build11.png');" id="buy11" border="1" onclick="pickBuy(11)">
 				</div>
-				<div id="bgBuilding11" class="building"><span id="name11"></span><br>Currently owned: <span id="owned11"></span><br>Cost: $<span id="cost11"></span>
-					<span class="tooltiptext">Stinky smelly garbage. Different amounts of garbage produce different effects. When at an odd number of garbage they have a chance to give ♠. When at an even number, Time Warp is active and tick rate is greatly increased. Each gives $<span id="give11Txt"></span> a tick for a total of $<span id="total11Txt"></span> each tick. Buying one now has a worth of <span id="ratio11Txt"></span>
+				<div id="bgBuilding11" class="building"><span id="name11"></span><span class="shoeData" id="tradeHolder">Trading: <span id="tradeBuilding"></span></span><br>Currently owned: <span id="owned11"></span><span class="shoeData" id="tradeDuration">Trade Duration: <span id="tradeDurationValue"></span></span><br>Cost: $<span id="cost11"></span>
+					<span class="tooltiptext">A single red paper clip. The potential for this baby is infinite! The more money that has been spent on other buildings increase the value of this one! Better get trading. Gives ∞! Each gives $<span id="give11Txt"></span> a tick for a total of $<span id="total11Txt"></span> each tick. Buying one now has a worth of <span id="ratio11Txt"></span>
 					</span>
 				</div>
 			</div>
@@ -391,7 +393,7 @@
 					</span>
 				</div>
 				<div id="b3upg2" class="upgradeBox" style="left:50px; top:300px" onClick="buy3Upgrade(1)">
-					<span class="tooltipRight"><span class="upgTitle">Bigger Gains</span></br>Increases the scaling on the Bingo Bucks reward by 5%
+					<span class="tooltipRight"><span class="upgTitle">Bigger Gains</span></br>Increases the scaling on the Bingo Bucks reward by 6%
 					</span>
 				</div>
 				<div id="b3upg3" class="upgradeBox" style="left:60px; top:440px" onClick="buy3Upgrade(2)">
@@ -847,7 +849,7 @@
 		
 		<div class="summonBtn" id="summonButton" style="cursor:hand;" onclick="summonAvatar()">
 			<div class="tooltiptext">
-				Consume all of your Moana to summon a random Avatar
+				Consume all of your Moana to summon a random Dream
 			</div>
 		</div>
 		
@@ -878,6 +880,9 @@
 	<script src="build8Upgrade.js"></script>
 	<script src="mana.js"></script>
 	<script src="avatar.js"></script>
+	<script src="pie.js"></script>
+	<script src="giant.js"></script>
+	<script src="rpc.js"></script>
 	
 	
 	

@@ -32,7 +32,7 @@
 					reduceAllIceTime(1);
 				}
 				if(baterestEnable){
-					baterestValue = Math.round((baterestValue * .3)*100)/100;
+					baterestValue = Math.round((baterestValue * baterestLoss)*100)/100;
 				}
 				var splodeValue = Math.round(buildings[5].currGain * (1-player.batSplodeWorth));
 				if(zeroGain){
@@ -52,7 +52,7 @@
 					addMoney_1((buildings[5].currGain * baterestValue));
 					gainer1 += (buildings[5].currGain * baterestValue);
 					gainer8 += (buildings[5].currGain * baterestValue);
-					baterestValue = Math.round((baterestValue + (buildings[5].amount/500 + .1))*100)/100;
+					baterestValue = Math.round((baterestValue + (buildings[5].amount/baterestGain + .1))*100)/100;
 				}
 			}
 		}
@@ -61,7 +61,7 @@
 				addMoney_1((buildings[5].currGain * baterestValue));
 				gainer1 += (buildings[5].currGain * baterestValue);
 				gainer8 += (buildings[5].currGain * baterestValue);
-				baterestValue =  Math.round((baterestValue + (buildings[5].amount/500 + .1))*100)/100;
+				baterestValue =  Math.round((baterestValue + (buildings[5].amount/baterestGain + .1))*100)/100;
 			}
 		}
 		$('#coldBatDuration').text(coldBatDuration);

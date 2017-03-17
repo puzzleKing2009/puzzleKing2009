@@ -44,8 +44,7 @@
 			if(Math.random()*100 <= 10)
 				reduceAllIceTime(1);
 		}
-		player.money_2++;
-		moneyBucket2[0] += 1;
+		addMoney_2(1);
 	}
 	function magicIceMelted(){
 		var tridentGain = Math.round(buildings[4].amount*((Math.random()*30)/100));

@@ -8,7 +8,7 @@
 	var warpMulti = 0;
 	var totalTicks = 0;
 	var totalMoney = 10;
-	var moneySpentPerBuilding = [0,0,0,0,0,0,0,0];
+	var moneySpentPerBuilding = [0,0,0,0,0,0,0,0,0,0,0];
 	var isRun = false;
 	var allowShoeMulti = false;
 	var shoeMultiDur = 0;
@@ -34,8 +34,12 @@
 	var sparePartsEnabled = false;
 	var moneyBucket = new Array(300);
 	moneyBucket.fill(0);
-	var moneyBucket2 = new Array(150);
-	moneyBucket2.fill(0);
+//	var moneyBucket2 = new Array(150);
+//	moneyBucket2.fill(0);
+//	var moneyBucket3 = new Array(150);
+//	moneyBucket3.fill(0);
+//	var moneyBucket4 = new Array(150);
+//	moneyBucket4.fill(0);
 	var moneyPerSecondInterval;
 	var magicDuplicateEnable = false;
 	var magicTridentGivesGainEnable = false;
@@ -88,6 +92,13 @@
 	var doubleMagicChnc = 25;
 	var hiddenValueVal = .77;
 	var dateTicksToDo = Date.now();
+	var baterestLoss = .3;
+	var baterestGain = 500;
+	var avaGarboUpgrade = false;
+	var avaShipUpgradeEnable = false;
+	var showSummonBTN = false;
+	var selectedAvatarSave = -1;
+	var selectedUpgradeSave = -1;
 	
 	var oGainer = 0;
 	var gainer1 = 0;
@@ -176,6 +187,12 @@
 		this.timeWarpValue = .7;
 		this.fireBingoChnc = 0;
 		this.fireShipChnc = 0;
+		this.pieChnc = 5;
+		this.pieGainEnable = false;
+		this.giantSleep = 50;
+		this.giantAwake = 1;
+		this.rpcTradeEnable = false;
+		this.rpcTradeActive = false;
 	}
 	
 	function building(name, cost, exp, gain){
@@ -201,6 +218,9 @@
 		resetPnB();
 		clearInterval(moneyPerSecondInterval);
 		moneyPerSecondInterval = setInterval(calcPerSec, 1000);
+	//	mps2 = setInterval(cps2, 1000);
+	//	mps3 = setInterval(cps3, 1000);
+	//	mps4 = setInterval(cps4, 1000);
 		money2PerSecondInterval = setInterval(calcPerSec2, 600000);
 		load();
 	}
@@ -229,6 +249,29 @@
 		monPerMinute = Math.round((monPerMinute/300)*100)/100;
 		document.getElementById("monPerSec").innerHTML = monPerMinute.formatMoney();
 	}
+	/*
+	function cps2(){
+		moneyBucket2.pop();
+		moneyBucket2.unshift(0);
+		var mpm = moneyBucket2.reduce(sumBucket, 0);
+		mpm = Math.round((mpm/150)*100)/100;
+		document.getElementById("mps2").innerHTML = mpm.formatMoney();
+	}
+	function cps3(){
+		moneyBucket3.pop();
+		moneyBucket3.unshift(0);
+		var mpm = moneyBucket3.reduce(sumBucket, 0);
+		mpm = Math.round((mpm/150)*100)/100;
+		document.getElementById("mps3").innerHTML = mpm.formatMoney();
+	}
+	function cps4(){
+		moneyBucket4.pop();
+		moneyBucket4.unshift(0);
+		var mpm = moneyBucket4.reduce(sumBucket, 0);
+		mpm = Math.round((mpm/150)*100)/100;
+		document.getElementById("mps4").innerHTML = mpm.formatMoney();
+	}
+	*/
 	function sumBucket(a, b){
 		return a+b;
 	}
@@ -238,7 +281,7 @@
 		gameTimer = setInterval(gameTick, player.updTime);
 		var autoSave = setInterval(save, 30000);
 
-		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 19), new building("Spaceship", 9000, 1.19, player.shipBaseGain), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 654321000, 1.15, 1000), new building("hold1", 1, 1.1, 1), new building("hold2", 2,2.2,2), new building("hold3",3,3.3,3)];
+		buildings = [new building("Shoes", 20, 1.069, 1), new building("Spade", 200, 1.053, 2), new building("Bingo", 2300, 1.12, 19), new building("Spaceship", 9000, 1.19, player.shipBaseGain), new building("Magic", 50000, 1.02, 30), new building("Gold Bat 9000", 999999, 1.25, 9999), new building("Ice Cubes", 70000000, 1.85, 420), new building("Garbage", 654321000, 1.15, 1000), new building("Pie", 3141592653589, 1.214, 3141592), new building("Sleeping Giant", 9999999999999,1.77,550000000), new building("Red Paper Clip",498536512698354,1.44,1)];
 	}
 	function resetGlobals(){
 		 bingoTimer = 0;
@@ -247,7 +290,7 @@
 		 warpMulti = 0;
 		 totalTicks = 0;
 		 totalMoney = 10;
-		 moneySpentPerBuilding = [0,0,0,0,0,0,0,0];
+		 moneySpentPerBuilding = [0,0,0,0,0,0,0,0,0,0,0];
 		 isRun = false;
 		 allowShoeMulti = false;
 		 shoeMultiDur = 0;
@@ -279,6 +322,7 @@
 		document.getElementById("myMoney3").innerHTML = player.money_3.formatMoney();
 		document.getElementById("myMoney4").innerHTML = player.money_4.formatMoney();
 		document.getElementById("myMoney5").innerHTML = player.money_5.formatMoney();
+		document.getElementById("myMoney6").innerHTML = player.money_6.formatMoney();
 		document.getElementById("gainer").innerHTML = player.gain.formatMoney();
 		document.getElementById("runChance").innerHTML = player.runChnc;
 		document.getElementById("shoeMulti").innerHTML = shoeMultiDur;
@@ -336,6 +380,16 @@
 			if(index==7)
 				document.getElementById("melt"+index+"Txt").innerHTML = player.meltTime;
 			document.getElementById("total"+index+"Txt").innerHTML = building.currGain.formatMoney();
+			if(index==11){
+				if(player.rpcTradeActive){
+					document.getElementById("give"+index+"Txt").innerHTML = getRPCValTrade().formatMoney();
+					document.getElementById("total"+index+"Txt").innerHTML = (getRPCValTrade() * buildings[10].amount).formatMoney();
+				}
+				else{
+					document.getElementById("give"+index+"Txt").innerHTML = getRPCVal().formatMoney();
+					document.getElementById("total"+index+"Txt").innerHTML = (getRPCVal() * buildings[10].amount).formatMoney();
+				}
+			}
 			document.getElementById("ratio"+index+"Txt").innerHTML = getWorthRatio(building, index);
 		});
 	}
@@ -361,9 +415,9 @@
 					if(warpMulti == 1){
 						worthRatio = Math.round((((building.baseGain+player.gain) * 1.7) / building.cost)*worthMult); 
 					}break;
-			case 9: break;
-			case 10: break;
-			case 11: break;
+			case 9: worthRatio = Math.round((building.baseGain/building.cost)*worthMult); break;
+			case 10: worthRatio = Math.round(((building.baseGain * (player.giantAwake / player.giantSleep))/building.cost)*worthMult); break;
+			case 11: worthRatio = Math.round((getRPCVal()/building.cost)*worthMult);break;
 		}
 		return worthRatio
 	}
@@ -374,12 +428,15 @@
 	}
 	function addMoney_2(x){
 		player.money_2 = Number(player.money_2 + (x * avaMon2Mult));
+	//	moneyBucket2[0] += Number(x * avaMon2Mult);
 	}
 	function addMoney_3(x){
 		player.money_3 = Number(player.money_3 + (x * avaMon3Mult));
+	//	moneyBucket3[0] += Number(x * avaMon3Mult);
 	}
 	function addMoney_4(x){
 		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult * avaMon4Mult));
+	//	moneyBucket4[0] += Number(x * avaMon4Mult * manaMoney4Mult);
 	}
 	function addMoney_5(x){
 		player.money_5 = Number(player.money_5 + (x * avaMon5Mult));
@@ -393,14 +450,14 @@
 			warpDValue = player.timeWarpValue;
 		}
 		var TicksToDo = Math.round((Date.now() - dateTicksToDo)/(player.updTime * warpDValue));
-		if(TicksToDo >= 150)
-			TicksToDo = 150;
+		if(TicksToDo > 100)
+			TicksToDo = 100;
 		if(TicksToDo < 1)
 			TicksToDo = 1;
 			
 		for(var ww=0; ww<TicksToDo; ww++){
 			if(tripleTickEnable){
-				for(var ff=0; ff<4; ff++){
+				for(var ff=0; ff<10; ff++){
 					doGameTick();
 				}
 			}
@@ -433,6 +490,8 @@
 			worthMult = 6000000;
 		if(player.money >= 10000000000000 && worthMult < 10000000)
 			worthMult = 10000000;
+		if(player.money >= 100000000000000 && worthMult < 100000000)
+			worthMult = 100000000;
 		
 		gainer8 += player.gain;
 		oGainer += buildings[0].currGain;
@@ -470,6 +529,15 @@
 			meltIce();
 		if(buildings[7].amount >=1){
 			doGarbage();
+		}
+		if(buildings[8].amount >=1){
+			doPie();
+		}
+		if(buildings[9].amount >=1){
+			doGiant();
+		}
+		if(buildings[10].amount >=1){
+			doRPC();
 		}
 		if(buildings[3].amount >=1)
 			runShip();
@@ -567,7 +635,6 @@
 		localStorage.setItem('manaDump', manaDump);
 		localStorage.setItem('mannaDump', mannaDump);
 		localStorage.setItem('moanaDump', moanaDump);
-
 		
 		localStorage.setItem('versionNum',verNum);
 		localStorage.setItem('worthMult', worthMult);
@@ -576,8 +643,17 @@
 		localStorage.setItem('rocketFuel', rocketFuelLevel);
 		localStorage.setItem('manaShown', shownMana);
 		
+		localStorage.setItem('showAvaBTN', showSummonBTN);
+		
 		var moneyPerBuild = JSON.stringify(moneySpentPerBuilding);
 		localStorage.setItem('monPerBuild',moneyPerBuild);
+		
+		var avaUpgradeList = avaMatAmt.concat(avaGroAmt);
+		avaUpgradeList = avaUpgradeList.concat(avaWelAmt);
+		var avaUpgradeStrList = JSON.stringify(avaUpgradeList);
+		localStorage.setItem('avaUpgrades',avaUpgradeStrList);
+		localStorage.setItem('selectedAvaSave', selectedAvatarSave);
+		localStorage.setItem('selectedUpgSave', selectedUpgradeSave);
 
 		document.getElementById("alert").innerHTML = "Game has been saved";
 		saveLoadPopup();
@@ -662,6 +738,11 @@
 			}
 			if(localStorage.getItem('monPerBuild')){
 				moneySpentPerBuilding = JSON.parse(localStorage.getItem('monPerBuild'));
+				if(moneySpentPerBuilding.length == 8){
+					moneySpentPerBuilding.push(0);
+					moneySpentPerBuilding.push(0);
+					moneySpentPerBuilding.push(0);
+				}
 			}
 			if(localStorage.getItem('versionNum')){
 				verNum = localStorage.getItem('versionNum');
@@ -676,6 +757,20 @@
 				canBuyUpgrade = false;
 				handleUpgBuy();
 			}
+			
+			if(localStorage.getItem('avaUpgrades')){
+				var avaUpgMan = JSON.parse(localStorage.getItem('avaUpgrades'));
+				loadAvaUpg(avaUpgMan);
+			}
+			
+			showSummonBTN = (localStorage.getItem('showAvaBTN') == 'true');
+			if(localStorage.getItem('selectedAvaSave')){
+				selectedAvatarSave = Number(localStorage.getItem('selectedAvaSave'));
+			}
+			if(localStorage.getItem('selectedUpgSave')){
+				selectedUpgradeSave = Number(localStorage.getItem('selectedUpgSave'));
+			}
+				loadAvaDisplay();
 			
 			document.getElementById("alert").innerHTML = "Game has been loaded";
 			

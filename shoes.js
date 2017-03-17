@@ -21,5 +21,5 @@
 		addMoney_1(Math.round(buildings[0].currGain* (buildings[0].amount) * multiStepVal));
 		oGainer += Math.round(buildings[0].currGain* (buildings[0].amount) * multiStepVal);
 		gainer8 += Math.round(buildings[0].currGain* (buildings[0].amount) * multiStepVal);
-		$('#multiStepValue').text(Math.round(buildings[0].currGain* (buildings[0].amount) * multiStepVal));
+		$('#multiStepValue').text(Math.round(buildings[0].currGain* (buildings[0].amount) * multiStepVal).formatMoney());
 	}

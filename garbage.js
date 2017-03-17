@@ -1,5 +1,8 @@
 	function checkGarbage(x){
 		var isWarp = false;
+		if(avaGarboUpgrade){
+			x = 120;
+		}
 		if(x > 0){
 			if(x % 4 == 0 && garbageFourMultEnable){
 				garbageGlobalMult = Math.round((1.04 + garbageGlobalMultBonus)*100)/100;
@@ -70,6 +73,9 @@
 	function calcGarbagePic(){
 		var warpBorder = document.getElementById("buy8");
 		var garbAmount = buildings[7].amount;
+		if(avaGarboUpgrade){
+			garbAmount = 120;
+		}
 		var counter = 1;
 		if(garbageFiveMultEnable){
 			if(garbAmount % 5 == 0){

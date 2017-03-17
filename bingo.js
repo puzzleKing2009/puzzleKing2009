@@ -42,7 +42,7 @@
 	}
 	function calcBingoBucks(){
 	
-		return Math.round((7*buildings[2].currGain * ((Math.pow(buildings[2].amount, player.bingoBuckScale) / 4.2)+2))*bingoChainValue);
+		return Math.round((7*buildings[2].currGain * ((Math.pow(buildings[2].amount, player.bingoBuckScale) / 4)+2))*bingoChainValue);
 	}
 	function addBingoCard(){
 		player.bingoHolder.push(new bingoCard);

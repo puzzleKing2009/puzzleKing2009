@@ -50,6 +50,9 @@ var buildingFree = false;
 				buyIce(1);
 			}
 			player.gain += Number(currBuilding.baseGain);
+			if(x==10){
+				player.gain -= Number(currBuilding.baseGain);
+			}
 			if(currBuilding.name=="Spaceship"){
 				if(currBuilding.amount >= 120){
 					currBuilding.baseGain = Math.round(currBuilding.baseGain * (player.shipMlt * .96));
@@ -91,8 +94,13 @@ var buildingFree = false;
 			var currBuilding = buildings[x];
 			currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp,currBuilding.amount));
 			if(x!=3){
-				player.gain += Number(currBuilding.baseGain * currBuilding.amount);
-				currBuilding.currGain += (currBuilding.baseGain * currBuilding.amount);
+				if(x==9){
+					currBuilding.currGain += (currBuilding.baseGain * currBuilding.amount);
+				}
+				else{
+					player.gain += Number(currBuilding.baseGain * currBuilding.amount);
+					currBuilding.currGain += (currBuilding.baseGain * currBuilding.amount);
+				}
 			}
 			else{
 				player.gain += calcShipTotalValue(currBuilding.amount);

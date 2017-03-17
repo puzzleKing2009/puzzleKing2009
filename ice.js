@@ -1,6 +1,8 @@
 	function reduceAllIceTime(x){
 		var cubes = player.iceHolder;
 		var index = cubes.length-1;
+		if(index >= 10)
+			index = 10;
 		while(index >= 0){
 			cubes[index].duration -= x;
 			index --;
@@ -28,7 +30,7 @@
 				else{
 					document.getElementById("buy7").style.backgroundImage="url('art/build7.2.png')";
 				}
-				player.money_3 += player.iceMeltMoney;
+				addMoney_3(player.iceMeltMoney);
 				addMoney_1(getMeltWorth());
 				gainer10 += getMeltWorth();
 				gainer8 += getMeltWorth();
@@ -37,6 +39,7 @@
 				currBuilding.cost = Math.round(currBuilding.baseCost * Math.pow(currBuilding.exp, currBuilding.amount));
 				player.gain -= Number(currBuilding.baseGain);
 				currBuilding.currGain -= currBuilding.baseGain;
+
 				if(magicIceGainTridentEnable){
 					magicIceMelted();
 				}

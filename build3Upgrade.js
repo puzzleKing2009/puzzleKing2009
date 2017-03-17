@@ -210,7 +210,7 @@ $('#b3upg8').toggleClass("upgradeBuy");
 		newUpgBought();
 		switch(x){
 			case 0:  upBingoBase(); break;
-			case 1:  player.bingoBuckScale = Math.round((player.bingoBuckScale * 1.05)*100)/100; break;
+			case 1:  player.bingoBuckScale = Math.round((player.bingoBuckScale * 1.06)*100)/100; break;
 			case 2:  bingoChain = true; $('#bingoBuckChain').toggle(); break;
 			case 3:  player.ballsCalled += 1; break;
 			case 4:  reduceBingoCost(); break;
