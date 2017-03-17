@@ -36,7 +36,7 @@
 	function calcMoanaPercent(x){
 		moanaDump += x;
 		$('#mana3Dump').text(moanaDump.formatMoney());
-		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/5500000000000000)))*10000)/100;
+		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/1200000000000000)))*10000)/100;
 		$('#mana3Percent').text(fillPercent);
 		manaFill3(fillPercent);
 		if(fillPercent == 100){
