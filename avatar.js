@@ -70,6 +70,7 @@
 						y = 7;
 					}
 				}
+				selectedUpgradeSave = isEmpty;
 				switch(isEmpty){
 					case 0: $('#avaUpgID').text("1"); 
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/1.png)'); 
