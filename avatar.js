@@ -21,6 +21,9 @@
 		}
 	}
 	function pickAvatar(){
+		if(totalAvaUpg() == 0){
+			pickAvaUpg(2, -1);
+		}
 		if(avaMatComplete && avaGroComplete && avaWelComplete){
 			
 		}
