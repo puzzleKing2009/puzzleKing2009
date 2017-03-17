@@ -15,7 +15,7 @@
 	}
 	function calcManaPercent(x){
 		manaDump += x;
-		$('#mana1Dump').text(manaDump.formatMoney());
+		$('#mana1Dump').text(shortenLargeNumber(manaDump));
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (manaDump*-1)/223456789)))*10000)/100;
 		$('#mana1Percent').text(fillPercent);
 		manaFill1(fillPercent);
@@ -25,7 +25,7 @@
 	}
 	function calcMannaPercent(x){
 		mannaDump += x;
-		$('#mana2Dump').text(mannaDump.formatMoney());
+		$('#mana2Dump').text(shortenLargeNumber(mannaDump));
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (mannaDump*-1)/45000000)))*10000)/100;
 		$('#mana2Percent').text(fillPercent);
 		manaFill2(fillPercent);
@@ -35,7 +35,7 @@
 	}
 	function calcMoanaPercent(x){
 		moanaDump += x;
-		$('#mana3Dump').text(moanaDump.formatMoney());
+		$('#mana3Dump').text(shortenLargeNumber(moanaDump));
 		var fillPercent = Math.round((1-(Math.pow(Math.E, (moanaDump*-1)/1200000000000000)))*10000)/100;
 		$('#mana3Percent').text(fillPercent);
 		manaFill3(fillPercent);
