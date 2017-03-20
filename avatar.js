@@ -27,7 +27,7 @@
 		}
 		else{
 			if(avaMatComplete && avaGroComplete && avaWelComplete){
-
+				alert("You win. I was going to put another phase here but got tired and didn't wanna program. //Reminder to put more stuff here when I feel like it");
 			}
 			else{
 				switch(Math.floor(Math.random()*3)+1){
