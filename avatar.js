@@ -281,7 +281,7 @@
 		player.money = player.money_2 = player.money_3 = player.money_4 = 0;
 	}
 	function calcConvertMonies(){
-		return Math.round(((player.money * .00000000000000001) + (player.money_2 * .0000001) + (player.money_3 * .00001) + (player.money_4 * .000000003)));
+		return Math.round(((player.money * .00000000000000001) + (player.money_2 * .00000001) + (player.money_3 * .000001) + (player.money_4 * .000000003)));
 	}
 	function buyAvaUpgrade(){
 		if(player.money_5 >= avaUpgCost){
