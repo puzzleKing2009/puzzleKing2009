@@ -26,7 +26,7 @@
 	}
 	td.value{
 		text-align:right;
-		width: 250px;
+		width: 200px;
 	}
 	td.shrink{
 		white-space: nowrap;
@@ -282,7 +282,7 @@
 		position:absolute;
 		height:30px;
 		width:70px;
-		border: 2px solid rgb(187, 174, 13);
+		border: 2px solid yellow;
 		top: 0%;
 	}
 	.manaDumpButton1:hover, .manaDumpButton2:hover, .manaDumpButton3:hover{
@@ -410,3 +410,90 @@
 		height:100px;
 		background-image: url("art/avatarUpgrade.png");
 	}
+	.discoBall{
+		position:absolute;
+		overflow:hidden;
+		left:170px;
+		top:40px;
+		border-radius: 50%;
+		width:220px;
+		height:210px;
+		display:none;
+		z-index: 0;
+	}
+	.discoBallBG{
+		position:absolute;
+		overflow:hidden;
+		left: 0px;
+		width:420px;
+		height:190px;
+		background-image:url("art/discoBall.png");
+		animation-name: discoMove;
+		animation-duration: 2s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+		z-index:1;
+	}
+	@keyframes discoMove{
+		0% {left: 0px;}
+		25% {left: -40px;}
+		50% {left: -80px;}
+		75% {left: -120px;}
+		100%{left: -165px;}
+	}
+	@keyframes discoFlash{
+		0% {background-color:yellow;}
+		10% {background-color:red;}
+		20% {background-color:green;}
+		30% {background-color:blue;}
+		40%{background-color:purple;}
+		50%{background-color:pink;}
+		60%{background-color:gray;}
+		70%{background-color:black;}
+		80%{background-color:orange;}
+		90%{background-color:white;}
+		100%{background-color:teal;}
+	}
+	@keyframes discoStrobe{
+		from {background-color:black;}
+		to {background-color:transparent;}
+	}
+	.discoBG{
+		position:absolute;
+		display:none;
+		width:100%;
+		height:100%;
+		background-image: url("art/disco.png");
+		z-index: 2;
+	}
+	.blackBox{
+		position:absolute;
+		display:none;
+		width:100%;
+		height:100%;
+		background-color:black;
+		animation-name: discoStrobe;
+		animation-duration: 0.45s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+		z-index: 3;
+	}
+	@keyframes discoWinAnimation{
+		0%	{color: green; font-size:200%; transform-origin: 50% 28%;}
+		20% {color: red; font-size:300%; transform-origin: 10% 48%; left: 10%;}
+		40% {color: blue; font-size:100%; transform-origin: 100% 78%; top: 20%; left:70%;}
+		60% {color: purple; font-size:50%; transform-origin: 32% 50%; top: 50%; left: 30%;}
+		80% {color: yellow; font-size:200%; transform-origin: 50% 28%; top: 10%; left: 50%;}
+		100% {color: white; font-size:150%; transform-origin: 50% 28%; top: 70%; left: 70%;}
+	}
+	.discoWin{
+		position:absolute;
+		left:45%;
+		top:50%;
+		animation-name: discoWinAnimation;
+		animation-duration: 3s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+	
+	

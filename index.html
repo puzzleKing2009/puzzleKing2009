@@ -828,8 +828,21 @@
 		</div>
 		
 		<div id="avatarUpgrades" class="upgrade" style="background-size: 45px 45px; background-image:url('art/sacBG.png')">
-		<div style="background-image:url('art/close.png'); cursor:hand; width:45px;height:45px;position:absolute;left:92%;" onclick="summonAvatar()"></div>
-		<div class="sacBtn" style="background-image:url('art/sacrifice.png'); cursor:hand; left:275; width:45px; height:45px; position:absolute;" onclick="convertMonies()">
+		<div id="discoBGID" class="discoBG">
+			<div id="discoWinner" class="discoWin">
+				YOU WIN!
+			</div>
+		</div>
+		<div id="discoBallID" class="discoBall">
+			<div id="discoBallBG" class="discoBallBG">
+			</div>
+		</div>
+		<div id="discoBlackBox" class="blackBox">
+		</div>
+		
+		
+		<div id="convertBG" style="background-image:url('art/close.png'); cursor:hand; width:45px;height:45px;position:absolute;left:92%;" onclick="summonAvatar()"></div>
+		<div id="sacButton" class="sacBtn" style="background-image:url('art/sacrifice.png'); cursor:hand; left:275; width:45px; height:45px; position:absolute;" onclick="convertMonies()">
 			<div class="tooltiptext">
 				Convert all of your $, φ, ☺, and ♠ into §. Sacrificing now will give <span id="sacReward"></span>§
 			</div>
@@ -883,7 +896,7 @@
 	<script src="pie.js"></script>
 	<script src="giant.js"></script>
 	<script src="rpc.js"></script>
-	
+	<script src="disco.js"></script>
 	
 	
 
