@@ -300,6 +300,13 @@
 		}
 	}
 	function finishAvaUpg(){
+		if(avaWelAmt.reduce(sumBucket,0) == 6)
+			avaWelComplete = true;
+		if(avaGroAmt.reduce(sumBucket,0) == 8)
+			avaGroComplete = true;
+		if(avaMatAmt.reduce(sumBucket,0) == 6)
+			avaMatComplete = true;
+		
 		selectedAvatarSave = -1;
 		selectedUpgradeSave = -1;
 		showSummonBTN = false;
