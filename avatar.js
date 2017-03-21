@@ -130,6 +130,7 @@
 					countdown -= 1;
 					if(countdown <= 0){
 						isEmpty = avaGroAmt.indexOf(0);
+						isEmpty += 1;
 					}
 				}
 				if(z != -1)
