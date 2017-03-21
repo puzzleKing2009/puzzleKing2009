@@ -124,7 +124,7 @@
 				var countdown = 10;
 				while(isEmpty == 10){
 					var selection = (Math.floor(Math.random()*8)+1);
-					if(avaGroAmt[selection] == 0){
+					if(avaGroAmt[(selection-1)] == 0){
 						isEmpty = selection;
 					}	
 					countdown -= 1;
