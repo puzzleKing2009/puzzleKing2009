@@ -39,7 +39,7 @@
 		var fillPercent = Math.round((moanaDump/15000000000000000)*10000)/100;
 		$('#mana3Percent').text(fillPercent);
 		manaFill3(fillPercent);
-		if(fillPercent == 100){
+		if(fillPercent >= 100){
 			avatarUpgPurchase = false;
 			showSummonBTN = true;
 			$('#summonButton:hidden').toggle();
