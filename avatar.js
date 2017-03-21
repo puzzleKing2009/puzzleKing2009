@@ -6,18 +6,23 @@
 	var avaGroAmt = [0,0,0,0,0,0,0,0];
 	var avaWelAmt = [0,0,0,0,0,0];
 	function summonAvatar(){
-		if(!avatarUpgPurchase){
-			moanaDump = 0;
-			calcMoanaPercent(0);
-			avatarUpgPurchase = true;
-			pickAvatar();
-		}
-		
-		if($('#avatarUpgrades').is(":hidden")){
-			$('#avatarUpgrades').toggle();
+		if(avaMatComplete && avaGroComplete && avaWelComplete){
+			disco();
 		}
 		else{
-			$('#avatarUpgrades').toggle();
+			if(!avatarUpgPurchase){
+				moanaDump = 0;
+				calcMoanaPercent(0);
+				avatarUpgPurchase = true;
+				pickAvatar();
+			}
+
+			if($('#avatarUpgrades').is(":hidden")){
+				$('#avatarUpgrades').toggle();
+			}
+			else{
+				$('#avatarUpgrades').toggle();
+		}
 		}
 	}
 	function pickAvatar(){
