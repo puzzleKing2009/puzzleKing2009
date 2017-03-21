@@ -121,11 +121,16 @@
 			
 			case 2: {
 				var isEmpty = 10;
+				var countdown = 10;
 				while(isEmpty == 10){
 					var selection = (Math.floor(Math.random()*8)+1);
 					if(avaGroAmt[selection] == 0){
 						isEmpty = selection;
 					}	
+					countdown -= 1;
+					if(countdown <= 0){
+						isEmpty = avaGroAmt.indexOf(0);
+					}
 				}
 				if(z != -1)
 					isEmpty = z;
@@ -195,11 +200,16 @@
 			
 			case 3: {
 				var isEmpty = 10;
+				var countdown = 10;
 				while(isEmpty == 10){
 					var selection = (Math.floor(Math.random()*6));
 					if(avaWelAmt[selection] == 0){
 						isEmpty = selection;
-					}	
+					}
+					countdown -= 1;
+					if(countdown <= 0){
+						isEmpty = avaWelAmt.indexOf(0);
+					}
 				}
 				if(z != -1)
 					isEmpty = z;
