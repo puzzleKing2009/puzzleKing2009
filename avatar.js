@@ -1,6 +1,7 @@
 	var avaMatComplete = false;
 	var avaGroComplete = false;
 	var avaWelComplete = false;
+	var avaUpgradeFree = false;
 	var avaUpgCost = 1;
 	var avaMatAmt = [0,0,0,0,0,0];
 	var avaGroAmt = [0,0,0,0,0,0,0,0];
@@ -284,7 +285,7 @@
 		return Math.round(((player.money * .00000000000000001) + (player.money_2 * .00000001) + (player.money_3 * .000001) + (player.money_4 * .000000003)));
 	}
 	function buyAvaUpgrade(){
-		if(player.money_5 >= avaUpgCost){
+		if(player.money_5 >= avaUpgCost || avaUpgradeFree){
 			player.money_5 -= avaUpgCost;
 			var avaUpg = Number($('#avaUpgID').text());
 			switch(avaUpg){
@@ -333,8 +334,10 @@
 	function loadAvaUpg(x){
 		for(var i = 0; i<20; i++){
 			if(x[i]==1){
+				avaUpgradeFree = true;
 				$('#avaUpgID').text(i+1);
 				buyAvaUpgrade();
+				avaUpgradeFree = false;
 			}
 		}
 	}
