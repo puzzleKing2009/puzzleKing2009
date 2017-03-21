@@ -821,10 +821,10 @@
 
 
 function shortenLargeNumber(number){
-var SI_PREFIXES = ["Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion"];
+var SI_PREFIXES = ["Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion"];
     var tier = Math.log10(number) / 3 | 0;
-    if(tier < 5) return Math.round(number).formatMoney();
-    var prefix = SI_PREFIXES[tier-5];
+    if(tier < 4) return Math.round(number).formatMoney();
+    var prefix = SI_PREFIXES[tier-4];
     var scale = Math.pow(10, tier * 3);
     var scaled = number / scale;
 	return scaled.toFixed(2) + " "+prefix;
