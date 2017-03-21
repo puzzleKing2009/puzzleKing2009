@@ -427,7 +427,7 @@
 		left: 0px;
 		width:420px;
 		height:190px;
-		background-image:url("art/discoBall.png");
+		background-image:url("art/discoball.png");
 		animation-name: discoMove;
 		animation-duration: 2s;
 		animation-iteration-count: infinite;
