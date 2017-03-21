@@ -7,6 +7,12 @@
 	var avaWelAmt = [0,0,0,0,0,0];
 	function summonAvatar(){
 		if(avaMatComplete && avaGroComplete && avaWelComplete){
+			if($('#avatarUpgrades').is(":hidden")){
+				$('#avatarUpgrades').toggle();
+			}
+			else{
+				$('#avatarUpgrades').toggle();
+			}
 			disco();
 		}
 		else{
@@ -22,7 +28,7 @@
 			}
 			else{
 				$('#avatarUpgrades').toggle();
-		}
+			}
 		}
 	}
 	function pickAvatar(){
