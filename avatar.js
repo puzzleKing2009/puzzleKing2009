@@ -286,7 +286,8 @@
 	}
 	function buyAvaUpgrade(){
 		if(player.money_5 >= avaUpgCost || avaUpgradeFree){
-			player.money_5 -= avaUpgCost;
+			if(!avaUpgradeFree)
+				player.money_5 -= avaUpgCost;
 			var avaUpg = Number($('#avaUpgID').text());
 			switch(avaUpg){
 				case 1: avaMatAmt[0] = 1; $('#building8').fadeIn(); break;
