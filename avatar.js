@@ -330,6 +330,7 @@
 		avaUpgCost = Math.round(2.5 * totalAvaUpg());
 		$('#summonButton:visible').toggle();
 		$('#avatarUpgrades:visible').toggle();
+		calcMoanaPercent(0);
 	}
 	function totalAvaUpg(){
 		return (avaMatAmt.reduce(sumBucket,0) + avaGroAmt.reduce(sumBucket,0) + avaWelAmt.reduce(sumBucket, 0));
