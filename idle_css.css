@@ -282,7 +282,7 @@
 		position:absolute;
 		height:30px;
 		width:70px;
-		border: 2px solid yellow;
+		border: 2px solid rgb(187,174,13);
 		top: 0%;
 	}
 	.manaDumpButton1:hover, .manaDumpButton2:hover, .manaDumpButton3:hover{
