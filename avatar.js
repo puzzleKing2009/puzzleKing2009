@@ -6,6 +6,7 @@
 	var avaMatAmt = [0,0,0,0,0,0];
 	var avaGroAmt = [0,0,0,0,0,0,0,0];
 	var avaWelAmt = [0,0,0,0,0,0];
+	var moanaScale = 1;
 	function summonAvatar(){
 		if(avaMatComplete && avaGroComplete && avaWelComplete){
 			if($('#avatarUpgrades').is(":hidden")){
@@ -322,10 +323,11 @@
 		if(avaMatAmt.reduce(sumBucket,0) == 6)
 			avaMatComplete = true;
 		
+		moanaScale += 1;
 		selectedAvatarSave = -1;
 		selectedUpgradeSave = -1;
 		showSummonBTN = false;
-		avaUpgCost = Math.round(3 * totalAvaUpg());
+		avaUpgCost = Math.round(2.5 * totalAvaUpg());
 		$('#summonButton:visible').toggle();
 		$('#avatarUpgrades:visible').toggle();
 	}
