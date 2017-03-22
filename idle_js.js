@@ -493,6 +493,10 @@
 			worthMult = 10000000;
 		if(player.money >= 100000000000000 && worthMult < 100000000)
 			worthMult = 100000000;
+		if(player.money >= 10000000000000000 && worthMult < 5000000000)
+			worthMult = 5000000000;
+		if(player.money >= 500000000000000000 && worthMult < 20000000000)
+			worthMult = 20000000000;
 		
 		gainer8 += player.gain;
 		oGainer += buildings[0].currGain;
