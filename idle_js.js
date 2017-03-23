@@ -452,7 +452,7 @@
 		player.money_6 = Number(player.money_6 + x);
 	}
 	function dumpInfinite(){
-		infiMultDur += (Math.floor(player.money_6/1000));
+		infiMultDur += (Math.floor(player.money_6/500));
 		player.money_6 = 0;
 	}
 	function gameTick(){
@@ -480,10 +480,10 @@
 	}
 	function doGameTick(){
 		if(infiMultDur > 0){
-			infiMonMult = 2;
-			infiMon2Mult = 2;
-			infiMon3Mult = 2;
-			infiMon4Mult = 2;
+			infiMonMult = 4;
+			infiMon2Mult = 4;
+			infiMon3Mult = 4;
+			infiMon4Mult = 4;
 			infiMultDur -= 1;
 			$("#infiniteDump").css("background-image", "url('art/infiniteDump1.png')");
 		}
