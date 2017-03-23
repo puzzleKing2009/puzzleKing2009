@@ -12,7 +12,7 @@
 		}
 		if(giantAwakeFlag){
 			if(Math.random()*100 <= 50){
-				addMoney_6(1);
+				addMoney_6(buildings[9].amount);
 			}
 			addMoney_1(buildings[9].currGain);
 			giantSleepTimer -= 1;
