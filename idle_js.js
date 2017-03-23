@@ -196,7 +196,7 @@
 		this.pieChnc = 5;
 		this.pieGainEnable = false;
 		this.giantSleep = 50;
-		this.giantAwake = 1;
+		this.giantAwake = 2;
 		this.rpcTradeEnable = false;
 		this.rpcTradeActive = false;
 	}
