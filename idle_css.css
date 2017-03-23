@@ -495,5 +495,31 @@
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
 	}
-	
+	.infiniteDumpBtn{
+		position:absolute;
+		top:10%;
+		left:25%;
+		background-image: url("art/infiniteDump.png");
+		width:50px;
+		height:50px;
+		cursor:hand;
+		display:none;
+	}
+	.infiniteDumpBtn .tooltiptext{
+		visibility:hidden;
+		position:absolute;
+		width:280px;
+		background-color: #495558;
+		color: #fff;
+		text-align:center;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 12px;
+		border-radius: 6px;
+		bottom:105%;
+		right:0%;
+		z-index: 5;
+	}
+	.infiniteDumpBtn:hover .tooltiptext{
+		visibility: visible;
+	}
 	

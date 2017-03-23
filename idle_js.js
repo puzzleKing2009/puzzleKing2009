@@ -100,6 +100,11 @@
 	var selectedAvatarSave = -1;
 	var selectedUpgradeSave = -1;
 	var david_stupid_max_bat = 0;
+	var infiMonMult = 1;
+	var infiMon2Mult = 1;
+	var infiMon3Mult = 1;
+	var infiMon4Mult = 1;
+	var infiMultDur = 0;
 
 	var oGainer = 0;
 	var gainer1 = 0;
@@ -344,6 +349,7 @@
 		document.getElementById("melt7Value").innerHTML = player.iceMeltMoney.formatMoney();
 		document.getElementById("smileyCost").innerHTML = smileCost;
 		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();
+		document.getElementById("infiniteDuration").innerHTML = Math.floor(player.money_6/1000);
 		document.getElementById("oGainer").innerHTML = (oGainer/gainer8*100).formatMoney(2);
 		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
 		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
@@ -423,20 +429,20 @@
 		return worthRatio
 	}
 	function addMoney_1(x){
-		player.money = Number(player.money + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
-		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
-		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult * avaMon1Mult));
+		player.money = Number(player.money + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult * infiMonMult));
+		totalMoney = Number(totalMoney + (x * garbageGlobalMult * manaMoneyMult * avaMon1Mult * infiMonMult));
+		moneyBucket[0] += Number((x * garbageGlobalMult * manaMoneyMult * avaMon1Mult * infiMonMult));
 	}
 	function addMoney_2(x){
-		player.money_2 = Number(player.money_2 + (x * avaMon2Mult));
+		player.money_2 = Number(player.money_2 + (x * avaMon2Mult * infiMon2Mult));
 	//	moneyBucket2[0] += Number(x * avaMon2Mult);
 	}
 	function addMoney_3(x){
-		player.money_3 = Number(player.money_3 + (x * avaMon3Mult));
+		player.money_3 = Number(player.money_3 + (x * avaMon3Mult * infiMon3Mult));
 	//	moneyBucket3[0] += Number(x * avaMon3Mult);
 	}
 	function addMoney_4(x){
-		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult * avaMon4Mult));
+		player.money_4 = Number(player.money_4 + (x * manaMoney4Mult * avaMon4Mult * infiMon4Mult));
 	//	moneyBucket4[0] += Number(x * avaMon4Mult * manaMoney4Mult);
 	}
 	function addMoney_5(x){
@@ -444,6 +450,10 @@
 	}
 	function addMoney_6(x){
 		player.money_6 = Number(player.money_6 + x);
+	}
+	function dumpInfinite(){
+		infiMultDur = (Math.floor(player.money_6/1000));
+		player.money_6 = 0;
 	}
 	function gameTick(){
 		var warpDValue = 1;
@@ -469,6 +479,22 @@
 		dateTicksToDo = Date.now();
 	}
 	function doGameTick(){
+		if(infiMultDur > 0){
+			infiMonMult = 2;
+			infiMon2Mult = 2;
+			infiMon3Mult = 2;
+			infiMon4Mult = 2;
+			infiMultDur -= 1;
+			$("#infiniteDump").css("background-image", "url('art/infiniteDump1.png')");
+		}
+		else{
+			infiMonMult = 1;
+			infiMon2Mult = 1;
+			infiMon3Mult = 1;
+			infiMon4Mult = 1;
+			$("#infiniteDump").css("background-image", "url('art/infiniteDump.png')");
+		}
+		
 		totalTicks++;
 		resetBuildingIcon();
 //		$('#building1Upgrade').css({"background-image": "url(art/build1.png)", "background-size":"contain"});
@@ -568,6 +594,10 @@
 			shownMana = true;
 			$('#manaArea:Hidden').toggle();
 		}
+		if(player.money_6 >= 1000 || showInfinite){
+			showInfinite = true;
+			$("#infiniteDump:Hidden").toggle();
+		}
 		pageRefresh();
 	}
 	
@@ -659,7 +689,10 @@
 		localStorage.setItem('avaUpgrades',avaUpgradeStrList);
 		localStorage.setItem('selectedAvaSave', selectedAvatarSave);
 		localStorage.setItem('selectedUpgSave', selectedUpgradeSave);
-
+		
+		localStorage.setItem('showingInfinite', showInfinite);
+		localStorage.setItem('infDuration', infiMultDur);
+		
 		document.getElementById("alert").innerHTML = "Game has been saved";
 		saveLoadPopup();
 	}
@@ -776,6 +809,9 @@
 				selectedUpgradeSave = Number(localStorage.getItem('selectedUpgSave'));
 			}
 				loadAvaDisplay();
+			
+			showInfinite = (localStorage.getItem('showingInfinite') == 'true');
+			infiMultDur = Number(localStorage.getItem('infDuration'));
 			
 			document.getElementById("alert").innerHTML = "Game has been loaded";
 			
