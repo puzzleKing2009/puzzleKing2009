@@ -294,17 +294,17 @@
 				case 1: avaMatAmt[0] = 1; $('#building8').fadeIn(); break;
 				case 2: avaMatAmt[1] = 1; $('#building9').fadeIn(); break;
 				case 3: avaMatAmt[2] = 1; $('#building10').fadeIn(); break;
-				case 4: avaMatAmt[3] = 1; $('#bgBuilding9').css("background-color", "gold"); $('#pieRanVal:hidden').toggle(); player.pieChnc = 10; player.pieGainEnable = true; break;
-				case 5: avaMatAmt[4] = 1; $('#bgBuilding10').css("background-color", "gold"); player.giantSleep = 225; player.giantAwake = 75; break;
-				case 6: avaMatAmt[5] = 1; $('#bgBuilding11').css("background-color", "gold"); $('#tradeHolder:hidden').toggle(); $('#tradeDuration:hidden').toggle(); player.rpcTradeEnable = true; break;
-				case 7: avaGroAmt[0] = 1; multiStepVal = 10; player.runChnc = 30; break;
-				case 8: avaGroAmt[1] = 1; player.digChnc += 5; player.multCritValue = (player.multCritValue * 1.3); break;
-				case 9: avaGroAmt[2] = 1; player.ballsCalled = 5; player.bingoWait = 4; break;
-				case 10: avaGroAmt[3] = 1; avaShipUpgradeEnable = true; player.overdriveWait = 20; break;
-				case 11: avaGroAmt[4] = 1; doubleMagicChnc = 50; hiddenValueVal *= 5; break;
-				case 12: avaGroAmt[5] = 1; baterestLoss = .75; baterestGain = 125; break;
-				case 13: avaGroAmt[6] = 1; player.meltWorth *= 5; break;
-				case 14: avaGroAmt[7] = 1; avaGarboUpgrade = true; garbageGlobalMultBonus += .5; break;
+				case 4: avaMatAmt[3] = 1; $('#bgBuilding9').css("background-color", "gold"); $('#pieRanVal:hidden').toggle(); player.pieChnc = 10; player.pieGainEnable = true; buildings[8].name="*Pie*"; break;
+				case 5: avaMatAmt[4] = 1; $('#bgBuilding10').css("background-color", "gold"); player.giantSleep = 225; player.giantAwake = 75; buildings[9].name="*Sleeping Giant*"; break;
+				case 6: avaMatAmt[5] = 1; $('#bgBuilding11').css("background-color", "gold"); $('#tradeHolder:hidden').toggle(); $('#tradeDuration:hidden').toggle(); player.rpcTradeEnable = true; buildings[10].name="*Red Paper Clip*"; break;
+				case 7: avaGroAmt[0] = 1; multiStepVal = 10; player.runChnc = 30; buildings[0].name="*Shoes*"; break;
+				case 8: avaGroAmt[1] = 1; player.digChnc += 5; player.multCritValue = (player.multCritValue * 1.3); buildings[1].name="*Spade*"; break;
+				case 9: avaGroAmt[2] = 1; player.ballsCalled = 5; player.bingoWait = 4; buildings[2].name="*Bingo*"; break;
+				case 10: avaGroAmt[3] = 1; avaShipUpgradeEnable = true; player.overdriveWait = 20; buildings[3].name="*Spaceship*"; break;
+				case 11: avaGroAmt[4] = 1; doubleMagicChnc = 50; hiddenValueVal *= 5; buildings[4].name="*Magic*"; break;
+				case 12: avaGroAmt[5] = 1; baterestLoss = .75; baterestGain = 125; buildings[5].name="*Gold Bat 9000*"; break;
+				case 13: avaGroAmt[6] = 1; player.meltWorth *= 5; buildings[6].name="*Ice Cubes*"; break;
+				case 14: avaGroAmt[7] = 1; avaGarboUpgrade = true; garbageGlobalMultBonus += .5; buildings[7].name="*Garbage*"; break;
 				case 15: avaWelAmt[0] = 1; tripleTickEnable = true; player.updTime += 2000; checkGarbage(buildings[7].amount); break;
 				case 16: avaWelAmt[1] = 1; avaMon1Mult = 5; break;
 				case 17: avaWelAmt[2] = 1; avaMon2Mult = 3; break;
@@ -316,6 +316,7 @@
 		}
 	}
 	function finishAvaUpg(){
+		nameBuilding();
 		if(avaWelAmt.reduce(sumBucket,0) == 6)
 			avaWelComplete = true;
 		if(avaGroAmt.reduce(sumBucket,0) == 8)
