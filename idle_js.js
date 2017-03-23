@@ -452,7 +452,7 @@
 		player.money_6 = Number(player.money_6 + x);
 	}
 	function dumpInfinite(){
-		infiMultDur = (Math.floor(player.money_6/1000));
+		infiMultDur += (Math.floor(player.money_6/1000));
 		player.money_6 = 0;
 	}
 	function gameTick(){
