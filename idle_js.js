@@ -824,6 +824,14 @@
 		});
 		saveLoadPopup();
 	}
+	function nameBuilding(){
+		buildings.forEach(function(building, index){
+			index++;
+			document.getElementById("name"+index).innerHTML = building.name;
+			document.getElementById("owned"+index).innerHTML = building.amount;
+			document.getElementById("cost"+index).innerHTML = building.cost;
+		});
+	}
 	function loadBuildings(build){
 		build.forEach(function(building, index){
 			buildings[index].amount = building.amount;
