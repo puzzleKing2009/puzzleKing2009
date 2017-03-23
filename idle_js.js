@@ -349,7 +349,7 @@
 		document.getElementById("melt7Value").innerHTML = player.iceMeltMoney.formatMoney();
 		document.getElementById("smileyCost").innerHTML = smileCost;
 		document.getElementById("nxtUpgValue").innerHTML = upgCost.formatMoney();
-		document.getElementById("infiniteDuration").innerHTML = Math.floor(player.money_6/1000);
+		document.getElementById("infiniteDuration").innerHTML = Math.floor(player.money_6/500);
 		document.getElementById("oGainer").innerHTML = (oGainer/gainer8*100).formatMoney(2);
 		document.getElementById("gainer1").innerHTML = (gainer1/gainer8*100).formatMoney(2);
 		document.getElementById("gainer2").innerHTML = (gainer2/gainer8*100).formatMoney(2);
