@@ -468,7 +468,7 @@
 			
 		for(var ww=0; ww<TicksToDo; ww++){
 			if(tripleTickEnable){
-				for(var ff=0; ff<10; ff++){
+				for(var ff=0; ff<8; ff++){
 					doGameTick();
 				}
 			}
