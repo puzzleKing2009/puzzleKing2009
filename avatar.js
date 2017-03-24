@@ -234,7 +234,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/15.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Better Clocks").append(cache); 
-					$('#avaUpgTT').text("Increases time between ticks by 2 second. Normal ticks are replaced with 10 Ticks"); 
+					$('#avaUpgTT').text("Increases time between ticks by 2 second. Normal ticks are replaced with 8 Ticks"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 1:$('#avaUpgID').text("16"); 
