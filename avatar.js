@@ -112,7 +112,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/4.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Better Ingredients").append(cache); 
-					$('#avaUpgTT').text("The smell of Pie becomes so strong it now has a 10% chance to condense into matter. Each tick Pi produces up to 314% bonus money"); 
+					$('#avaUpgTT').text("The smell of Pie becomes so strong it now has a 25% chance to condense into matter. Each tick Pi produces up to 628% bonus money"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 4:
@@ -294,7 +294,7 @@
 				case 1: avaMatAmt[0] = 1; $('#building8').fadeIn(); break;
 				case 2: avaMatAmt[1] = 1; $('#building9').fadeIn(); break;
 				case 3: avaMatAmt[2] = 1; $('#building10').fadeIn(); break;
-				case 4: avaMatAmt[3] = 1; $('#bgBuilding9').css("background-color", "#942EF3"); $('#pieRanVal:hidden').toggle(); player.pieChnc = 10; player.pieGainEnable = true; break;
+				case 4: avaMatAmt[3] = 1; $('#bgBuilding9').css("background-color", "#942EF3"); $('#pieRanVal:hidden').toggle(); player.pieChnc = 25; player.pieGainEnable = true; break;
 				case 5: avaMatAmt[4] = 1; $('#bgBuilding10').css("background-color", "#942EF3"); player.giantSleep = 225; player.giantAwake = 75; break;
 				case 6: avaMatAmt[5] = 1; $('#bgBuilding11').css("background-color", "#942EF3"); $('#tradeHolder:hidden').toggle(); $('#tradeDuration:hidden').toggle(); player.rpcTradeEnable = true; break;
 				case 7: avaGroAmt[0] = 1; $('#bgBuilding1').css("background-color", "#942EF3"); multiStepVal = 10; player.runChnc = 30; break;
