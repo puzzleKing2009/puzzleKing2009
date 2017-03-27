@@ -234,14 +234,14 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/15.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Better Clocks").append(cache); 
-					$('#avaUpgTT').text("Increases time between ticks by 2 second. Normal ticks are replaced with 8 Ticks"); 
+					$('#avaUpgTT').text("Increases time between ticks by 2 second. Normal ticks are replaced with 7 Ticks"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 1:$('#avaUpgID').text("16"); 
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/16.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Double Money").append(cache); 
-					$('#avaUpgTT').text("Increases all $ gain by 400%"); 
+					$('#avaUpgTT').text("Increases all $ gain by 200%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 2:$('#avaUpgID').text("17"); 
@@ -306,7 +306,7 @@
 				case 13: avaGroAmt[6] = 1; $('#bgBuilding7').css("background-color", "#942EF3"); player.meltWorth *= 5; break;
 				case 14: avaGroAmt[7] = 1; $('#bgBuilding8').css("background-color", "#942EF3"); avaGarboUpgrade = true; garbageGlobalMultBonus += .5; break;
 				case 15: avaWelAmt[0] = 1; tripleTickEnable = true; player.updTime += 2000; checkGarbage(buildings[7].amount); break;
-				case 16: avaWelAmt[1] = 1; avaMon1Mult = 5; break;
+				case 16: avaWelAmt[1] = 1; avaMon1Mult = 3; break;
 				case 17: avaWelAmt[2] = 1; avaMon2Mult = 3; break;
 				case 18: avaWelAmt[3] = 1; avaMon3Mult = 4; break;
 				case 19: avaWelAmt[4] = 1; avaMon4Mult = 3; break;
