@@ -323,7 +323,7 @@
 		if(avaMatAmt.reduce(sumBucket,0) == 6)
 			avaMatComplete = true;
 		
-		moanaScale += 1;
+		moanaScale = (moanaScale + 0.5);
 		selectedAvatarSave = -1;
 		selectedUpgradeSave = -1;
 		showSummonBTN = false;
