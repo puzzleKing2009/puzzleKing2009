@@ -38,7 +38,7 @@
 		$('#mana3Dump').text(shortenLargeNumber(moanaDump));
 		var fillPercent = Math.round((moanaDump/(15000000000000000 * moanaScale))*10000)/100;
 		$('#mana3Percent').text(fillPercent);
-		$('#mana3DumpRemain').text(((15000000000000000 * moanaScale)-moanaDump));
+		$('#mana3DumpRemain').text(shortenLargeNumber((15000000000000000 * moanaScale)-moanaDump));
 		manaFill3(fillPercent);
 		if(fillPercent >= 100){
 			avatarUpgPurchase = false;
