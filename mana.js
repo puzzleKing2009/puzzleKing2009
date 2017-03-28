@@ -41,6 +41,7 @@
 		$('#mana3DumpRemain').text(shortenLargeNumber((15000000000000000 * moanaScale)-moanaDump));
 		manaFill3(fillPercent);
 		if(fillPercent >= 100){
+			save();
 			avatarUpgPurchase = false;
 			showSummonBTN = true;
 			$('#summonButton:hidden').toggle();
