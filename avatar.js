@@ -283,7 +283,7 @@
 		player.money = player.money_2 = player.money_3 = player.money_4 = 0;
 	}
 	function calcConvertMonies(){
-		return Math.round(((player.money * .00000000000000001) + (player.money_2 * .00000045) + (player.money_3 * .00004) + (player.money_4 * .000000045)));
+		return Math.floor(((player.money * .00000000000000001) + (player.money_2 * .00000045) + (player.money_3 * .00004) + (player.money_4 * .000000045)));
 	}
 	function buyAvaUpgrade(){
 		if(player.money_5 >= avaUpgCost || avaUpgradeFree){
