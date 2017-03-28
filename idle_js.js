@@ -799,6 +799,7 @@
 			
 			if(localStorage.getItem('avaUpgrades')){
 				var avaUpgMan = JSON.parse(localStorage.getItem('avaUpgrades'));
+				alert("test");
 				loadAvaUpg(avaUpgMan);
 			}
 			
