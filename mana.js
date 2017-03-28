@@ -44,7 +44,6 @@
 			avatarUpgPurchase = false;
 			showSummonBTN = true;
 			$('#summonButton:hidden').toggle();
-			save();
 		}
 	}
 	function manaDumpFunc(x){
