@@ -248,7 +248,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/17.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Magic Money").append(cache); 
-					$('#avaUpgTT').text("Increases all φ gain by 200%"); 
+					$('#avaUpgTT').text("Increases all φ gain by 100%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 3:
@@ -256,7 +256,7 @@
 					$('#avaUpgSlot').css('background-image', 'url(art/avaUpg/18.png)'); 
 					var cache = $('#avaUpgDesc').children();
 					$('#avaUpgDesc').text("Smile!").append(cache); 
-					$('#avaUpgTT').text("Increases all ☺ gain by 300%"); 
+					$('#avaUpgTT').text("Increases all ☺ gain by 200%"); 
 					$('#avaUpgPrice').text(avaUpgCost);  
 					break;
 					case 4:
@@ -283,7 +283,7 @@
 		player.money = player.money_2 = player.money_3 = player.money_4 = 0;
 	}
 	function calcConvertMonies(){
-		return Math.floor(((player.money * .00000000000000001) + (player.money_2 * .00000045) + (player.money_3 * .00004) + (player.money_4 * .000000045)));
+		return Math.floor(((player.money * .00000000000000002) + (player.money_2 * .0000001) + (player.money_3 * .00002) + (player.money_4 * .000000015)));
 	}
 	function buyAvaUpgrade(){
 		if(player.money_5 >= avaUpgCost || avaUpgradeFree){
@@ -307,8 +307,8 @@
 				case 14: avaGroAmt[7] = 1; $('#bgBuilding8').css("background-color", "#942EF3"); avaGarboUpgrade = true; garbageGlobalMultBonus += .5; break;
 				case 15: avaWelAmt[0] = 1; tripleTickEnable = true; player.updTime += 2000; checkGarbage(buildings[7].amount); break;
 				case 16: avaWelAmt[1] = 1; avaMon1Mult = 3; break;
-				case 17: avaWelAmt[2] = 1; avaMon2Mult = 3; break;
-				case 18: avaWelAmt[3] = 1; avaMon3Mult = 4; break;
+				case 17: avaWelAmt[2] = 1; avaMon2Mult = 2; break;
+				case 18: avaWelAmt[3] = 1; avaMon3Mult = 3; break;
 				case 19: avaWelAmt[4] = 1; avaMon4Mult = 3; break;
 				case 20: avaWelAmt[5] = 1; avaMon5Mult = 2; break;
 			}
