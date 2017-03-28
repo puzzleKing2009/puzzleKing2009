@@ -105,6 +105,7 @@
 	var infiMon3Mult = 1;
 	var infiMon4Mult = 1;
 	var infiMultDur = 0;
+	var showInfinite = false;
 
 	var oGainer = 0;
 	var gainer1 = 0;
