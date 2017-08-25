@@ -5,8 +5,8 @@ if(score >= 100){
 		xhr.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 		       key = xhr.responseText;
-			console.log(key);
-			alert("The key is: "+decode(key));
+			var message = decode(key);
+			alert("The key is: "+message));
 		    }
 		};
 		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
@@ -22,5 +22,6 @@ function decode(key){
 	for(var y=0; y<x.length; y++){
 		retVal +=String.fromCharCode(x[y]);
 	}
+	console.log(retVal);
 	return retVal;
 }
