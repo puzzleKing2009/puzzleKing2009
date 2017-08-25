@@ -19,7 +19,7 @@ function decode(key){
 	console.log(key);
 	var x = key.split(":");
 	var retVal;
-	for(var y=0; y<x.length; y++){
+	for(var y=1; y<x.length; y++){
 		retVal +=String.fromCharCode(x[y]);
 	}
 	console.log(retVal);
