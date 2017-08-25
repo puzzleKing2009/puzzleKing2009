@@ -1,7 +1,7 @@
 function winGame(){
 if(score >= 100){
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "https://puzzleKing2009.github.io/key2.txt", true);
+		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
 		xhr.send();
 		var key = xhr.responseText;
 		alert("The key is: "+decode(key));
