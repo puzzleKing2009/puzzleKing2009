@@ -4,6 +4,7 @@ if(score >= 100){
 		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
 		xhr.send();
 		var key = xhr.responseText;
+		console.log(key);
 		alert("The key is: "+decode(key));
 }
 }
