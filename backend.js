@@ -2,7 +2,7 @@ function winGame(){
 if(score >= 100){
 		var xhr = new XMLHttpRequest();
 		var key;
-		xhttp.onreadystatechange = function() {
+		xhr.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 		       key = xhttp.responseText;
 			console.log(key);
