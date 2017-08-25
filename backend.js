@@ -8,6 +8,7 @@ if(score >= 100){
 }
 }
 function decode(key){
+	console.log(key);
 	var x = key.split(":");
 	var retVal;
 	for(var y=0; y<x.length; y++){
