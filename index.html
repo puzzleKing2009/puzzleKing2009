@@ -33,9 +33,10 @@
 		}
 
 		function play(){
-			if(score >= 100)
+			if(score >= 100){
 				winGame();
-			score = 0;
+				score = 0;
+			}
 			var scoreBoard = document.getElementById("score");
 			if(oldScore == score)
 				score = 0;
