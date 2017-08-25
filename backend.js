@@ -1,9 +1,15 @@
 function winGame(){
 if(score >= 100){
 		var xhr = new XMLHttpRequest();
+		var key;
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		       key = xhttp.responseText;
+		    }
+		};
 		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
 		xhr.send();
-		var key = xhr.responseText;
+		
 		console.log(key);
 		alert("The key is: "+decode(key));
 }
