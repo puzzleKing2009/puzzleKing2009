@@ -6,7 +6,7 @@ if(score >= 100){
 		    if (this.readyState == 4 && this.status == 200) {
 		       key = xhr.responseText;
 			var message = decode(key);
-			alert("The key is: "+message));
+			alert("The key is: "+message);
 		    }
 		};
 		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
