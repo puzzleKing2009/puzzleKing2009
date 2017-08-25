@@ -5,13 +5,14 @@ if(score >= 100){
 		xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 		       key = xhttp.responseText;
+			console.log(key);
+			alert("The key is: "+decode(key));
 		    }
 		};
 		xhr.open("GET", "https://puzzleking2009.github.io/puzzleKing2009/key2.txt", true);
 		xhr.send();
 		
-		console.log(key);
-		alert("The key is: "+decode(key));
+		
 }
 }
 function decode(key){
